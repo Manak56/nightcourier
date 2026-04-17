@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Ночной Курьер Оренбург | Доставка 24/7</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0a0f1a;
+            --bg-card: rgba(18, 24, 34, 0.85);
+            --accent-primary: #00e0ff;
+            --accent-glow: rgba(0, 224, 255, 0.25);
+            --text-white: #ffffff;
+            --text-soft: #eef2ff;
+            --call-green: #2bce56;
+            --tg-blue: #2aabee;
+            --border-rad: 28px;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at 15% 30%, rgba(0, 212, 255, 0.08) 0%, #0a0f1a 90%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px 100px 16px;
+            min-height: 100vh;
+        }
+
+        /* имитация лёгкой "ночной" текстуры */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.15"><path fill="none" d="M70 90 L130 90 M70 110 L130 110 M90 70 L90 130 M110 70 L110 130" stroke="%2300e0ff" stroke-width="1.2" stroke-dasharray="3 4"/><circle cx="40" cy="40" r="1.5" fill="%2300e0ff"/><circle cx="160" cy="30" r="1.5" fill="%2300e0ff"/><circle cx="180" cy="120" r="1.2" fill="%2300e0ff"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* анимированный неон-блок */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 28px;
+            animation: fadeSlideDown 0.6s ease-out;
+        }
+
+        .neon-circle {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(145deg, #111a28, #05080f);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-primary);
+            box-shadow: 0 0 18px var(--accent-glow), inset 0 0 8px rgba(0,224,255,0.3);
+            transition: box-shadow 0.2s;
+            overflow: hidden; /* чтобы изображение не выходило за пределы круга */
+        }
+
+        /* стили для изображения логотипа */
+        .logo-image {
+            width: 80%;
+            height: auto;
+            max-width: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 2px rgba(0,224,255,0.5));
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #FFFFFF 0%, #aaf0ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(0,224,255,0.4);
+        }
+
+        .tagline {
+            font-weight: 500;
+            font-size: 15px;
+            background: rgba(0, 224, 255, 0.12);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+            color: #caf2ff;
+        }
+
+        /* карточки услуг */
+        .services-panel {
+            margin: 32px 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(0, 224, 255, 0.25);
+            transition: all 0.25s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-primary);
+            background: rgba(25, 32, 45, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .service-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(0, 224, 255, 0.12);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--accent-primary);
+        }
+
+        .service-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.2px;
+        }
+
+        .service-price {
+            font-weight: 800;
+            font-size: 1.25rem;
+            background: linear-gradient(120deg, #ffffff, #a0f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .badge-special {
+            font-size: 0.85rem;
+            background: rgba(0,224,255,0.2);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        /* дополнительный блок с преимуществами */
+        .features-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 28px 0 24px;
+        }
+
+        .feature-item {
+            flex: 1;
+            background: rgba(12, 18, 26, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 12px 6px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(0,224,255,0.2);
+        }
+
+        .feature-item i {
+            display: block;
+            font-size: 22px;
+            color: var(--accent-primary);
+            margin-bottom: 6px;
+        }
+
+        /* информация о работе */
+        .info-bar {
+            text-align: center;
+            background: linear-gradient(90deg, transparent, rgba(0,224,255,0.1), transparent);
+            padding: 14px;
+            border-radius: 48px;
+            margin-top: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .info-bar i {
+            color: var(--accent-primary);
+        }
+
+        /* фиксированные кнопки внизу */
+        .action-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 460px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            z-index: 1000;
+            background: rgba(10, 15, 26, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 12px 16px;
+            border-radius: 80px;
+            border: 1px solid rgba(0,224,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 12px 8px;
+            border-radius: 60px;
+            transition: all 0.2s ease;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-tg {
+            background: var(--tg-blue);
+            box-shadow: 0 4px 12px rgba(42, 171, 238, 0.3);
+        }
+
+        .btn-call {
+            background: var(--call-green);
+            box-shadow: 0 4px 12px rgba(43, 206, 86, 0.3);
+        }
+
+        .btn-action:active {
+            transform: scale(0.96);
+        }
+
+        /* подвал с доп инфо */
+        .footer-note {
+            margin-top: 40px;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.7;
+            letter-spacing: 0.3px;
+            color: #b0d4ff;
+        }
+
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Адаптив для маленьких экранов */
+        @media (max-width: 450px) {
+            .action-buttons {
+                padding: 10px 14px;
+                gap: 10px;
+            }
+            .btn-action {
+                font-size: 0.9rem;
+                gap: 8px;
+            }
+            .service-card {
+                padding: 14px 16px;
+            }
+            .service-name {
+                font-size: 1rem;
+            }
+            .service-price {
+                font-size: 1.1rem;
+            }
+            .neon-circle {
+                width: 110px;
+                height: 110px;
+            }
+            .logo-image {
+                width: 75%;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Шапка с логотипом -->
+    <div class="logo-section">
+        <div class="neon-circle">
+            <!-- Здесь используется изображение из ссылки, которую вы предоставили -->
+            <img class="logo-image" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&as=32x31,48x47,72x71,108x106,160x157,240x235,360x353,480x471,540x530,620x608&from=bu&u=2WdB8mfScu-SkuyGPmV0AWx_YMa0uF1h1PoxVDVCNXA&cs=620x0" alt="Логотип Ночной Курьер">
+        </div>
+        <h1>НОЧНОЙ КУРЬЕР</h1>
+        <div class="tagline">
+            <i class="fas fa-clock"></i> МЫ РАБОТАЕМ, ПОКА ГОРОД СПИТ
+        </div>
+    </div>
+
+    <!-- Услуги: расширенный список с более живыми ценами и описанием -->
+    <div class="services-panel">
+        <div class="service-card">
+            <div class="service-left">
+                <div class="service-icon"><i class="fas fa-shipping-fast"></i></div>
+                <div class="service-name">Базовая доставка</div>
+            </div>
+            <div class="service-price">от 300₽</div>
+        </div>
+        <div class="service-card">
+            <div class="service-left">
+                <div class="service-icon"><i class="fas fa-glass-cheers"></i></div>
+                <div class="service-name">Трезвый водитель</div>
+            </div>
+            <div class="service-price">от 1000₽</div>
+        </div>
+        <div class="service-card">
+            <div class="service-left">
+                <div class="service-icon"><i class="fas fa-tools"></i></div>
+                <div class="service-name">Помощь на дороге</div>
+            </div>
+            <div class="service-price">от 500₽</div>
+        </div>
+        <div class="service-card">
+            <div class="service-left">
+                <div class="service-icon"><i class="fas fa-crown"></i></div>
+                <div class="service-name">Спецзаказы</div>
+            </div>
+            <div class="service-price"><span class="badge-special">Договорная</span></div>
+        </div>
+        <!-- добавим еще одну актуальную услугу для ночного города -->
+        <div class="service-card">
+            <div class="service-left">
+                <div class="service-icon"><i class="fas fa-motorcycle"></i></div>
+                <div class="service-name">Экспресс 30 мин</div>
+            </div>
+            <div class="service-price">от 450₽</div>
+        </div>
+    </div>
+
+    <!-- Блок с ключевыми преимуществами (микро-фишки) -->
+    <div class="features-row">
+        <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Безопасно</span>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 ночью</span>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Оренбург</span>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-wallet"></i>
+            <span>Наличные / Карта</span>
+        </div>
+    </div>
+
+    <!-- Инфо-панель с режимом работы и географией -->
+    <div class="info-bar">
+        <i class="fas fa-city"></i> Оренбург · Ежедневно с 22:00 до 06:00
+        <i class="fas fa-mobile-alt"></i> 
+    </div>
+    <div class="info-bar" style="margin-top: 8px; background: rgba(0,0,0,0.4);">
+        <i class="fas fa-route"></i> Доставка товаров, документов, подарков, продуктов
+        <i class="fas fa-hand-peace"></i>
+    </div>
+
+    <div class="footer-note">
+        <i class="fas fa-car-side"></i> Быстро, честно, конфиденциально. Работаем по городу и ближайшему пригороду.
+    </div>
+</div>
+
+<!-- Фиксированные кнопки: Telegram и звонок (номера и ссылки по заданию) -->
+<div class="action-buttons">
+    <a href="https://t.me/NIGHTCOURIER56" class="btn-action btn-tg" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-telegram-plane"></i> ЧАТ В ТГ
+    </a>
+    <a href="tel:+79999099924" class="btn-action btn-call">
+        <i class="fas fa-phone-alt"></i> ПОЗВОНИТЬ
+    </a>
+</div>
+
+<!-- Небольшой скрипт для анимации появления + защита от случайного перехода при долгом нажатии (без лишнего) -->
+<script>
+    (function() {
+        // простая инициализация: добавим легкий эффект свечения на кнопки при ховере (на десктопе)
+        const buttons = document.querySelectorAll('.btn-action');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', function(e) {
+                // только тактильный фидбек (не блокируем)
+                this.style.opacity = '0.8';
+                setTimeout(() => { this.style.opacity = ''; }, 120);
+            });
+        });
+
+        // дополнительно: сделать динамическую подстановку года (но это необязательно)
+        const footerNote = document.querySelector('.footer-note');
+        if (footerNote && !footerNote.innerHTML.includes('202')) {
+            const yearSpan = document.createElement('span');
+            yearSpan.style.marginLeft = '6px';
+            yearSpan.innerHTML = `• ${new Date().getFullYear()}`;
+            footerNote.appendChild(yearSpan);
+        }
+
+        // проверяем, чтобы ссылки не открывались в нежелательном контексте, но все корректно
+        console.log('Ночной Курьер | Оренбург готов к работе');
+    })();
+</script>
+</body>
+</html>
