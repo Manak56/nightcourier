@@ -6,6 +6,12 @@
     <title>Ночной Курьер | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg-color: #0b101b; 
             --accent-color: #00d4ff;
@@ -54,47 +60,49 @@
 
         nav {
             position: sticky; top: 0; background: rgba(11, 16, 27, 0.95);
-            padding: 12px; display: flex; justify-content: center; gap: 15px;
+            padding: 10px; display: flex; justify-content: center; gap: 12px;
             z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
             flex-wrap: wrap;
         }
 
         nav a { color: white; text-decoration: none; font-size: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
 
-        .container { max-width: 500px; margin: 0 auto; padding: 16px; text-align: center; position: relative; z-index: 2; }
+        .container { max-width: 500px; margin: 0 auto; padding: 14px; text-align: center; position: relative; z-index: 2; }
 
         .logo-circle {
-            width: 85px; height: 85px; background: #0b101b;
-            border: 3px solid var(--accent-color); border-radius: 50%; margin: 15px auto;
+            width: 75px; height: 75px; background: #0b101b;
+            border: 2.5px solid var(--accent-color); border-radius: 50%; margin: 12px auto;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.3);
+            overflow: hidden; box-shadow: 0 0 15px rgba(0,212,255,0.3);
         }
         
         .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .work-time { color: var(--accent-color); font-weight: bold; font-size: 13px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        h1 { font-size: 22px; letter-spacing: 1px; }
 
-        .section-title { text-align: left; font-size: 16px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 25px 0 12px; color: var(--accent-color); }
+        .work-time { color: var(--accent-color); font-weight: bold; font-size: 12px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
-        .card { background: var(--card-bg); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); font-size: 14px; }
+        .section-title { text-align: left; font-size: 15px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 20px 0 10px; color: var(--accent-color); }
+
+        .card { background: var(--card-bg); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); font-size: 13px; }
 
         .social-buttons { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 8px; 
-            margin-top: 20px; 
+            gap: 6px; 
+            margin-top: 16px; 
         }
         .btn-social { 
-            padding: 10px; 
+            padding: 8px; 
             border-radius: 10px; 
             text-decoration: none; 
             color: white; 
-            font-size: 12px; 
+            font-size: 11px; 
             font-weight: bold; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 6px; 
+            gap: 5px; 
             transition: transform 0.1s;
             cursor: pointer;
             border: none;
@@ -107,82 +115,107 @@
 
         .calculator {
             background: rgba(18, 24, 34, 0.95);
-            border-radius: 18px; padding: 16px; margin: 15px 0;
+            border-radius: 16px; padding: 14px; margin: 12px 0;
             border: 1px solid rgba(0, 212, 255, 0.3); text-align: left;
         }
-        .calc-row { margin-bottom: 12px; }
-        .calc-row label { display: block; font-size: 12px; margin-bottom: 6px; color: var(--accent-color); font-weight: bold; }
-        .calc-row select, .calc-row input { width: 100%; padding: 10px; border-radius: 10px; background: #0f1622; border: 1px solid #2a3a55; color: white; box-sizing: border-box; font-size: 13px; }
+        .calc-row { margin-bottom: 10px; }
+        .calc-row label { display: block; font-size: 11px; margin-bottom: 5px; color: var(--accent-color); font-weight: bold; }
+        .calc-row select, .calc-row input { width: 100%; padding: 8px; border-radius: 8px; background: #0f1622; border: 1px solid #2a3a55; color: white; box-sizing: border-box; font-size: 12px; }
         .calc-row input[type="range"] { padding: 0; accent-color: var(--accent-color); }
         
         .price-breakdown {
-            background: rgba(0, 212, 255, 0.1); padding: 12px; border-radius: 12px;
-            text-align: center; margin-top: 12px; border: 1px dashed var(--accent-color);
+            background: rgba(0, 212, 255, 0.1); padding: 10px; border-radius: 12px;
+            text-align: center; margin-top: 10px; border: 1px dashed var(--accent-color);
         }
-        .price-breakdown span { font-size: 28px; font-weight: 800; color: var(--accent-color); }
-        .price-detail { font-size: 10px; margin-top: 4px; opacity: 0.7; }
+        .price-breakdown span { font-size: 24px; font-weight: 800; color: var(--accent-color); }
+        .price-detail { font-size: 9px; margin-top: 3px; opacity: 0.7; }
         
         .prepay-alert {
             background: rgba(255, 100, 50, 0.2);
             border-left: 3px solid #ff6644;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 11px;
-            margin-top: 10px;
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 10px;
+            margin-top: 8px;
             text-align: center;
         }
         
         .promo-badge {
             background: linear-gradient(135deg, #ffaa00, #ff6600);
             border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 11px;
+            padding: 5px 10px;
+            font-size: 10px;
             font-weight: bold;
             text-align: center;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
-        /* Кнопка ЗАКАЗАТЬ — адаптирована под телефон, компактная */
+        /* КНОПКА ЗАКАЗАТЬ — максимально компактная */
         .btn-order {
             display: block; 
             width: 100%; 
             background: var(--accent-color); 
             color: #000;
-            padding: 12px; 
-            border-radius: 40px; 
+            padding: 8px 12px; 
+            border-radius: 30px; 
             text-decoration: none; 
             font-weight: bold;
             text-align: center; 
-            margin-top: 14px; 
-            font-size: 15px; 
+            margin-top: 12px; 
+            font-size: 13px; 
             transition: 0.2s;
             letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(0,212,255,0.3);
+            box-shadow: 0 1px 4px rgba(0,212,255,0.3);
         }
         .btn-order:active { transform: scale(0.97); }
 
-        .faq-item { background: var(--card-bg); border-radius: 12px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.1); }
-        .faq-question { padding: 12px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; }
-        .faq-question i { transition: transform 0.3s; }
-        .faq-answer { max-height: 0; padding: 0 12px; overflow: hidden; transition: 0.3s; font-size: 12px; opacity: 0.8; }
-        .faq-item.active .faq-answer { max-height: 150px; padding-bottom: 12px; }
+        /* Блок для звонка под кнопкой */
+        .call-block {
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(40, 167, 69, 0.15);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 12px;
+            border: 1px solid rgba(40, 167, 69, 0.4);
+        }
+        .call-block i {
+            font-size: 16px;
+            color: var(--call-color);
+        }
+        .call-link {
+            color: var(--call-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .call-link:active { opacity: 0.7; }
+
+        .faq-item { background: var(--card-bg); border-radius: 10px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.1); }
+        .faq-question { padding: 10px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; font-size: 12px; }
+        .faq-question i { transition: transform 0.3s; font-size: 11px; }
+        .faq-answer { max-height: 0; padding: 0 10px; overflow: hidden; transition: 0.3s; font-size: 11px; opacity: 0.8; }
+        .faq-item.active .faq-answer { max-height: 150px; padding-bottom: 10px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        .legal-info { margin-top: 30px; padding: 12px; font-size: 10px; opacity: 0.9; line-height: 1.4; background: rgba(0,0,0,0.6); border-radius: 10px; text-align: left; }
+        .legal-info { margin-top: 25px; padding: 10px; font-size: 9px; opacity: 0.8; line-height: 1.4; background: rgba(0,0,0,0.5); border-radius: 8px; text-align: left; }
         
-        .call-now { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; z-index: 2000; text-decoration: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); animation: pulse 2s infinite; }
+        .call-now { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; z-index: 2000; text-decoration: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 70% { transform: scale(1.05); } 100% { transform: scale(1); } }
         
         .toast-message {
             position: fixed;
-            bottom: 90px;
+            bottom: 85px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--accent-color);
             color: #000;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             z-index: 3000;
             opacity: 0;
@@ -196,10 +229,13 @@
         }
         
         @media (max-width: 480px) {
-            .container { padding: 12px; }
-            .logo-circle { width: 70px; height: 70px; }
-            .btn-social { font-size: 10px; padding: 8px; }
-            .btn-order { padding: 10px; font-size: 14px; }
+            .container { padding: 10px; }
+            .logo-circle { width: 65px; height: 65px; }
+            h1 { font-size: 20px; }
+            .btn-social { font-size: 9px; padding: 6px; }
+            .btn-order { padding: 7px 10px; font-size: 12px; }
+            .call-block { padding: 6px; font-size: 11px; }
+            .call-link { font-size: 12px; }
         }
     </style>
 </head>
@@ -217,7 +253,7 @@
             <div class="logo-circle">
                 <img class="logo-img" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&as=32x31,48x47,72x71,108x106,160x157,240x235,360x353,480x471,540x530,620x608&from=bu&u=2WdB8mfScu-SkuyGPmV0AWx_YMa0uF1h1PoxVDVCNXA&cs=620x0" alt="Ночной Курьер">
             </div>
-            <h1 style="font-size: 24px;">НОЧНОЙ КУРЬЕР</h1>
+            <h1>НОЧНОЙ КУРЬЕР</h1>
             <p class="work-time">ОРЕНБУРГ | 22:00 — 06:00</p>
             
             <div class="social-buttons">
@@ -241,7 +277,7 @@
                 <div class="calc-row">
                     <label><i class="fas fa-road"></i> Расстояние: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
                     <input type="range" id="dist" min="1" max="20" value="3" step="1">
-                    <div style="font-size: 10px; margin-top: 4px; opacity: 0.7;">
+                    <div style="font-size: 9px; margin-top: 3px; opacity: 0.7;">
                         📍 до 3км=300₽ | до 7км=450₽ | до 12км=600₽ | за город=от600₽
                     </div>
                 </div>
@@ -284,9 +320,18 @@
                     🎁 АКЦИЯ: Каждая 3-я доставка — скидка 25%!
                 </div>
 
-                <!-- КНОПКА ЗАКАЗАТЬ — ведёт в личный Telegram -->
+                <!-- КНОПКА ЗАКАЗАТЬ (уменьшена) -->
                 <a href="#" id="orderBtn" class="btn-order">📦 ЗАКАЗАТЬ</a>
-                <div style="font-size: 9px; margin-top: 8px; opacity: 0.5; text-align: center;">
+                
+                <!-- Блок для звонка под кнопкой -->
+                <div class="call-block">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Нет Telegram? </span>
+                    <a href="tel:+79999099924" class="call-link">Позвоните нам</a>
+                    <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                </div>
+                
+                <div style="font-size: 9px; margin-top: 8px; opacity: 0.4; text-align: center;">
                     *Цена может уточняться оператором
                 </div>
             </div>
@@ -317,7 +362,7 @@
             Сайт не является публичной офертой. Мы не доставляем алкоголь после 23:00, наркотики, оружие.
         </div>
 
-        <footer style="padding: 20px 0 90px; font-size: 9px; opacity: 0.5;">
+        <footer style="padding: 15px 0 70px; font-size: 9px; opacity: 0.4;">
             © 2026 Night Courier Orenburg
         </footer>
     </div>
@@ -371,7 +416,7 @@
                 prepayBlock.style.display = 'none';
             }
             
-            // Формируем текст сообщения для Telegram (личное сообщение)
+            // Формируем текст для ЛИЧНОГО сообщения в Telegram
             let message = `🛵 НОЧНОЙ КУРЬЕР | ОРЕНБУРГ%0A%0A`;
             message += `📏 Расстояние: ${dist} км%0A`;
             message += `⏰ Временной коэффициент: ${timeExtra > 0 ? '+' + timeExtra + '₽' : 'без доплаты'}%0A`;
@@ -383,8 +428,7 @@
             }
             message += `%0AХочу заказать доставку!`;
             
-            // Ссылка на ЛИЧНОЕ сообщение в Telegram (бот или пользователь)
-            // Используем nightcourier56 с параметром start или просто пишем в личку
+            // Ссылка на ЛИЧНОЕ сообщение в Telegram (direct)
             orderBtn.href = `https://t.me/nightcourier56?text=${message}`;
         }
 
