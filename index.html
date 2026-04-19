@@ -26,7 +26,6 @@
             background-color: var(--bg-color);
         }
 
-        /* Фоновое изображение Оренбурга */
         body::before {
             content: "";
             position: fixed;
@@ -34,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
+            background-image: url('http://img-fotki.yandex.ru/get/9352/115912404.1e/0_baa3e_dbcfac90_XXL.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -55,49 +54,48 @@
 
         nav {
             position: sticky; top: 0; background: rgba(11, 16, 27, 0.95);
-            padding: 15px; display: flex; justify-content: center; gap: 20px;
+            padding: 12px; display: flex; justify-content: center; gap: 15px;
             z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
             flex-wrap: wrap;
         }
 
-        nav a { color: white; text-decoration: none; font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
+        nav a { color: white; text-decoration: none; font-size: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
 
-        .container { max-width: 500px; margin: 0 auto; padding: 20px; text-align: center; position: relative; z-index: 2; }
+        .container { max-width: 500px; margin: 0 auto; padding: 16px; text-align: center; position: relative; z-index: 2; }
 
         .logo-circle {
-            width: 100px; height: 100px; background: #0b101b;
-            border: 3px solid var(--accent-color); border-radius: 50%; margin: 20px auto;
+            width: 85px; height: 85px; background: #0b101b;
+            border: 3px solid var(--accent-color); border-radius: 50%; margin: 15px auto;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.3);
         }
         
         .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .work-time { color: var(--accent-color); font-weight: bold; font-size: 14px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .work-time { color: var(--accent-color); font-weight: bold; font-size: 13px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
-        .section-title { text-align: left; font-size: 18px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 30px 0 15px; color: var(--accent-color); text-shadow: 0 0 3px rgba(0,0,0,0.5); }
+        .section-title { text-align: left; font-size: 16px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 25px 0 12px; color: var(--accent-color); }
 
-        .card { background: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); font-size: 14px; }
 
-        /* СОЦИАЛЬНЫЕ КНОПКИ — теперь 3 кнопки */
         .social-buttons { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 10px; 
+            gap: 8px; 
             margin-top: 20px; 
         }
         .btn-social { 
-            padding: 12px; 
-            border-radius: 8px; 
+            padding: 10px; 
+            border-radius: 10px; 
             text-decoration: none; 
             color: white; 
-            font-size: 13px; 
+            font-size: 12px; 
             font-weight: bold; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 8px; 
-            transition: transform 0.1s, opacity 0.2s;
+            gap: 6px; 
+            transition: transform 0.1s;
             cursor: pointer;
             border: none;
             font-family: inherit;
@@ -107,75 +105,84 @@
         .tg { background: var(--tg-color); }
         .share { background: var(--share-color); }
 
-        /* КАЛЬКУЛЯТОР */
         .calculator {
             background: rgba(18, 24, 34, 0.95);
-            border-radius: 20px; padding: 20px; margin: 20px 0;
+            border-radius: 18px; padding: 16px; margin: 15px 0;
             border: 1px solid rgba(0, 212, 255, 0.3); text-align: left;
         }
-        .calc-row { margin-bottom: 15px; }
-        .calc-row label { display: block; font-size: 13px; margin-bottom: 8px; color: var(--accent-color); font-weight: bold; }
-        .calc-row select, .calc-row input { width: 100%; padding: 12px; border-radius: 10px; background: #0f1622; border: 1px solid #2a3a55; color: white; box-sizing: border-box; }
-        .calc-row input[type="range"] { accent-color: var(--accent-color); }
+        .calc-row { margin-bottom: 12px; }
+        .calc-row label { display: block; font-size: 12px; margin-bottom: 6px; color: var(--accent-color); font-weight: bold; }
+        .calc-row select, .calc-row input { width: 100%; padding: 10px; border-radius: 10px; background: #0f1622; border: 1px solid #2a3a55; color: white; box-sizing: border-box; font-size: 13px; }
+        .calc-row input[type="range"] { padding: 0; accent-color: var(--accent-color); }
         
         .price-breakdown {
-            background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 12px;
-            text-align: center; margin-top: 15px; border: 1px dashed var(--accent-color);
+            background: rgba(0, 212, 255, 0.1); padding: 12px; border-radius: 12px;
+            text-align: center; margin-top: 12px; border: 1px dashed var(--accent-color);
         }
-        .price-breakdown span { font-size: 32px; font-weight: 800; color: var(--accent-color); }
-        .price-detail { font-size: 11px; margin-top: 5px; opacity: 0.7; }
+        .price-breakdown span { font-size: 28px; font-weight: 800; color: var(--accent-color); }
+        .price-detail { font-size: 10px; margin-top: 4px; opacity: 0.7; }
         
         .prepay-alert {
             background: rgba(255, 100, 50, 0.2);
             border-left: 3px solid #ff6644;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
-            font-size: 12px;
-            margin-top: 12px;
+            font-size: 11px;
+            margin-top: 10px;
             text-align: center;
         }
         
         .promo-badge {
             background: linear-gradient(135deg, #ffaa00, #ff6600);
             border-radius: 20px;
-            padding: 8px 15px;
-            font-size: 12px;
+            padding: 6px 12px;
+            font-size: 11px;
             font-weight: bold;
             text-align: center;
             margin-top: 12px;
         }
 
+        /* Кнопка ЗАКАЗАТЬ — адаптирована под телефон, компактная */
         .btn-order {
-            display: block; width: 100%; background: var(--accent-color); color: #000;
-            padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold;
-            text-align: center; margin-top: 15px; font-size: 16px; transition: 0.2s;
+            display: block; 
+            width: 100%; 
+            background: var(--accent-color); 
+            color: #000;
+            padding: 12px; 
+            border-radius: 40px; 
+            text-decoration: none; 
+            font-weight: bold;
+            text-align: center; 
+            margin-top: 14px; 
+            font-size: 15px; 
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,212,255,0.3);
         }
-        .btn-order:active { transform: scale(0.98); }
+        .btn-order:active { transform: scale(0.97); }
 
-        /* FAQ */
         .faq-item { background: var(--card-bg); border-radius: 12px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.1); }
-        .faq-question { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; }
+        .faq-question { padding: 12px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; }
         .faq-question i { transition: transform 0.3s; }
-        .faq-answer { max-height: 0; padding: 0 15px; overflow: hidden; transition: 0.3s; font-size: 13px; opacity: 0.8; }
-        .faq-item.active .faq-answer { max-height: 150px; padding-bottom: 15px; }
+        .faq-answer { max-height: 0; padding: 0 12px; overflow: hidden; transition: 0.3s; font-size: 12px; opacity: 0.8; }
+        .faq-item.active .faq-answer { max-height: 150px; padding-bottom: 12px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        .legal-info { margin-top: 40px; padding: 15px; font-size: 11px; opacity: 0.9; line-height: 1.5; background: rgba(0,0,0,0.6); border-radius: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .legal-info { margin-top: 30px; padding: 12px; font-size: 10px; opacity: 0.9; line-height: 1.4; background: rgba(0,0,0,0.6); border-radius: 10px; text-align: left; }
         
-        .call-now { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 2000; text-decoration: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); animation: pulse 2s infinite; }
+        .call-now { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; z-index: 2000; text-decoration: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 70% { transform: scale(1.05); } 100% { transform: scale(1); } }
         
-        /* Всплывающее уведомление */
         .toast-message {
             position: fixed;
-            bottom: 100px;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--accent-color);
             color: #000;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             z-index: 3000;
             opacity: 0;
@@ -189,9 +196,10 @@
         }
         
         @media (max-width: 480px) {
-            .logo-circle { width: 80px; height: 80px; }
-            .social-buttons { gap: 6px; }
-            .btn-social { font-size: 11px; padding: 10px; }
+            .container { padding: 12px; }
+            .logo-circle { width: 70px; height: 70px; }
+            .btn-social { font-size: 10px; padding: 8px; }
+            .btn-order { padding: 10px; font-size: 14px; }
         }
     </style>
 </head>
@@ -209,10 +217,9 @@
             <div class="logo-circle">
                 <img class="logo-img" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&as=32x31,48x47,72x71,108x106,160x157,240x235,360x353,480x471,540x530,620x608&from=bu&u=2WdB8mfScu-SkuyGPmV0AWx_YMa0uF1h1PoxVDVCNXA&cs=620x0" alt="Ночной Курьер">
             </div>
-            <h1>НОЧНОЙ КУРЬЕР</h1>
+            <h1 style="font-size: 24px;">НОЧНОЙ КУРЬЕР</h1>
             <p class="work-time">ОРЕНБУРГ | 22:00 — 06:00</p>
             
-            <!-- Три кнопки: Telegram, WhatsApp, Поделиться -->
             <div class="social-buttons">
                 <a href="https://t.me/NIGHTCOURIER56" class="btn-social tg"><i class="fab fa-telegram"></i> Telegram</a>
                 <a href="https://wa.me/79999099924" class="btn-social wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -234,7 +241,7 @@
                 <div class="calc-row">
                     <label><i class="fas fa-road"></i> Расстояние: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
                     <input type="range" id="dist" min="1" max="20" value="3" step="1">
-                    <div style="font-size: 11px; margin-top: 5px; opacity: 0.7;">
+                    <div style="font-size: 10px; margin-top: 4px; opacity: 0.7;">
                         📍 до 3км=300₽ | до 7км=450₽ | до 12км=600₽ | за город=от600₽
                     </div>
                 </div>
@@ -277,8 +284,9 @@
                     🎁 АКЦИЯ: Каждая 3-я доставка — скидка 25%!
                 </div>
 
+                <!-- КНОПКА ЗАКАЗАТЬ — ведёт в личный Telegram -->
                 <a href="#" id="orderBtn" class="btn-order">📦 ЗАКАЗАТЬ</a>
-                <div style="font-size: 10px; margin-top: 10px; opacity: 0.5; text-align: center;">
+                <div style="font-size: 9px; margin-top: 8px; opacity: 0.5; text-align: center;">
                     *Цена может уточняться оператором
                 </div>
             </div>
@@ -292,11 +300,11 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">Как работает скидка 25%? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Каждая 3-я доставка у одного номера телефона — скидка 25% на всю сумму. Просто напомните оператору!</div>
+                <div class="faq-answer">Каждая 3-я доставка у одного номера телефона — скидка 25% на всю сумму.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Что такое сложный заказ? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Если нужно заехать в аптеку, потом в магазин — это сложный маршрут, доплата 150₽.</div>
+                <div class="faq-answer">Заезд в аптеку, потом в магазин — доплата 150₽.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Как оплатить? <i class="fas fa-chevron-down"></i></div>
@@ -306,17 +314,15 @@
 
         <div class="legal-info" id="legal">
             <strong>Юридическая информация:</strong><br>
-            Сайт не является публичной офертой. Мы осуществляем курьерскую доставку исключительно тех товаров и грузов, которые <b>разрешены действующим законодательством РФ</b>. Запрещены: алкоголь после 23:00, наркотики, оружие.
+            Сайт не является публичной офертой. Мы не доставляем алкоголь после 23:00, наркотики, оружие.
         </div>
 
-        <footer style="padding: 20px 0 100px; font-size: 10px; opacity: 0.5;">
+        <footer style="padding: 20px 0 90px; font-size: 9px; opacity: 0.5;">
             © 2026 Night Courier Orenburg
         </footer>
     </div>
 
-    <!-- Всплывающее уведомление -->
     <div id="toastMsg" class="toast-message">🔗 Ссылка скопирована!</div>
-
     <a href="tel:+79999099924" class="call-now"><i class="fas fa-phone"></i></a>
 
     <script>
@@ -365,18 +371,21 @@
                 prepayBlock.style.display = 'none';
             }
             
-            let orderText = `🛵 НОЧНОЙ КУРЬЕР | ОРЕНБУРГ\n\n`;
-            orderText += `📏 Расстояние: ${dist} км\n`;
-            orderText += `⏰ Временной коэффициент: ${timeExtra > 0 ? '+' + timeExtra + '₽' : 'без доплаты'}\n`;
-            orderText += `📍 Сложный заказ: ${complexExtra > 0 ? 'Да (+150₽)' : 'Нет'}\n`;
-            orderText += `🏋️ Тяжёлый груз: ${heavyExtra > 0 ? 'Да (+100₽)' : 'Нет'}\n`;
-            orderText += `💰 Итоговая сумма: ${total}₽\n`;
+            // Формируем текст сообщения для Telegram (личное сообщение)
+            let message = `🛵 НОЧНОЙ КУРЬЕР | ОРЕНБУРГ%0A%0A`;
+            message += `📏 Расстояние: ${dist} км%0A`;
+            message += `⏰ Временной коэффициент: ${timeExtra > 0 ? '+' + timeExtra + '₽' : 'без доплаты'}%0A`;
+            message += `📍 Сложный заказ: ${complexExtra > 0 ? 'Да (+150₽)' : 'Нет'}%0A`;
+            message += `🏋️ Тяжёлый груз: ${heavyExtra > 0 ? 'Да (+100₽)' : 'Нет'}%0A`;
+            message += `💰 Итоговая сумма: ${total}₽%0A`;
             if (total >= 1000) {
-                orderText += `⚠️ Предоплата 50%: ${Math.ceil(total/2)}₽\n`;
+                message += `⚠️ Предоплата 50%: ${Math.ceil(total/2)}₽%0A`;
             }
-            orderText += `\nХочу заказать доставку!`;
+            message += `%0AХочу заказать доставку!`;
             
-            orderBtn.href = `https://t.me/NIGHTCOURIER56?text=${encodeURIComponent(orderText)}`;
+            // Ссылка на ЛИЧНОЕ сообщение в Telegram (бот или пользователь)
+            // Используем nightcourier56 с параметром start или просто пишем в личку
+            orderBtn.href = `https://t.me/nightcourier56?text=${message}`;
         }
 
         dInput.addEventListener('input', update);
@@ -395,7 +404,7 @@
             });
         });
 
-        // ========== КНОПКА ПОДЕЛИТЬСЯ ==========
+        // Кнопка ПОДЕЛИТЬСЯ
         const shareBtn = document.getElementById('shareBtn');
         const toastMsg = document.getElementById('toastMsg');
 
@@ -412,34 +421,22 @@
             const title = 'Ночной Курьер | Оренбург';
             const text = '🚀 Ночная доставка по Оренбургу с 22:00 до 06:00! Калькулятор цен, акции, быстрый заказ.';
 
-            // Проверяем, поддерживается ли Web Share API (на мобильных устройствах)
             if (navigator.share) {
                 try {
-                    await navigator.share({
-                        title: title,
-                        text: text,
-                        url: url,
-                    });
-                    console.log('Поделились успешно');
+                    await navigator.share({ title, text, url });
                 } catch (err) {
-                    if (err.name !== 'AbortError') {
-                        console.log('Ошибка шаринга:', err);
-                        fallbackCopy(url);
-                    }
+                    if (err.name !== 'AbortError') fallbackCopy(url);
                 }
             } else {
-                // fallback для десктопов и старых браузеров
                 fallbackCopy(url);
             }
         }
 
         function fallbackCopy(url) {
-            // Копируем ссылку в буфер обмена
             navigator.clipboard.writeText(url).then(() => {
                 showToast('🔗 Ссылка скопирована! Отправьте другу');
             }).catch(() => {
-                // Если не получилось — показываем альтернативный текст
-                showToast('📋 Скопируйте ссылку вручную: ' + url);
+                showToast('📋 Скопируйте ссылку вручную');
             });
         }
 
