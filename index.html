@@ -10,7 +10,7 @@
             --bg-color: #0b101b; 
             --accent-color: #00d4ff;
             --text-color: #ffffff;
-            --card-bg: rgba(25, 32, 45, 0.9);
+            --card-bg: rgba(18, 24, 34, 0.85);
             --tg-color: #0088cc;
             --wa-color: #25d366;
             --call-color: #28a745;
@@ -18,28 +18,64 @@
 
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            background-image: url("https://www.transparenttextures.com/patterns/snow.png");
-            color: var(--text-color);
             margin: 0;
             scroll-behavior: smooth;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        /* Фоновое изображение Оренбурга */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1576045054020-9e2fa6c1e2b2?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            filter: brightness(0.4) contrast(1.1);
+            z-index: -2;
+        }
+
+        /* Градиентная накладка для читаемости текста */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(11, 16, 27, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: -1;
+        }
+
+        /* Альтернативный фон, если основное фото не загрузится — ночное фото Оренбурга с мостом */
+        @supports (background-image: url('')) {
+            body::before {
+                background-image: url('https://images.pexels.com/photos/1434575/night-city-river-bridge-1434575.jpg?auto=compress&cs=tinysrgb&w=1600');
+            }
         }
 
         nav {
-            position: sticky; top: 0; background: rgba(11, 16, 27, 0.95);
+            position: sticky; top: 0; background: rgba(11, 16, 27, 0.9);
             padding: 15px; display: flex; justify-content: center; gap: 15px;
             z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
         }
 
-        nav a { color: white; text-decoration: none; font-size: 11px; text-transform: uppercase; font-weight: bold; }
+        nav a { color: white; text-decoration: none; font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
 
-        .container { max-width: 500px; margin: 0 auto; padding: 20px; text-align: center; }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; text-align: center; position: relative; z-index: 2; }
 
         .logo-circle {
-            width: 100px; height: 100px; background: radial-gradient(circle, #1a2a44 0%, #0b101b 100%);
+            width: 100px; height: 100px; background: radial-gradient(circle, rgba(26,42,68,0.9) 0%, rgba(11,16,27,0.8) 100%);
             border: 3px solid var(--accent-color); border-radius: 50%; margin: 20px auto;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(0,212,255,0.3);
         }
         
         .logo-img {
@@ -48,11 +84,11 @@
             object-fit: contain;
         }
 
-        .work-time { color: var(--accent-color); font-weight: bold; font-size: 14px; }
+        .work-time { color: var(--accent-color); font-weight: bold; font-size: 14px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
-        .section-title { text-align: left; font-size: 18px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 30px 0 15px; color: var(--accent-color); }
+        .section-title { text-align: left; font-size: 18px; border-left: 3px solid var(--accent-color); padding-left: 10px; margin: 30px 0 15px; color: var(--accent-color); text-shadow: 0 0 3px rgba(0,0,0,0.5); }
 
-        .card { background: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
 
         .social-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .btn-social { padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 14px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.1s ease; }
@@ -60,13 +96,109 @@
         .wa { background: var(--wa-color); }
         .tg { background: var(--tg-color); }
 
+        /* ===== КАЛЬКУЛЯТОР ===== */
+        .calculator {
+            background: rgba(18, 24, 34, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        .calc-row {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .calc-row label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .calc-row select, .calc-row input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: #0f1622;
+            border: 1px solid #2a3a55;
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .calc-row input[type="range"] {
+            padding: 0;
+            accent-color: var(--accent-color);
+        }
+        .calc-price {
+            background: linear-gradient(135deg, #00d4ff20, #00d4ff05);
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px dashed var(--accent-color);
+        }
+        .calc-price span {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .distance-value {
+            display: inline-block;
+            margin-left: 10px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* ===== FAQ (АККОРДЕОН) ===== */
+        .faq-item {
+            background: rgba(18, 24, 34, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .faq-question {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .faq-question:hover {
+            background: rgba(0, 212, 255, 0.15);
+        }
+        .faq-question i {
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            max-height: 0;
+            padding: 0 16px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 250px;
+            padding: 0 16px 16px 16px;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
         /* Юридический блок */
-        .legal-info { margin-top: 50px; padding: 20px; font-size: 11px; opacity: 0.6; line-height: 1.6; text-align: left; background: rgba(0,0,0,0.2); border-radius: 10px; }
+        .legal-info { margin-top: 50px; padding: 20px; font-size: 11px; opacity: 0.8; line-height: 1.6; text-align: left; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); border-radius: 10px; }
         .legal-links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .legal-links a { color: var(--accent-color); text-decoration: underline; cursor: pointer; }
 
-        /* Модальные окна для документов */
-        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); padding: 20px; box-sizing: border-box; overflow-y: auto; }
+        /* Модальные окна */
+        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); padding: 20px; box-sizing: border-box; overflow-y: auto; }
         .modal-content { background: #1a202c; padding: 25px; border-radius: 15px; color: #ccc; font-size: 13px; text-align: left; max-width: 600px; margin: 0 auto; border: 1px solid var(--accent-color); }
         .close-modal { color: var(--accent-color); float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
 
@@ -75,6 +207,21 @@
         
         @media (max-width: 480px) {
             .logo-circle { width: 80px; height: 80px; }
+            body::before { background-position: center 40%; }
+        }
+
+        /* Небольшая надпись о городе на фоне (опционально) */
+        .city-signature {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            font-size: 10px;
+            opacity: 0.3;
+            z-index: 1;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -82,6 +229,8 @@
 
     <nav>
         <a href="#services">Услуги</a>
+        <a href="#calculator">Калькулятор</a>
+        <a href="#faq">Вопросы</a>
         <a href="#legal">Инфо</a>
         <a href="tel:+79999099924">Срочно</a>
     </nav>
@@ -108,6 +257,84 @@
             <div class="card"><span><i class="fas fa-star"></i> Спецзаказы</span><span style="color: var(--accent-color)">Договорная</span></div>
         </div>
 
+        <!-- ===== БЛОК КАЛЬКУЛЯТОРА ===== -->
+        <div id="calculator">
+            <div class="section-title"><i class="fas fa-calculator"></i> Калькулятор доставки</div>
+            <div class="calculator">
+                <div class="calc-row">
+                    <label><i class="fas fa-motorcycle"></i> Тип доставки</label>
+                    <select id="deliveryType">
+                        <option value="standard">Базовая доставка</option>
+                        <option value="express">Экспресс (30 мин)</option>
+                        <option value="sober">Трезвый водитель</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <label><i class="fas fa-road"></i> Расстояние (км): <span id="distanceValue" class="distance-value">5</span> км</label>
+                    <input type="range" id="distance" min="1" max="20" value="5" step="1">
+                </div>
+                <div class="calc-row">
+                    <label><i class="fas fa-weight-hanging"></i> Дополнительно</label>
+                    <select id="extra">
+                        <option value="0">Без опций</option>
+                        <option value="200">+ Тяжёлый груз (от 10 кг) +200₽</option>
+                        <option value="300">+ Ожидание курьера (15 мин) +300₽</option>
+                        <option value="500">+ Срочность "по городу за 20 мин" +500₽</option>
+                    </select>
+                </div>
+                <div class="calc-price">
+                    💰 Примерная стоимость: <span id="totalPrice">от 450₽</span>
+                </div>
+                <div style="font-size: 10px; margin-top: 10px; opacity: 0.6;">*Цена может уточняться оператором</div>
+            </div>
+        </div>
+
+        <!-- ===== БЛОК FAQ (АККОРДЕОН) ===== -->
+        <div id="faq">
+            <div class="section-title"><i class="fas fa-question-circle"></i> Частые вопросы</div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Как оплатить доставку? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Принимаем наличные курьеру, перевод на карту или СБП. Оплата после выполнения заказа. Для корпоративных клиентов — безналичный расчёт.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Сколько ждать курьера? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Среднее время подачи — 15–25 минут после подтверждения заказа. В часы пик (23:00–01:00) возможно до 40 минут, но мы всегда предупреждаем.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Что можно передать с курьером? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Документы, ключи, подарки, продукты, лекарства, товары из магазинов. Запрещены: алкоголь (после 23:00), наркотики, оружие, взрывчатые вещества.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Есть ли минимальная сумма заказа? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Нет, минимальная стоимость — 300 рублей. Даже если нужно передать маленький конверт через город.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Как отменить заказ? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Позвоните или напишите в Telegram/WhatsApp. Бесплатная отмена за 10 минут до подачи курьера. Позже — возможна комиссия 100₽, если водитель уже выехал.
+                </div>
+            </div>
+        </div>
+
+        <!-- Юридический блок -->
         <div class="legal-info" id="legal">
             <strong>Важная информация:</strong><br>
             Сайт не является публичной офертой. Цены носят информационный характер и зависят от сложности маршрута. Мы не осуществляем доставку товаров, запрещенных законодательством РФ (алкоголь после 23:00, табачные изделия, наркотические средства и т.д.).
@@ -118,12 +345,17 @@
             </div>
         </div>
 
-        <footer style="padding: 30px 0 100px; font-size: 10px; opacity: 0.4;">
+        <footer style="padding: 30px 0 100px; font-size: 10px; opacity: 0.6;">
             © 2026 Night Courier Orenburg. Все права защищены.
         </footer>
     </div>
 
-    <!-- Модальное окно: Политика конфиденциальности -->
+    <!-- Подпись на фоне -->
+    <div class="city-signature">
+        🌃 Ночной Оренбург
+    </div>
+
+    <!-- Модальные окна -->
     <div id="privacy" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('privacy')">&times;</span>
@@ -133,7 +365,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно: Правила сервиса -->
     <div id="terms" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('terms')">&times;</span>
@@ -146,30 +377,65 @@
         </div>
     </div>
 
-    <!-- Кнопка быстрого звонка -->
+    <!-- Кнопка звонка -->
     <a href="tel:+79999099924" class="call-now"><i class="fas fa-phone"></i></a>
 
     <script>
-        // Функции для модальных окон
+        // Калькулятор
+        const deliveryType = document.getElementById('deliveryType');
+        const distanceSlider = document.getElementById('distance');
+        const distanceValue = document.getElementById('distanceValue');
+        const extraSelect = document.getElementById('extra');
+        const totalPriceSpan = document.getElementById('totalPrice');
+
+        function calculatePrice() {
+            let basePrice = 0;
+            const type = deliveryType.value;
+            const dist = parseInt(distanceSlider.value);
+            const extra = parseInt(extraSelect.value);
+
+            if (type === 'standard') basePrice = 200 + dist * 20;
+            else if (type === 'express') basePrice = 350 + dist * 25;
+            else basePrice = 800 + dist * 30;
+
+            let total = basePrice + extra;
+            total = Math.max(total, 300);
+            totalPriceSpan.innerText = `от ${total}₽`;
+        }
+
+        deliveryType.addEventListener('change', calculatePrice);
+        distanceSlider.addEventListener('input', function() {
+            distanceValue.innerText = this.value;
+            calculatePrice();
+        });
+        extraSelect.addEventListener('change', calculatePrice);
+        calculatePrice();
+
+        // FAQ аккордеон
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Модальные окна
         function showModal(id) { 
             const modal = document.getElementById(id);
             if (modal) modal.style.display = "block"; 
         }
-        
         function closeModal(id) { 
             const modal = document.getElementById(id);
             if (modal) modal.style.display = "none"; 
         }
-        
-        // Закрытие при клике на фон
         window.onclick = function(event) { 
             if (event.target.classList && event.target.classList.contains('modal')) { 
                 event.target.style.display = "none"; 
             } 
         }
-        
-        // Адаптация для безопасного отображения на всех устройствах
-        console.log("Ночной Курьер | Оренбург | Сайт загружен");
     </script>
 </body>
 </html>
