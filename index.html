@@ -2,190 +2,502 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Ночной Курьер | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
     <style>
         :root {
-            --bg-color: #0b101b; --accent-color: #00d4ff; --text-color: #ffffff;
-            --card-bg: rgba(18, 24, 34, 0.96); --call-color: #28a745;
+            --bg-color: #0b101b;
+            --accent-color: #00d4ff;
+            --text-color: #ffffff;
+            --card-bg: rgba(18, 24, 34, 0.96);
+            --call-color: #28a745;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
-            background-image: linear-gradient(rgba(11,16,27,0.9), rgba(11,16,27,0.9)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            background-image: linear-gradient(rgba(11,16,27,0.92), rgba(11,16,27,0.92)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-
-        /* ИСПРАВЛЕНИЕ: ПРИНУДИТЕЛЬНЫЕ ЦВЕТА ДЛЯ ПОЛЕЙ */
+        /* Принудительные стили для полей ввода */
         input, select, textarea {
             background-color: #0f1622 !important;
             color: #ffffff !important;
             border: 1px solid #2a3a55 !important;
-            -webkit-appearance: none; /* Убирает системные стили iOS */
+            border-radius: 12px !important;
+            padding: 12px !important;
+            font-size: 14px !important;
+            outline: none;
+            transition: all 0.2s;
         }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 0 2px rgba(0,212,255,0.2);
+        }
+        ::placeholder { color: rgba(255,255,255,0.5) !important; }
 
-        /* Видимость подсказок (placeholder) */
-        ::placeholder { color: rgba(255, 255, 255, 0.5) !important; opacity: 1; }
-        :-ms-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
-        ::-ms-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
-
-        .reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
+        /* Навигация */
         nav {
-            position: sticky; top: 0; background: rgba(11, 16, 27, 0.98);
-            padding: 12px; display: flex; justify-content: center; gap: 15px;
-            z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            background: rgba(11, 16, 27, 0.98);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            z-index: 1000;
+            border-bottom: 1px solid var(--accent-color);
+            backdrop-filter: blur(10px);
         }
-        nav a { color: white; text-decoration: none; font-size: 10px; text-transform: uppercase; font-weight: bold; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+        }
+        nav a:hover { color: var(--accent-color); }
 
-        .container { max-width: 480px; margin: 0 auto; padding: 15px; }
-        
-        header { text-align: center; margin-bottom: 25px; }
-        .logo-circle { width: 80px; height: 80px; border: 2px solid var(--accent-color); border-radius: 50%; margin: 0 auto 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+        }
 
-        /* БАННЕР АКЦИИ */
+        /* Шапка */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,212,255,0.4);
+        }
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        h1 {
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+        .sub {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Акция */
         .promo-banner {
-            background: linear-gradient(45deg, #ff4444, #ff8800); color: white;
-            padding: 10px; border-radius: 12px; text-align: center; font-weight: bold;
-            font-size: 13px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255,68,68,0.3);
+            background: linear-gradient(95deg, #ff4444, #ff8800);
+            padding: 10px;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(255,68,68,0.3);
         }
 
-        .calculator, .map-section { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
-        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        
-        .calc-row { margin-bottom: 15px; }
-        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; }
-        
-        .calc-row select, .calc-row input, .calc-row textarea { 
-            width: 100%; padding: 12px; border-radius: 10px; font-size: 14px; outline: none; transition: 0.3s;
+        /* Карточки секций */
+        .card-section {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0,212,255,0.2);
+            backdrop-filter: blur(4px);
         }
-        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color) !important; box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+        .section-title {
+            color: var(--accent-color);
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 12px;
+        }
+
+        .calc-row {
+            margin-bottom: 16px;
+        }
+        .calc-row label {
+            display: block;
+            font-size: 11px;
+            color: #aaa;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .double-input {
+            display: flex;
+            gap: 10px;
+        }
+        .double-input input {
+            flex: 1;
+        }
 
         .price-breakdown {
-            background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px;
-            text-align: center; border: 1px dashed var(--accent-color); margin-top: 15px;
+            background: rgba(0,212,255,0.08);
+            padding: 16px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px dashed var(--accent-color);
+            margin-top: 10px;
         }
-        .total-price { font-size: 28px; font-weight: 800; color: var(--accent-color); display: block; }
-        .price-detail { font-size: 10px; color: #888; margin-top: 5px; }
-        
-        .btn-main { 
-            display: block; width: 100%; background: var(--accent-color); color: #000; 
-            padding: 16px; border-radius: 30px; text-decoration: none; font-weight: bold; 
-            text-align: center; margin-top: 15px; font-size: 14px;
+        .total-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent-color);
         }
-        .btn-sub-container { display: flex; gap: 10px; margin-top: 10px; }
-        .btn-sub { 
-            flex: 1; padding: 10px; border-radius: 20px; text-decoration: none; 
-            font-size: 11px; font-weight: bold; text-align: center; color: white;
-            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
+        .price-detail {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 5px;
         }
 
-        .map-container { width: 100%; height: 250px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,212,255,0.3); }
-        .call-fixed { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 2000; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .btn-main {
+            display: block;
+            width: 100%;
+            background: var(--accent-color);
+            color: #000;
+            padding: 14px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 18px;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+        .btn-main:active { transform: scale(0.97); }
+
+        .map-container {
+            width: 100%;
+            height: 240px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0,212,255,0.4);
+        }
+
+        /* О нас */
+        .about-text {
+            font-size: 13px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        .about-text i {
+            color: var(--accent-color);
+            width: 24px;
+        }
+        .about-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+        .about-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 10px 80px;
+            font-size: 9px;
+            opacity: 0.5;
+        }
+
+        .call-fixed {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--call-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            z-index: 2000;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(40,167,69,0.5);}
+            70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(40,167,69,0);}
+            100% { transform: scale(1);}
+        }
+        @media (max-width: 480px) {
+            .container { padding: 12px; }
+            .card-section { padding: 16px; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
     <a href="#delivery">Доставка</a>
-    <a href="#driver">Водитель</a>
+    <a href="#driver">Трезвый водитель</a>
     <a href="#map-block">Карта</a>
-    <a href="#other">Помощь</a>
+    <a href="#help">Помощь</a>
+    <a href="#about">О нас</a>
 </nav>
 
 <div class="container">
-    <header class="animate__animated animate__fadeIn">
+    <header>
         <div class="logo-circle">
-            <img style="width:100%; height:100%; object-fit:cover;" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png">
+            <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="Логотип">
         </div>
         <h1>НОЧНОЙ КУРЬЕР</h1>
-        <p style="color:var(--accent-color); font-weight:bold; font-size: 12px;">ОРЕНБУРГ | 22:00 — 06:00</p>
+        <div class="sub">ОРЕНБУРГ | 22:00 — 06:00</div>
     </header>
 
-    <div class="promo-banner animate__animated animate__pulse animate__infinite">
+    <div class="promo-banner">
         🎁 Каждая 3-я доставка — скидка 25%!
     </div>
 
-    <section class="calculator reveal" id="delivery">
-        <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
+    <!-- БЛОК ДОСТАВКИ -->
+    <section id="delivery" class="card-section">
+        <div class="section-title"><i class="fas fa-box"></i> Калькулятор доставки</div>
         <div class="calc-row">
-            <label>РАССТОЯНИЕ: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
-            <input type="range" id="dist" min="1" max="25" value="3" oninput="updateDelivery()">
+            <label>📏 Расстояние: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
+            <input type="range" id="dist" min="1" max="25" value="3" step="1">
         </div>
         <div class="calc-row">
-            <select id="del-time" onchange="updateDelivery()">
-                <option value="0">22:00 - 00:00 (Без доплаты)</option>
-                <option value="100">00:00 - 02:00 (+100₽)</option>
-                <option value="200">02:00 - 04:00 (+200₽)</option>
-                <option value="250">04:00 - 06:00 (+250₽)</option>
+            <label>⏰ Время заказа</label>
+            <select id="time">
+                <option value="0">22:00 – 00:00 (без доплаты)</option>
+                <option value="100">00:00 – 02:00 (+100₽)</option>
+                <option value="200">02:00 – 04:00 (+200₽)</option>
+                <option value="250">04:00 – 06:00 (+250₽)</option>
             </select>
         </div>
-        <div style="display:flex; gap:10px;" class="calc-row">
-            <input type="text" id="del-from" placeholder="Откуда">
-            <input type="text" id="del-to" placeholder="Куда">
+        <div class="calc-row">
+            <label>📍 Сложный маршрут (2+ точки)</label>
+            <select id="complex">
+                <option value="0">Нет</option>
+                <option value="150">Да, заезд в 2+ места (+150₽)</option>
+            </select>
         </div>
-        <textarea id="del-list" rows="2" placeholder="Что купить?" class="calc-row"></textarea>
-        
+        <div class="calc-row">
+            <label>🏋️ Тяжёлый груз (подъём >10 кг)</label>
+            <select id="heavy">
+                <option value="0">Нет</option>
+                <option value="100">Да (+100₽)</option>
+            </select>
+        </div>
+        <div class="double-input">
+            <input type="text" id="from" placeholder="Откуда забрать">
+            <input type="text" id="to" placeholder="Куда доставить">
+        </div>
+        <textarea id="goods" rows="2" placeholder="Что передать? (товары, документы...)" style="margin-top:12px;"></textarea>
+
         <div class="price-breakdown">
-            💰 ИТОГО: <span id="del-total" class="total-price">300₽</span>
-            <div id="del-detail" class="price-detail">База: 300₽</div>
+            💰 ИТОГО: <span id="totalPrice" class="total-price">300₽</span>
+            <div id="priceDetail" class="price-detail">База: 300₽</div>
         </div>
-        <a href="#" id="del-btn" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ</a>
+
+        <a href="#" id="orderLink" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ</a>
     </section>
 
-    <section class="map-section reveal" id="map-block">
+    <!-- ТРЕЗВЫЙ ВОДИТЕЛЬ -->
+    <section id="driver" class="card-section">
+        <div class="section-title"><i class="fas fa-user-shield"></i> Трезвый водитель</div>
+        <div class="calc-row">
+            <label>🏁 Расстояние: <span id="driverDistVal">3</span> км</label>
+            <input type="range" id="driverDist" min="1" max="25" value="3" step="1">
+        </div>
+        <div class="calc-row">
+            <label>⏰ Время</label>
+            <select id="driverTime">
+                <option value="0">22:00–00:00</option>
+                <option value="100">00:00–02:00 (+100₽)</option>
+                <option value="200">02:00–04:00 (+200₽)</option>
+                <option value="250">04:00–06:00 (+250₽)</option>
+            </select>
+        </div>
+        <div class="price-breakdown">
+            💰 Стоимость: <span id="driverPrice" class="total-price">1000₽</span>
+        </div>
+        <a href="#" id="driverLink" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ ВОДИТЕЛЯ</a>
+    </section>
+
+    <!-- КАРТА -->
+    <section id="map-block" class="card-section">
         <div class="section-title"><i class="fas fa-map-marked-alt"></i> Карта Оренбурга</div>
         <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12" width="100%" height="100%"></iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
         </div>
     </section>
 
-    <section class="calculator reveal" id="other" style="border-color: #9c27b0;">
-        <div class="section-title" style="color: #9c27b0;"><i class="fas fa-tools"></i> Иная помощь</div>
-        <textarea id="other-task" rows="3" placeholder="Опишите ситуацию..." oninput="updateOther()" style="border-color:#9c27b0 !important;"></textarea>
-        <a href="#" id="other-btn" class="btn-main" style="background:#9c27b0; color:white;">ОТПРАВИТЬ</a>
+    <!-- ПОМОЩЬ НА ДОРОГЕ -->
+    <section id="help" class="card-section">
+        <div class="section-title"><i class="fas fa-tools"></i> Помощь на дороге</div>
+        <textarea id="helpText" rows="3" placeholder="Опишите, что случилось (прикурить, открыть, трос...)"></textarea>
+        <a href="#" id="helpLink" class="btn-main" style="background:#9c27b0; color:white;">ОТПРАВИТЬ ЗАЯВКУ</a>
     </section>
 
-    <footer style="text-align:center; padding: 20px; font-size: 10px; opacity: 0.5;">
+    <!-- О НАС -->
+    <section id="about" class="card-section">
+        <div class="section-title"><i class="fas fa-info-circle"></i> О нас</div>
+        <div class="about-text">
+            <p>«Ночной Курьер» — это служба быстрой и анонимной помощи в Оренбурге с 22:00 до 06:00.</p>
+            <ul class="about-list">
+                <li><i class="fas fa-check-circle"></i> Работаем по всему городу и пригороду</li>
+                <li><i class="fas fa-clock"></i> Среднее время подачи — 15–25 минут</li>
+                <li><i class="fas fa-ruble-sign"></i> Честный калькулятор без скрытых комиссий</li>
+                <li><i class="fas fa-gift"></i> Акция: каждый 3-й заказ – скидка 25%</li>
+                <li><i class="fas fa-shield-alt"></i> Водители проходят проверку, за рулём только трезвые</li>
+            </ul>
+            <p style="margin-top:12px;">📞 Звоните или пишите в Telegram – поможем в любой ситуации.</p>
+        </div>
+    </section>
+
+    <footer>
         <p>НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</p>
-        <p>© 2026 Night Courier Orenburg.</p>
+        <p>© 2026 Night Courier Orenburg</p>
     </footer>
 </div>
 
 <a href="tel:+79999099924" class="call-fixed"><i class="fas fa-phone"></i></a>
 
 <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // ---- ОБЩАЯ ФУНКЦИЯ ОТПРАВКИ В ТЕЛЕГРАМ (username nightcourier56) ----
+    const TG_BOT = "https://t.me/nightcourier56?text=";
+    function sendToTG(text) {
+        return TG_BOT + encodeURIComponent(text);
+    }
 
-    function sendToTG(text) { return "https://t.me/mankogame?text=" + encodeURIComponent(text); }
+    // ----- БЛОК ДОСТАВКИ -----
+    const distSlider = document.getElementById('dist');
+    const distVal = document.getElementById('distVal');
+    const timeSelect = document.getElementById('time');
+    const complexSelect = document.getElementById('complex');
+    const heavySelect = document.getElementById('heavy');
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+    const goodsInput = document.getElementById('goods');
+    const totalSpan = document.getElementById('totalPrice');
+    const priceDetailSpan = document.getElementById('priceDetail');
+    const orderLink = document.getElementById('orderLink');
+
+    function getBasePrice(d) {
+        if (d <= 3) return 300;
+        if (d <= 7) return 450;
+        if (d <= 12) return 600;
+        return 650;
+    }
 
     function updateDelivery() {
-        const d = parseInt(document.getElementById('dist').value);
-        const t = parseInt(document.getElementById('del-time').value);
-        document.getElementById('distVal').innerText = d;
-        let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
-        const total = base + t;
-        document.getElementById('del-total').innerText = total + '₽';
-        document.getElementById('del-detail').innerText = `База: ${base}₽ + доплата: ${t}₽`;
-        const msg = `📦 ЗАКАЗ\n📍 Откуда: ${document.getElementById('del-from').value}\n🏠 Куда: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Итого: ${total}₽`;
-        document.getElementById('del-btn').href = sendToTG(msg);
+        let d = parseInt(distSlider.value);
+        let timeExtra = parseInt(timeSelect.value);
+        let complexExtra = parseInt(complexSelect.value);
+        let heavyExtra = parseInt(heavySelect.value);
+        let base = getBasePrice(d);
+        let total = base + timeExtra + complexExtra + heavyExtra;
+        distVal.innerText = d;
+        totalSpan.innerText = total + '₽';
+        priceDetailSpan.innerText = `База: ${base}₽ + ночь: ${timeExtra}₽ + сложный: ${complexExtra}₽ + тяжелый: ${heavyExtra}₽`;
+        
+        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n`;
+        msg += `📏 Расстояние: ${d} км\n`;
+        msg += `⏰ Время: ${timeSelect.options[timeSelect.selectedIndex].text}\n`;
+        msg += `📍 Сложный маршрут: ${complexExtra > 0 ? "Да (+150₽)" : "Нет"}\n`;
+        msg += `🏋️ Тяжёлый груз: ${heavyExtra > 0 ? "Да (+100₽)" : "Нет"}\n`;
+        msg += `📍 Откуда: ${fromInput.value || "не указано"}\n`;
+        msg += `🏁 Куда: ${toInput.value || "не указано"}\n`;
+        msg += `📦 Что везём: ${goodsInput.value || "не указано"}\n`;
+        msg += `💰 Итог: ${total}₽\n\n`;
+        msg += `Хочу заказать доставку!`;
+        orderLink.href = sendToTG(msg);
     }
 
-    function updateOther() {
-        const msg = `🛠 ПОМОЩЬ\n📝 Суть: ${document.getElementById('other-task').value}`;
-        document.getElementById('other-btn').href = sendToTG(msg);
-    }
+    distSlider.addEventListener('input', updateDelivery);
+    timeSelect.addEventListener('change', updateDelivery);
+    complexSelect.addEventListener('change', updateDelivery);
+    heavySelect.addEventListener('change', updateDelivery);
+    fromInput.addEventListener('input', updateDelivery);
+    toInput.addEventListener('input', updateDelivery);
+    goodsInput.addEventListener('input', updateDelivery);
+    updateDelivery();
 
-    window.onload = updateDelivery;
+    // ----- ТРЕЗВЫЙ ВОДИТЕЛЬ -----
+    const driverDist = document.getElementById('driverDist');
+    const driverDistVal = document.getElementById('driverDistVal');
+    const driverTime = document.getElementById('driverTime');
+    const driverPriceSpan = document.getElementById('driverPrice');
+    const driverLink = document.getElementById('driverLink');
+
+    function updateDriver() {
+        let d = parseInt(driverDist.value);
+        let timeExtra = parseInt(driverTime.value);
+        let base = 800; // базовая цена трезвого водителя
+        let total = base + (d * 15) + timeExtra; // 15₽ за км
+        driverDistVal.innerText = d;
+        driverPriceSpan.innerText = total + '₽';
+        
+        let msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n`;
+        msg += `📏 Расстояние: ${d} км\n`;
+        msg += `⏰ Время: ${driverTime.options[driverTime.selectedIndex].text}\n`;
+        msg += `💰 Итог: ${total}₽\n\n`;
+        msg += `Нужен водитель!`;
+        driverLink.href = sendToTG(msg);
+    }
+    driverDist.addEventListener('input', updateDriver);
+    driverTime.addEventListener('change', updateDriver);
+    updateDriver();
+
+    // ----- ПОМОЩЬ НА ДОРОГЕ -----
+    const helpText = document.getElementById('helpText');
+    const helpLink = document.getElementById('helpLink');
+    function updateHelp() {
+        let text = helpText.value.trim();
+        let msg = `🛠 ПОМОЩЬ НА ДОРОГЕ\nОписание: ${text || "ситуация не описана"}\nНужна помощь!`;
+        helpLink.href = sendToTG(msg);
+    }
+    helpText.addEventListener('input', updateHelp);
+    updateHelp();
+
+    // Плавное появление секций (IntersectionObserver)
+    const sections = document.querySelectorAll('.card-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = '0.5s ease-out';
+        observer.observe(section);
+    });
 </script>
 </body>
 </html>
