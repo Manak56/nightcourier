@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта 24/7 Оренбург</title>
+    <style>
+        body { font-family: sans-serif; background: #0b101b; color: white; margin: 0; text-align: center; }
+        nav { background: #000; padding: 15px; border-bottom: 2px solid #00d4ff; display: flex; justify-content: center; gap: 15px; }
+        nav a { color: white; text-decoration: none; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .map-box { border: 1px solid #00d4ff; margin: 20px auto; max-width: 900px; border-radius: 15px; overflow: hidden; }
+        h2 { color: #00d4ff; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Заказ</a>
+        <a href="map.html" style="color:#00d4ff">Карта</a>
+        <a href="fleet.html">Автопарк</a>
+    </nav>
+    <h2>Круглосуточные точки Оренбурга</h2>
+    <div class="map-box">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A307849c71a39d899539288e7b936d538f8303f237197f26227926715f2105151&amp;source=constructor" width="100%" height="450" frameborder="0"></iframe>
+    </div>
+</body>
+</html>
