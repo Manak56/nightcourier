@@ -6,6 +6,8 @@
     <title>Night Courier | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
         :root {
             --bg: #0b101b;
             --card: rgba(22, 27, 34, 0.98);
@@ -13,10 +15,9 @@
             --text: #ffffff;
             --secondary: #8b949e;
             --btn-green: #28a745;
+            --btn-orange: #ff8800;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
@@ -28,88 +29,107 @@
 
         .app-container { display: flex; flex-direction: column; height: 100vh; max-width: 500px; margin: 0 auto; position: relative; }
 
-        /* HEADER */
         header {
-            padding: 15px; text-align: center; background: rgba(11, 16, 27, 0.95);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px); z-index: 100;
+            padding: 12px; text-align: center; background: rgba(11, 16, 27, 0.95);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px);
             display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .header-logo { width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
+        .header-logo { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
         header h1 { font-size: 16px; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
 
-        /* СТРАНИЦЫ */
-        .page {
-            flex: 1; overflow-y: auto; padding: 20px; display: none; 
-            padding-bottom: 120px;
-        }
-        .page.active { display: block; animation: slideUp 0.4s ease; }
+        .page { flex: 1; overflow-y: auto; padding: 16px; display: none; padding-bottom: 100px; }
+        .page.active { display: block; animation: slideUp 0.3s ease; }
 
-        .card {
-            background: var(--card); border-radius: 20px; padding: 20px; 
-            margin-bottom: 20px; border: 1px solid rgba(0, 212, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .card { background: var(--card); border-radius: 20px; padding: 18px; margin-bottom: 18px; border: 1px solid rgba(0, 212, 255, 0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h2 { font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
 
-        h2 { font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--accent); }
-
-        /* ПОЛЯ */
         input, select, textarea {
-            width: 100% !important; background: #0f1622 !important; 
-            border: 1px solid #2a3a55 !important; border-radius: 12px !important;
-            padding: 12px !important; color: #ffffff !important; 
-            font-size: 14px !important; margin-bottom: 12px !important; outline: none;
+            width: 100% !important; background: #0f1622 !important; border: 1px solid #2a3a55 !important;
+            border-radius: 12px !important; padding: 10px 12px !important; color: #fff !important;
+            font-size: 14px !important; margin-bottom: 10px !important; outline: none;
         }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent) !important; box-shadow: 0 0 8px rgba(0,212,255,0.2); }
-        ::placeholder { color: rgba(255,255,255,0.4); }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent) !important; box-shadow: 0 0 6px rgba(0,212,255,0.3); }
+        ::placeholder { color: rgba(255,255,255,0.5); }
 
-        /* КНОПКИ */
         .btn-main {
-            background: var(--accent); color: #000; border: none; padding: 14px;
-            border-radius: 30px; width: 100%; font-weight: 800; font-size: 14px;
-            text-decoration: none; display: block; text-align: center; text-transform: uppercase;
+            background: var(--accent); color: #000; border: none; padding: 12px;
+            border-radius: 40px; width: 100%; font-weight: 800; font-size: 14px;
+            text-decoration: none; display: block; text-align: center; margin-top: 10px;
             transition: 0.2s;
         }
         .btn-main:active { transform: scale(0.97); }
+        .btn-call { background: var(--btn-green); color: white; }
+        .flex-buttons { display: flex; gap: 10px; margin-top: 8px; }
+        .flex-buttons .btn-main { flex: 1; margin-top: 0; }
 
-        /* НИЖНЯЯ НАВИГАЦИЯ (5 пунктов) */
+        /* Нижняя навигация */
         .bottom-nav {
             position: absolute; bottom: 0; width: 100%; background: rgba(11, 16, 27, 0.98);
-            display: flex; justify-content: space-around; padding: 10px 0 20px;
+            display: flex; justify-content: space-around; padding: 8px 0 18px;
             border-top: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(20px); z-index: 100;
         }
-        .nav-item {
-            color: #555; text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; font-size: 9px; font-weight: bold; transition: 0.3s;
-        }
-        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        .nav-item { color: #777; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 9px; font-weight: bold; transition: 0.2s; }
+        .nav-item i { font-size: 20px; margin-bottom: 3px; }
         .nav-item.active { color: var(--accent); }
 
-        /* КНОПКА ЗВОНКА */
-        .call-btn {
-            position: fixed; bottom: 100px; right: 20px; width: 55px; height: 55px;
-            background: var(--btn-green); border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; color: #fff; font-size: 22px;
-            z-index: 999; box-shadow: 0 5px 20px rgba(40,167,69,0.4);
-            animation: vibrate 2s infinite;
+        .call-fab {
+            position: fixed; bottom: 90px; right: 16px; width: 52px; height: 52px;
+            background: var(--btn-green); border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 22px; z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4); animation: vibrate 2s infinite;
         }
-        @keyframes vibrate {
-            0%, 100% { transform: scale(1); }
-            10%, 20% { transform: scale(1.08) rotate(-3deg); }
-            30%, 40% { transform: scale(1.08) rotate(3deg); }
-        }
-
+        @keyframes vibrate { 0%,100%{transform:scale(1);} 10%,20%{transform:scale(1.08) rotate(-3deg);} 30%,40%{transform:scale(1.08) rotate(3deg);} }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Баннер акции — без бесконечной анимации */
-        .promo {
-            background: linear-gradient(45deg, #ff4444, #ff8800);
-            padding: 10px; border-radius: 12px; text-align: center;
-            font-weight: bold; font-size: 12px; margin-bottom: 20px;
+        .promo { background: linear-gradient(45deg, #ff4444, #ff8800); padding: 8px; border-radius: 40px; text-align: center; font-weight: bold; font-size: 11px; margin-bottom: 16px; }
+        .legal-note { font-size: 8px; text-align: center; color: var(--secondary); margin-top: 20px; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .about-list { list-style: none; }
+        .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; }
+        .about-list i { width: 20px; color: var(--accent); }
+
+        /* FAQ стили */
+        .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; cursor: pointer; font-weight: bold; font-size: 13px; }
+        .faq-question i { transition: transform 0.2s; color: var(--accent); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 12px; color: var(--secondary); padding: 0; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* Стили для SVG-карты */
+        .static-map {
+            background: #1a2538;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 12px;
         }
-        /* Вкладка "О нас" стили */
-        .about-list { list-style: none; margin-top: 10px; }
-        .about-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
-        .about-list i { width: 22px; color: var(--accent); }
+        .map-svg {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: #2a3a55;
+        }
+        .district-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 10px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -122,196 +142,311 @@
 
     <!-- ГЛАВНАЯ -->
     <div id="home" class="page active">
-        <div style="text-align:center; padding: 20px 0;">
-            <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width:100px; margin-bottom:15px; filter: drop-shadow(0 0 15px var(--accent));">
-            <h2 style="justify-content:center; font-size: 24px;">ОРЕНБУРГ</h2>
-            <p style="color:var(--accent); font-weight:bold; letter-spacing: 2px;">22:00 — 06:00</p>
+        <div style="text-align: center; padding: 15px 0;">
+            <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
+            <h2 style="justify-content: center; font-size: 22px;">ОРЕНБУРГ</h2>
+            <p style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">22:00 — 06:00</p>
         </div>
-        
         <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
-
         <div class="card">
             <h2><i class="fas fa-rocket"></i> Наши услуги</h2>
-            <p style="font-size: 14px; color: var(--secondary); margin-bottom: 15px;">Мы — твои глаза и руки в ночном городе. Быстро, анонимно, надежно.</p>
-            <button class="btn-main" onclick="switchTab('order')">ПЕРЕЙТИ К ЗАКАЗУ</button>
+            <p style="font-size: 13px; color: var(--secondary); margin-bottom: 15px;">Быстрая доставка, трезвый водитель, помощь на дороге — работаем всю ночь.</p>
+            <button class="btn-main" onclick="switchTab('order')">📦 ЗАКАЗАТЬ</button>
         </div>
     </div>
 
-    <!-- ЗАКАЗ (ПОЛНЫЙ КАЛЬКУЛЯТОР) -->
+    <!-- ЗАКАЗ (доставка + трезвый водитель) -->
     <div id="order" class="page">
         <div class="card">
             <h2><i class="fas fa-shopping-cart"></i> Калькулятор доставки</h2>
             <input type="text" id="from" placeholder="Откуда (адрес / магазин)">
             <input type="text" id="to" placeholder="Куда доставить?">
-            <textarea id="list" rows="2" placeholder="Что передать? (товары, документы...)" oninput="updateOrder()"></textarea>
+            <textarea id="list" rows="2" placeholder="Что передать? (товары, документы...)"></textarea>
             
             <div class="calc-row">
                 <label style="font-size: 11px; color: var(--accent);">📏 Расстояние: <span id="distVal">3</span> км</label>
-                <input type="range" id="dist" min="1" max="25" value="3" step="1" oninput="updateOrder()">
+                <input type="range" id="dist" min="1" max="25" value="3" step="1">
             </div>
-            
             <div class="calc-row">
                 <label style="font-size: 11px; color: var(--accent);">⏰ Время заказа</label>
-                <select id="time" onchange="updateOrder()">
+                <select id="time">
                     <option value="0">22:00 – 00:00 (без доплаты)</option>
                     <option value="100">00:00 – 02:00 (+100₽)</option>
                     <option value="200">02:00 – 04:00 (+200₽)</option>
                     <option value="250">04:00 – 06:00 (+250₽)</option>
                 </select>
             </div>
-            
             <div class="calc-row">
                 <label style="font-size: 11px; color: var(--accent);">📍 Сложный маршрут (2+ точки)</label>
-                <select id="complex" onchange="updateOrder()">
+                <select id="complex">
                     <option value="0">Нет</option>
                     <option value="150">Да, заезд в 2+ места (+150₽)</option>
                 </select>
             </div>
-            
             <div class="calc-row">
                 <label style="font-size: 11px; color: var(--accent);">🏋️ Тяжёлый груз (подъём >10 кг)</label>
-                <select id="heavy" onchange="updateOrder()">
+                <select id="heavy">
                     <option value="0">Нет</option>
                     <option value="100">Да (+100₽)</option>
                 </select>
             </div>
 
-            <div style="background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px; text-align: center; margin-top: 5px;">
+            <div style="background: rgba(0,212,255,0.1); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
                 <span style="font-size: 10px;">ИТОГО:</span>
-                <div id="total" style="font-size: 28px; font-weight: 800; color: var(--accent);">300₽</div>
+                <div id="total" style="font-size: 26px; font-weight: 800; color: var(--accent);">300₽</div>
                 <div id="priceDetail" style="font-size: 9px; opacity: 0.7;">База: 300₽</div>
             </div>
-            
-            <a href="#" id="sendBtn" class="btn-main" style="margin-top: 15px;"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ</a>
+
+            <div class="flex-buttons">
+                <a href="#" id="sendBtn" class="btn-main"><i class="fab fa-telegram"></i> Заказать</a>
+                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
+            </div>
         </div>
 
         <div class="card" style="border-color: var(--btn-green);">
             <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
-            <p style="font-size: 13px; margin-bottom: 15px;">Бережно доставим тебя и твое авто домой.</p>
-            <a href="https://t.me/mankogame?text=Нужен%20трезвый%20водитель" class="btn-main" style="background: var(--btn-green); color: white;">ВЫЗВАТЬ ВОДИТЕЛЯ</a>
+            <div class="calc-row">
+                <label style="font-size: 11px; color: var(--btn-green);">📏 Расстояние: <span id="driverDistVal">3</span> км</label>
+                <input type="range" id="driverDist" min="1" max="30" value="3" step="1">
+            </div>
+            <div class="calc-row">
+                <label style="font-size: 11px; color: var(--btn-green);">⏰ Время заказа</label>
+                <select id="driverTime">
+                    <option value="0">22:00 – 00:00 (без доплаты)</option>
+                    <option value="100">00:00 – 02:00 (+100₽)</option>
+                    <option value="200">02:00 – 04:00 (+200₽)</option>
+                    <option value="250">04:00 – 06:00 (+250₽)</option>
+                </select>
+            </div>
+            <div style="background: rgba(40,167,69,0.15); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
+                <span style="font-size: 10px;">СТОИМОСТЬ:</span>
+                <div id="driverTotal" style="font-size: 26px; font-weight: 800; color: var(--btn-green);">1200₽</div>
+            </div>
+            <div class="flex-buttons">
+                <a href="#" id="driverSendBtn" class="btn-main" style="background: var(--btn-green); color: white;"><i class="fab fa-telegram"></i> Заказать</a>
+                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
+            </div>
         </div>
     </div>
 
-    <!-- КАРТА -->
+    <!-- КАРТА (статичная SVG с зонами районов) -->
     <div id="map" class="page">
         <div class="card">
-            <h2><i class="fas fa-map-marked-alt"></i> Карта охвата</h2>
-            <div style="border-radius: 15px; overflow: hidden; height: 350px; border: 1px solid var(--accent);">
-                <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12" width="100%" height="100%" frameborder="0"></iframe>
+            <h2><i class="fas fa-map-marked-alt"></i> Карта районов Оренбурга</h2>
+            <div class="static-map">
+                <svg class="map-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Фон -->
+                    <rect width="400" height="300" fill="#2a3a55" rx="8"/>
+                    
+                    <!-- Район "Центр" (красный) -->
+                    <polygon points="150,80 250,80 270,150 200,180 130,150" fill="#ff4444" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="195" y="120" fill="white" font-size="8" text-anchor="middle">Центр</text>
+                    
+                    <!-- Район "Степной" (синий) -->
+                    <polygon points="50,180 120,160 130,220 80,250 30,230" fill="#4488ff" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="70" y="210" fill="white" font-size="7" text-anchor="middle">Степной</text>
+                    
+                    <!-- Район "Мёртвый (Бёрды)" (зелёный) -->
+                    <polygon points="300,180 360,170 370,230 330,260 280,230" fill="#44cc44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="325" y="215" fill="white" font-size="7" text-anchor="middle">Мёртвый</text>
+                    
+                    <!-- Район "Малая земля" (оранжевый) -->
+                    <polygon points="10,40 120,20 130,80 60,100 20,80" fill="#ffaa44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="65" y="60" fill="white" font-size="7" text-anchor="middle">Малая земля</text>
+                    
+                    <!-- Район "Ростоши" (фиолетовый) -->
+                    <polygon points="260,30 340,20 360,70 300,90 250,60" fill="#aa66ff" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="300" y="55" fill="white" font-size="7" text-anchor="middle">Ростоши</text>
+                    
+                    <!-- Район "70 лет ВЛКСМ" (голубой) -->
+                    <polygon points="180,200 250,190 260,250 200,270 170,240" fill="#33cccc" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="215" y="235" fill="white" font-size="7" text-anchor="middle">70 лет ВЛКСМ</text>
+                    
+                    <!-- Район "Авиагородок" (розовый) -->
+                    <polygon points="50,120 110,110 100,160 60,170 30,140" fill="#ff66aa" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="70" y="142" fill="white" font-size="7" text-anchor="middle">Авиагородок</text>
+                    
+                    <!-- Район "Весенний" (жёлтый) -->
+                    <polygon points="310,110 370,100 380,150 340,160 290,140" fill="#ffee44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
+                    <text x="335" y="132" fill="white" font-size="7" text-anchor="middle">Весенний</text>
+                </svg>
+                <div class="district-legend">
+                    <div class="legend-item"><span class="legend-color" style="background:#ff4444;"></span> Центр</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#4488ff;"></span> Степной</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#44cc44;"></span> Мёртвый (Бёрды)</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#ffaa44;"></span> Малая земля</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#aa66ff;"></span> Ростоши</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#33cccc;"></span> 70 лет ВЛКСМ</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#ff66aa;"></span> Авиагородок</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#ffee44;"></span> Весенний</div>
+                </div>
+                <p style="font-size: 10px; margin-top: 10px; text-align: center;">* Схематичное расположение районов. Доставка по всем зонам.</p>
             </div>
-            <p style="font-size: 12px; margin-top: 15px; text-align: center; color: var(--secondary);">Работаем по всему Оренбургу и области</p>
+        </div>
+    </div>
+
+    <!-- ПОМОЩЬ -->
+    <div id="help" class="page">
+        <div class="card">
+            <h2><i class="fas fa-tools"></i> Помощь на дороге</h2>
+            <p style="font-size: 13px; margin-bottom: 12px;">Опишите проблему: прикурить, открыть авто, трос, замена колеса и т.д.</p>
+            <textarea id="helpProblem" rows="3" placeholder="Например: не могу завестись, нужен прикуриватель..."></textarea>
+            <div class="flex-buttons">
+                <a href="#" id="helpSendBtn" class="btn-main" style="background: var(--btn-orange); color: white;"><i class="fab fa-telegram"></i> Отправить</a>
+                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
+            </div>
         </div>
     </div>
 
     <!-- СВЯЗЬ -->
     <div id="support" class="page">
         <div class="card">
-            <h2><i class="fas fa-id-card"></i> Обратная связь</h2>
-            <p style="margin-bottom: 20px; font-size: 14px;">Мы работаем, пока город спит. По любым вопросам пишите или звоните.</p>
-            <a href="tel:+79999099924" class="btn-main" style="background: var(--btn-green); color: white; margin-bottom: 15px;">
-                <i class="fas fa-phone"></i> ПОЗВОНИТЬ
-            </a>
-            <a href="https://t.me/mankogame" class="btn-main" style="background: #0088cc; color: white;">
-                <i class="fab fa-telegram-plane"></i> НАПИСАТЬ В TG
-            </a>
+            <h2><i class="fas fa-id-card"></i> Контакты</h2>
+            <a href="tel:+79999099924" class="btn-main btn-call" style="margin-bottom: 10px;"><i class="fas fa-phone"></i> 8 (999) 909-99-24</a>
+            <a href="https://t.me/mankogame" class="btn-main" style="background: #0088cc; color: white;"><i class="fab fa-telegram-plane"></i> @mankogame</a>
         </div>
     </div>
 
-    <!-- О НАС (НОВАЯ ВКЛАДКА) -->
+    <!-- О НАС + FAQ -->
     <div id="about" class="page">
         <div class="card">
             <h2><i class="fas fa-info-circle"></i> О нас</h2>
-            <p style="margin-bottom: 15px; font-size: 14px;">«Night Courier» — ночная служба доставки и помощи в Оренбурге с 22:00 до 06:00.</p>
+            <p style="margin-bottom: 12px;">«Night Courier» — ночная служба доставки и помощи в Оренбурге с 22:00 до 06:00.</p>
             <ul class="about-list">
                 <li><i class="fas fa-check-circle"></i> Работаем по всему городу и пригороду</li>
                 <li><i class="fas fa-clock"></i> Среднее время подачи — 15–25 минут</li>
                 <li><i class="fas fa-ruble-sign"></i> Честный калькулятор без скрытых комиссий</li>
                 <li><i class="fas fa-gift"></i> Акция: каждый 3-й заказ – скидка 25%</li>
-                <li><i class="fas fa-shield-alt"></i> Водители проходят проверку, за рулём только трезвые</li>
-                <li><i class="fas fa-phone-alt"></i> Круглосуточная поддержка в Telegram</li>
+                <li><i class="fas fa-shield-alt"></i> Водители проходят проверку</li>
+                <li><i class="fas fa-balance-scale"></i> Работаем строго по закону РФ</li>
             </ul>
+        </div>
+        <!-- БЛОК FAQ -->
+        <div class="card">
+            <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
+            <div class="faq-item">
+                <div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Среднее время подачи — 15–25 минут после подтверждения заказа. В ночное время часто быстрее.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Как оплатить доставку? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ требуется предоплата 50%.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатые вещества. Остальное согласовывается.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Каждая 3-я доставка у одного номера телефона автоматически получает скидку 25% (напоминайте оператору).</div>
+            </div>
+        </div>
+        <div class="legal-note">
+            ⚠️ Сайт не является публичной офертой. Цены носят информационный характер.<br>
+            Мы осуществляем деятельность в соответствии с законодательством РФ.
         </div>
     </div>
 
-    <a href="tel:+79999099924" class="call-btn"><i class="fas fa-phone"></i></a>
+    <a href="tel:+79999099924" class="call-fab"><i class="fas fa-phone-alt"></i></a>
 
-    <!-- НИЖНЯЯ НАВИГАЦИЯ (5 пунктов) -->
     <nav class="bottom-nav">
-        <a href="javascript:void(0)" class="nav-item active" onclick="switchTab('home', this)">
-            <i class="fas fa-home"></i><span>Главная</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('order', this)">
-            <i class="fas fa-bolt"></i><span>Заказ</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('map', this)">
-            <i class="fas fa-map-pin"></i><span>Карта</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('support', this)">
-            <i class="fas fa-headset"></i><span>Связь</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('about', this)">
-            <i class="fas fa-users"></i><span>О нас</span>
-        </a>
+        <a href="javascript:void(0)" class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i><span>Главная</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('order', this)"><i class="fas fa-bolt"></i><span>Заказ</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('map', this)"><i class="fas fa-map-pin"></i><span>Карта</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('help', this)"><i class="fas fa-wrench"></i><span>Помощь</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('support', this)"><i class="fas fa-headset"></i><span>Связь</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('about', this)"><i class="fas fa-users"></i><span>О нас</span></a>
     </nav>
 </div>
 
 <script>
-    // Функция переключения вкладок
     function switchTab(tabId, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
-        if(el) el.classList.add('active');
+        if (el) el.classList.add('active');
     }
 
-    // Полный калькулятор доставки
-    function updateOrder() {
-        const dist = parseInt(document.getElementById('dist').value);
-        const timeExtra = parseInt(document.getElementById('time').value);
-        const complexExtra = parseInt(document.getElementById('complex').value);
-        const heavyExtra = parseInt(document.getElementById('heavy').value);
-        
-        let base;
-        if (dist <= 3) base = 300;
-        else if (dist <= 7) base = 450;
-        else if (dist <= 12) base = 600;
-        else base = 650;
-        
+    // ---- Калькулятор доставки ----
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+    const listInput = document.getElementById('list');
+    const distSlider = document.getElementById('dist');
+    const distVal = document.getElementById('distVal');
+    const timeSelect = document.getElementById('time');
+    const complexSelect = document.getElementById('complex');
+    const heavySelect = document.getElementById('heavy');
+    const totalSpan = document.getElementById('total');
+    const priceDetail = document.getElementById('priceDetail');
+    const sendBtn = document.getElementById('sendBtn');
+
+    function updateDelivery() {
+        const dist = parseInt(distSlider.value);
+        const timeExtra = parseInt(timeSelect.value);
+        const complexExtra = parseInt(complexSelect.value);
+        const heavyExtra = parseInt(heavySelect.value);
+        let base = dist <= 3 ? 300 : dist <= 7 ? 450 : dist <= 12 ? 600 : 650;
         let total = base + timeExtra + complexExtra + heavyExtra;
-        document.getElementById('distVal').innerText = dist;
-        document.getElementById('total').innerText = total + '₽';
-        document.getElementById('priceDetail').innerHTML = `База: ${base}₽ + ночь: ${timeExtra}₽ + сложный: ${complexExtra}₽ + тяжёлый: ${heavyExtra}₽`;
+        distVal.innerText = dist;
+        totalSpan.innerText = total + '₽';
+        priceDetail.innerHTML = `База: ${base}₽ + ночь: ${timeExtra}₽ + сложный: ${complexExtra}₽ + тяжёлый: ${heavyExtra}₽`;
         
-        // Формируем сообщение для Telegram
-        const from = document.getElementById('from').value || "не указано";
-        const to = document.getElementById('to').value || "не указано";
-        const list = document.getElementById('list').value || "не указано";
-        const timeText = document.getElementById('time').options[document.getElementById('time').selectedIndex].text;
-        
-        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n`;
-        msg += `📍 Откуда: ${from}\n`;
-        msg += `🏠 Куда: ${to}\n`;
-        msg += `📦 Список: ${list}\n`;
-        msg += `📏 Расстояние: ${dist} км\n`;
-        msg += `⏰ Временной слот: ${timeText}\n`;
-        msg += `📍 Сложный маршрут: ${complexExtra > 0 ? "Да (+150₽)" : "Нет"}\n`;
-        msg += `🏋️ Тяжёлый груз: ${heavyExtra > 0 ? "Да (+100₽)" : "Нет"}\n`;
-        msg += `💰 Итоговая сумма: ${total}₽\n\n`;
-        msg += `Хочу заказать доставку!`;
-        
-        document.getElementById('sendBtn').href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+        const from = fromInput.value || "не указано";
+        const to = toInput.value || "не указано";
+        const list = listInput.value || "не указано";
+        const timeText = timeSelect.options[timeSelect.selectedIndex].text;
+        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n📍 Откуда: ${from}\n🏠 Куда: ${to}\n📦 Список: ${list}\n📏 Расстояние: ${dist} км\n⏰ ${timeText}\n📍 Сложный: ${complexExtra > 0 ? "Да (+150₽)" : "Нет"}\n🏋️ Тяжёлый: ${heavyExtra > 0 ? "Да (+100₽)" : "Нет"}\n💰 Итог: ${total}₽\n\nХочу заказать доставку!`;
+        sendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
     }
-    
-    // Инициализация
-    window.onload = function() {
-        updateOrder();
-        // Добавляем обработчики на все поля
-        const fields = ['from', 'to', 'list', 'dist', 'time', 'complex', 'heavy'];
-        fields.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.addEventListener('input', updateOrder);
+    fromInput.addEventListener('input', updateDelivery);
+    toInput.addEventListener('input', updateDelivery);
+    listInput.addEventListener('input', updateDelivery);
+    distSlider.addEventListener('input', updateDelivery);
+    timeSelect.addEventListener('change', updateDelivery);
+    complexSelect.addEventListener('change', updateDelivery);
+    heavySelect.addEventListener('change', updateDelivery);
+    updateDelivery();
+
+    // ---- Трезвый водитель ----
+    const driverDistSlider = document.getElementById('driverDist');
+    const driverDistVal = document.getElementById('driverDistVal');
+    const driverTimeSelect = document.getElementById('driverTime');
+    const driverTotalSpan = document.getElementById('driverTotal');
+    const driverSendBtn = document.getElementById('driverSendBtn');
+
+    function updateDriver() {
+        const dist = parseInt(driverDistSlider.value);
+        const timeExtra = parseInt(driverTimeSelect.value);
+        let base = 800 + dist * 15;
+        let total = base + timeExtra;
+        driverDistVal.innerText = dist;
+        driverTotalSpan.innerText = total + '₽';
+        const timeText = driverTimeSelect.options[driverTimeSelect.selectedIndex].text;
+        let msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n📏 Расстояние: ${dist} км\n⏰ ${timeText}\n💰 Стоимость: ${total}₽\n\nНужен водитель!`;
+        driverSendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+    }
+    driverDistSlider.addEventListener('input', updateDriver);
+    driverTimeSelect.addEventListener('change', updateDriver);
+    updateDriver();
+
+    // ---- Помощь ----
+    const helpProblem = document.getElementById('helpProblem');
+    const helpSendBtn = document.getElementById('helpSendBtn');
+    function updateHelp() {
+        let problem = helpProblem.value.trim() || "не описана";
+        let msg = `🛠 ПОМОЩЬ НА ДОРОГЕ\nПроблема: ${problem}\nНужна срочная помощь!`;
+        helpSendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+    }
+    helpProblem.addEventListener('input', updateHelp);
+    updateHelp();
+
+    // FAQ аккордеон
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const parent = q.parentElement;
+            parent.classList.toggle('active');
         });
-    };
+    });
 </script>
 </body>
 </html>
