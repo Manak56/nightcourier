@@ -2,77 +2,170 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ночной Курьер Оренбург</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Ночной Курьер | Оренбург</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --neon: #00d4ff; --bg: #0b101b; --card: rgba(255,255,255,0.05); }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 50px; }
-        nav { background: rgba(0,0,0,0.95); padding: 15px; border-bottom: 2px solid var(--neon); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; gap: 25px; }
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
-        .container { max-width: 450px; margin: 0 auto; padding: 20px; text-align: center; }
-        h1 { color: var(--neon); font-size: 2em; margin: 10px 0; text-shadow: 0 0 10px rgba(0,212,255,0.3); }
-        .calc-box { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #333; text-align: left; }
-        label { display: block; font-size: 12px; color: #888; margin-bottom: 5px; }
-        .calc-input { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border: 1px solid #444; border-radius: 10px; color: white; font-size: 16px; box-sizing: border-box; }
-        .price-row { display: flex; align-items: center; justify-content: space-between; background: rgba(0,212,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; }
-        .price-display { background: none; border: none; color: var(--neon); font-size: 22px; font-weight: bold; text-align: right; width: 80px; }
-        button { width: 100%; padding: 16px; border-radius: 30px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-main { background: var(--neon); color: black; margin-bottom: 10px; }
-        .btn-call { background: transparent; border: 2px solid #28a745; color: #28a745; text-decoration: none; display: block; text-align: center; padding: 14px; border-radius: 30px; }
+        :root {
+            --bg-color: #0b101b; --accent-color: #00d4ff; --text-color: #ffffff;
+            --card-bg: rgba(18, 24, 34, 0.9); --tg-color: #0088cc; --call-color: #28a745;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
+            background-image: linear-gradient(rgba(11,16,27,0.8), rgba(11,16,27,0.8)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
+            background-size: cover; background-attachment: fixed;
+        }
+        nav {
+            position: sticky; top: 0; background: rgba(11, 16, 27, 0.95);
+            padding: 12px; display: flex; justify-content: center; gap: 15px;
+            z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
+        }
+        nav a { color: white; text-decoration: none; font-size: 10px; text-transform: uppercase; font-weight: bold; }
+        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
+        .logo-circle { width: 80px; height: 80px; border: 2px solid var(--accent-color); border-radius: 50%; margin: 10px auto; overflow: hidden; box-shadow: 0 0 15px var(--accent-color); }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { text-align: center; font-size: 24px; margin-bottom: 5px; }
+        .work-time { text-align: center; color: var(--accent-color); font-weight: bold; margin-bottom: 20px; font-size: 14px; }
+        
+        .calculator { background: var(--card-bg); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
+        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        
+        .calc-row { margin-bottom: 12px; }
+        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; }
+        .calc-row select, .calc-row input, .calc-row textarea { 
+            width: 100%; padding: 10px; border-radius: 8px; background: #0f1622; 
+            border: 1px solid #2a3a55; color: white; font-size: 14px; 
+        }
+        .price-tag { 
+            background: rgba(0,212,255,0.15); padding: 15px; border-radius: 10px; 
+            text-align: center; border: 1px dashed var(--accent-color); margin-top: 10px;
+        }
+        .price-tag span { font-size: 26px; font-weight: 800; color: var(--accent-color); }
+        
+        .btn-order { 
+            display: block; width: 100%; background: var(--accent-color); color: #000; 
+            padding: 14px; border-radius: 30px; text-decoration: none; font-weight: bold; 
+            text-align: center; margin-top: 15px; transition: 0.3s;
+        }
+        .call-now { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html" style="color:var(--neon)">Заказ</a>
-        <a href="map.html">Карта 24/7</a>
-        <a href="tel:+79999099924">Позвонить</a>
-    </nav>
-    <div class="container">
-        <h1>НОЧНОЙ КУРЬЕР</h1>
-        <div style="color:#28a745; font-size: 0.8em; margin-bottom: 15px;">● ОРЕНБУРГ 22:00 — 06:00</div>
-        <div class="calc-box">
-            <label>ЧТО НУЖНО:</label>
-            <select id="serviceType" class="calc-input" onchange="updatePrice()">
-                <option value="delivery">📦 Доставка (от 800₽)</option>
-                <option value="driver">🚗 Трезвый водитель (от 1500₽)</option>
-                <option value="help">🔋 Помощь на дороге (от 1000₽)</option>
-                <option value="out-of-town">🏡 Пригород (от 2500₽)</option>
-            </select>
-            <label>МАРШРУТ (Откуда - Куда):</label>
-            <input type="text" id="route" placeholder="Напр: Степной - Южный" class="calc-input">
-            <label>ДЕТАЛИ (Список товаров/задача):</label>
-            <textarea id="orderList" placeholder="Что купить или какая помощь нужна..." class="calc-input" rows="3"></textarea>
-            <div class="price-row">
-                <span>Ваш бюджет:</span>
-                <div style="display:flex; align-items:center;">
-                    <input type="number" id="userPrice" value="800" class="price-display">
-                    <span style="color:var(--neon); margin-left:5px; font-weight:bold;">₽</span>
-                </div>
-            </div>
-            <button class="btn-main" onclick="sendToTelegram()">🚀 ОТПРАВИТЬ В TELEGRAM</button>
-            <a href="tel:+79999099924" class="btn-call">📞 ПОЗВОНИТЬ</a>
-        </div>
+
+<nav>
+    <a href="#delivery-calc">Доставка</a>
+    <a href="#driver-calc">Трезвый водитель</a>
+    <a href="map.html">Карта 24/7</a>
+</nav>
+
+<div class="container">
+    <div class="logo-circle">
+        <img class="logo-img" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&from=bu&cs=620x0" alt="Logo">
     </div>
-    <script>
-        const prices = { delivery: 800, driver: 1500, help: 1000, 'out-of-town': 2500 };
-        function updatePrice() {
-            const type = document.getElementById('serviceType').value;
-            document.getElementById('userPrice').value = prices[type];
-        }
-        function sendToTelegram() {
-            const typeText = document.getElementById('serviceType').options[document.getElementById('serviceType').selectedIndex].text;
-            const route = document.getElementById('route').value;
-            const list = document.getElementById('orderList').value;
-            const price = document.getElementById('userPrice').value;
-            const min = prices[document.getElementById('serviceType').value];
-            if (price < min) { alert(`Минимальная цена для этой услуги — ${min}₽`); return; }
-            if (!route || !list) { alert("Заполните детали заказа!"); return; }
-            const msg = `🚨 НОВЫЙ ВЫЗОВ:\n🛠 ${typeText}\n📍 МАРШРУТ: ${route}\n📋 ЗАДАЧА: ${list}\n💰 БЮДЖЕТ: ${price} ₽`;
-            window.open(`https://t.me/nightcourier56?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-    </script>
+    <h1>НОЧНОЙ КУРЬЕР</h1>
+    <p class="work-time">ОРЕНБУРГ | 22:00 — 06:00</p>
+
+    <div class="calculator" id="delivery-calc">
+        <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
+        
+        <div class="calc-row">
+            <label>РАЙОН ДОСТАВКИ:</label>
+            <select id="del-zone" onchange="calcDelivery()">
+                <option value="300">Степной / Центр (300₽)</option>
+                <option value="450">Южный / Маяк (450₽)</option>
+                <option value="600">Ростоши / Экодолье (600₽)</option>
+                <option value="800">Пригород (от 800₽)</option>
+            </select>
+        </div>
+
+        <div class="calc-row">
+            <label>ВРЕМЯ ЗАКАЗА:</label>
+            <select id="del-time" onchange="calcDelivery()">
+                <option value="0">22:00 - 00:00 (0₽)</option>
+                <option value="150">00:00 - 03:00 (+150₽)</option>
+                <option value="250">03:00 - 06:00 (+250₽)</option>
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <div class="calc-row" style="flex: 1;">
+                <label>ОТКУДА:</label>
+                <input type="text" id="del-from" placeholder="Напр: Макдак">
+            </div>
+            <div class="calc-row" style="flex: 1;">
+                <label>КУДА:</label>
+                <input type="text" id="del-to" placeholder="Напр: Мира 10">
+            </div>
+        </div>
+
+        <div class="calc-row">
+            <label>ЧТО ПРИВЕЗТИ + ПРИМЕРНАЯ ЦЕНА ТОВАРОВ:</label>
+            <textarea id="del-list" rows="2" placeholder="Напр: Бургер, сигареты. Сумма чека около 1200р"></textarea>
+        </div>
+
+        <div class="price-tag">Итого за доставку: <span id="del-total">300₽</span></div>
+        <a href="#" id="del-btn" class="btn-order">ЗАКАЗАТЬ ДОСТАВКУ</a>
+    </div>
+
+    <div class="calculator" id="driver-calc" style="border-color: #28a745;">
+        <div class="section-title" style="color: #28a745;"><i class="fas fa-car"></i> Трезвый водитель</div>
+        
+        <div class="calc-row">
+            <label>МАРШРУТ:</label>
+            <select id="drv-zone" onchange="calcDriver()">
+                <option value="1000">По городу (1000₽)</option>
+                <option value="1500">Город -> Пригород (1500₽)</option>
+                <option value="2500">Межгород (от 2500₽)</option>
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <div class="calc-row" style="flex: 1;">
+                <label>ОТКУДА (Где вы сейчас):</label>
+                <input type="text" id="drv-from" placeholder="Напр: Бар 'Доски'">
+            </div>
+            <div class="calc-row" style="flex: 1;">
+                <label>КУДА (Домой):</label>
+                <input type="text" id="drv-to" placeholder="Напр: Чкалова 2">
+            </div>
+        </div>
+
+        <div class="price-tag" style="border-color: #28a745;">Цена услуги: <span id="drv-total" style="color: #28a745;">1000₽</span></div>
+        <a href="#" id="drv-btn" class="btn-order" style="background: #28a745;">ВЫЗВАТЬ ВОДИТЕЛЯ</a>
+    </div>
+</div>
+
+<a href="tel:+79999099924" class="call-now"><i class="fas fa-phone"></i></a>
+
+<script>
+    function calcDelivery() {
+        const zone = parseInt(document.getElementById('del-zone').value);
+        const time = parseInt(document.getElementById('del-time').value);
+        const total = zone + time;
+        document.getElementById('del-total').innerText = total + '₽';
+        
+        const from = document.getElementById('del-from').value;
+        const to = document.getElementById('del-to').value;
+        const list = document.getElementById('del-list').value;
+        
+        const msg = `📦 НОВАЯ ДОСТАВКА%0A📍 ОТКУДА: ${from}%0A🏠 КУДА: ${to}%0A📝 СПИСОК: ${list}%0A💰 ИТОГО СЕРВИС: ${total}₽`;
+        document.getElementById('del-btn').href = `https://t.me/nightcourier56?text=${msg}`;
+    }
+
+    function calcDriver() {
+        const price = document.getElementById('drv-zone').value;
+        document.getElementById('drv-total').innerText = price + '₽';
+        
+        const from = document.getElementById('drv-from').value;
+        const to = document.getElementById('drv-to').value;
+        
+        const msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ%0A📍 ОТКУДА: ${from}%0A🏠 КУДА: ${to}%0A💰 СУММА: ${price}₽`;
+        document.getElementById('drv-btn').href = `https://t.me/nightcourier56?text=${msg}`;
+    }
+
+    // Инициализация при загрузке
+    window.onload = () => { calcDelivery(); calcDriver(); };
+</script>
 </body>
 </html>
