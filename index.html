@@ -62,7 +62,6 @@
         .flex-buttons { display: flex; gap: 10px; margin-top: 8px; }
         .flex-buttons .btn-main { flex: 1; margin-top: 0; }
 
-        /* Нижняя навигация */
         .bottom-nav {
             position: absolute; bottom: 0; width: 100%; background: rgba(11, 16, 27, 0.98);
             display: flex; justify-content: space-around; padding: 8px 0 18px;
@@ -95,40 +94,75 @@
         .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* Стили для SVG-карты */
-        .static-map {
-            background: #1a2538;
+        /* Схема тарифов (километраж) */
+        .tariff-scheme {
+            background: #0f1622;
             border-radius: 20px;
             padding: 12px;
             margin-bottom: 12px;
+            text-align: center;
         }
-        .map-svg {
+        .tariff-scheme svg {
             width: 100%;
+            max-width: 280px;
             height: auto;
-            border-radius: 12px;
-            background: #2a3a55;
+            margin: 0 auto;
+            display: block;
         }
-        .district-legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+        .tariff-table {
             margin-top: 12px;
-            font-size: 10px;
+            font-size: 12px;
         }
-        .legend-color {
-            width: 14px;
-            height: 14px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-right: 4px;
+        .tariff-table table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(0,0,0,0.4);
-            padding: 4px 8px;
-            border-radius: 20px;
+        .tariff-table td, .tariff-table th {
+            padding: 6px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .tariff-table th {
+            color: var(--accent);
+        }
+
+        /* Преимущества на главной */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .feature {
+            background: rgba(0,212,255,0.1);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+        }
+        .feature i {
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .feature span {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .review {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .review .name {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .review .text {
+            font-size: 11px;
+            margin-top: 4px;
+            color: var(--secondary);
         }
     </style>
 </head>
@@ -140,7 +174,7 @@
         <h1>Night Courier</h1>
     </header>
 
-    <!-- ГЛАВНАЯ -->
+    <!-- ГЛАВНАЯ (обновлена) -->
     <div id="home" class="page active">
         <div style="text-align: center; padding: 15px 0;">
             <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
@@ -148,15 +182,39 @@
             <p style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">22:00 — 06:00</p>
         </div>
         <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
+        
+        <!-- Блок "Почему выбирают нас" -->
         <div class="card">
-            <h2><i class="fas fa-rocket"></i> Наши услуги</h2>
-            <p style="font-size: 13px; color: var(--secondary); margin-bottom: 15px;">Быстрая доставка, трезвый водитель, помощь на дороге — работаем всю ночь.</p>
-            <button class="btn-main" onclick="switchTab('order')">📦 ЗАКАЗАТЬ</button>
+            <h2><i class="fas fa-star"></i> Почему выбирают нас</h2>
+            <div class="features-grid">
+                <div class="feature"><i class="fas fa-clock"></i><br><span>15-25 мин</span><br><small>подача курьера</small></div>
+                <div class="feature"><i class="fas fa-ruble-sign"></i><br><span>Прозрачные цены</span><br><small>без скрытых комиссий</small></div>
+                <div class="feature"><i class="fas fa-shield-alt"></i><br><span>Анонимно</span><br><small>ваши данные в безопасности</small></div>
+                <div class="feature"><i class="fas fa-gift"></i><br><span>Скидка 25%</span><br><small>каждая 3-я доставка</small></div>
+            </div>
+        </div>
+
+        <!-- Блок "Отзывы" -->
+        <div class="card">
+            <h2><i class="fas fa-comment-dots"></i> Отзывы клиентов</h2>
+            <div class="review">
+                <div class="name">Алексей</div>
+                <div class="text">Заказывал в 2 часа ночи. Курьер приехал через 20 минут, все чётко. Спасибо!</div>
+            </div>
+            <div class="review">
+                <div class="name">Екатерина</div>
+                <div class="text">Отличная служба. Трезвый водитель — реально выручили. Рекомендую.</div>
+            </div>
+            <div class="review">
+                <div class="name">Дмитрий</div>
+                <div class="text">Пользовался доставкой уже 3 раза, скидку дали — приятно. Быстро и вежливо.</div>
+            </div>
         </div>
     </div>
 
-    <!-- ЗАКАЗ (доставка + трезвый водитель) -->
+    <!-- ЗАКАЗ (доставка + трезвый водитель + помощь) -->
     <div id="order" class="page">
+        <!-- Доставка -->
         <div class="card">
             <h2><i class="fas fa-shopping-cart"></i> Калькулятор доставки</h2>
             <input type="text" id="from" placeholder="Откуда (адрес / магазин)">
@@ -203,6 +261,7 @@
             </div>
         </div>
 
+        <!-- Трезвый водитель -->
         <div class="card" style="border-color: var(--btn-green);">
             <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
             <div class="calc-row">
@@ -227,70 +286,12 @@
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
         </div>
-    </div>
 
-    <!-- КАРТА (статичная SVG с зонами районов) -->
-    <div id="map" class="page">
+        <!-- Помощь на дороге (перенесена сюда) -->
         <div class="card">
-            <h2><i class="fas fa-map-marked-alt"></i> Карта районов Оренбурга</h2>
-            <div class="static-map">
-                <svg class="map-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Фон -->
-                    <rect width="400" height="300" fill="#2a3a55" rx="8"/>
-                    
-                    <!-- Район "Центр" (красный) -->
-                    <polygon points="150,80 250,80 270,150 200,180 130,150" fill="#ff4444" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="195" y="120" fill="white" font-size="8" text-anchor="middle">Центр</text>
-                    
-                    <!-- Район "Степной" (синий) -->
-                    <polygon points="50,180 120,160 130,220 80,250 30,230" fill="#4488ff" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="70" y="210" fill="white" font-size="7" text-anchor="middle">Степной</text>
-                    
-                    <!-- Район "Мёртвый (Бёрды)" (зелёный) -->
-                    <polygon points="300,180 360,170 370,230 330,260 280,230" fill="#44cc44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="325" y="215" fill="white" font-size="7" text-anchor="middle">Мёртвый</text>
-                    
-                    <!-- Район "Малая земля" (оранжевый) -->
-                    <polygon points="10,40 120,20 130,80 60,100 20,80" fill="#ffaa44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="65" y="60" fill="white" font-size="7" text-anchor="middle">Малая земля</text>
-                    
-                    <!-- Район "Ростоши" (фиолетовый) -->
-                    <polygon points="260,30 340,20 360,70 300,90 250,60" fill="#aa66ff" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="300" y="55" fill="white" font-size="7" text-anchor="middle">Ростоши</text>
-                    
-                    <!-- Район "70 лет ВЛКСМ" (голубой) -->
-                    <polygon points="180,200 250,190 260,250 200,270 170,240" fill="#33cccc" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="215" y="235" fill="white" font-size="7" text-anchor="middle">70 лет ВЛКСМ</text>
-                    
-                    <!-- Район "Авиагородок" (розовый) -->
-                    <polygon points="50,120 110,110 100,160 60,170 30,140" fill="#ff66aa" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="70" y="142" fill="white" font-size="7" text-anchor="middle">Авиагородок</text>
-                    
-                    <!-- Район "Весенний" (жёлтый) -->
-                    <polygon points="310,110 370,100 380,150 340,160 290,140" fill="#ffee44" fill-opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-                    <text x="335" y="132" fill="white" font-size="7" text-anchor="middle">Весенний</text>
-                </svg>
-                <div class="district-legend">
-                    <div class="legend-item"><span class="legend-color" style="background:#ff4444;"></span> Центр</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#4488ff;"></span> Степной</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#44cc44;"></span> Мёртвый (Бёрды)</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#ffaa44;"></span> Малая земля</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#aa66ff;"></span> Ростоши</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#33cccc;"></span> 70 лет ВЛКСМ</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#ff66aa;"></span> Авиагородок</div>
-                    <div class="legend-item"><span class="legend-color" style="background:#ffee44;"></span> Весенний</div>
-                </div>
-                <p style="font-size: 10px; margin-top: 10px; text-align: center;">* Схематичное расположение районов. Доставка по всем зонам.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ПОМОЩЬ -->
-    <div id="help" class="page">
-        <div class="card">
-            <h2><i class="fas fa-tools"></i> Помощь на дороге</h2>
+            <h2 style="color: var(--btn-orange);"><i class="fas fa-tools"></i> Помощь на дороге</h2>
             <p style="font-size: 13px; margin-bottom: 12px;">Опишите проблему: прикурить, открыть авто, трос, замена колеса и т.д.</p>
-            <textarea id="helpProblem" rows="3" placeholder="Например: не могу завестись, нужен прикуриватель..."></textarea>
+            <textarea id="helpProblem" rows="2" placeholder="Например: не могу завестись, нужен прикуриватель..."></textarea>
             <div class="flex-buttons">
                 <a href="#" id="helpSendBtn" class="btn-main" style="background: var(--btn-orange); color: white;"><i class="fab fa-telegram"></i> Отправить</a>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
@@ -298,12 +299,51 @@
         </div>
     </div>
 
-    <!-- СВЯЗЬ -->
+    <!-- КАРТА (заменена на схему тарифов и километража) -->
+    <div id="map" class="page">
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
+            <div class="tariff-scheme">
+                <svg viewBox="0 0 200 150">
+                    <circle cx="100" cy="75" r="20" fill="none" stroke="#00d4ff" stroke-width="2" stroke-dasharray="4"/>
+                    <circle cx="100" cy="75" r="40" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3"/>
+                    <circle cx="100" cy="75" r="60" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="2"/>
+                    <text x="100" y="70" text-anchor="middle" fill="#00d4ff" font-size="6">3 км</text>
+                    <text x="100" y="50" text-anchor="middle" fill="#aaa" font-size="5">7 км</text>
+                    <text x="100" y="30" text-anchor="middle" fill="#aaa" font-size="5">12 км</text>
+                    <circle cx="100" cy="75" r="3" fill="#00d4ff"/>
+                </svg>
+                <div class="tariff-table">
+                    <table>
+                        <tr><th>Расстояние</th><th>Стоимость</th></tr>
+                        <tr><td>до 3 км</td><td>300₽</td></tr>
+                        <tr><td>до 7 км</td><td>450₽</td></tr>
+                        <tr><td>до 12 км</td><td>600₽</td></tr>
+                        <tr><td>за город</td><td>от 650₽</td></tr>
+                    </table>
+                </div>
+                <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену. Итог всегда виден в калькуляторе.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- СВЯЗЬ + СОТРУДНИЧЕСТВО -->
     <div id="support" class="page">
         <div class="card">
             <h2><i class="fas fa-id-card"></i> Контакты</h2>
             <a href="tel:+79999099924" class="btn-main btn-call" style="margin-bottom: 10px;"><i class="fas fa-phone"></i> 8 (999) 909-99-24</a>
             <a href="https://t.me/mankogame" class="btn-main" style="background: #0088cc; color: white;"><i class="fab fa-telegram-plane"></i> @mankogame</a>
+        </div>
+        <!-- Новый блок "Сотрудничество" -->
+        <div class="card">
+            <h2><i class="fas fa-handshake"></i> Сотрудничество</h2>
+            <p style="font-size: 13px;">Приглашаем к сотрудничеству:</p>
+            <ul style="margin: 10px 0 0 20px; font-size: 12px;">
+                <li>• Таксопарки и водителей (ночные смены)</li>
+                <li>• Магазины и кафе (доставка готовых заказов)</li>
+                <li>• Рекламные агентства (размещение информации)</li>
+            </ul>
+            <p style="margin-top: 12px;">По вопросам партнёрства пишите в Telegram: <strong>@mankogame</strong></p>
         </div>
     </div>
 
@@ -321,7 +361,7 @@
                 <li><i class="fas fa-balance-scale"></i> Работаем строго по закону РФ</li>
             </ul>
         </div>
-        <!-- БЛОК FAQ -->
+        <!-- FAQ -->
         <div class="card">
             <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
             <div class="faq-item">
@@ -352,8 +392,7 @@
     <nav class="bottom-nav">
         <a href="javascript:void(0)" class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i><span>Главная</span></a>
         <a href="javascript:void(0)" class="nav-item" onclick="switchTab('order', this)"><i class="fas fa-bolt"></i><span>Заказ</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('map', this)"><i class="fas fa-map-pin"></i><span>Карта</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('help', this)"><i class="fas fa-wrench"></i><span>Помощь</span></a>
+        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('map', this)"><i class="fas fa-chart-simple"></i><span>Тарифы</span></a>
         <a href="javascript:void(0)" class="nav-item" onclick="switchTab('support', this)"><i class="fas fa-headset"></i><span>Связь</span></a>
         <a href="javascript:void(0)" class="nav-item" onclick="switchTab('about', this)"><i class="fas fa-users"></i><span>О нас</span></a>
     </nav>
@@ -367,7 +406,7 @@
         if (el) el.classList.add('active');
     }
 
-    // ---- Калькулятор доставки ----
+    // ---- Доставка ----
     const fromInput = document.getElementById('from');
     const toInput = document.getElementById('to');
     const listInput = document.getElementById('list');
