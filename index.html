@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-color: #0b101b; --accent-color: #00d4ff; --text-color: #ffffff;
-            --card-bg: rgba(18, 24, 34, 0.96); --tg-color: #0088cc; --call-color: #28a745;
+            --card-bg: rgba(18, 24, 34, 0.96); --call-color: #28a745;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
         
@@ -18,11 +18,22 @@
             font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
             background-image: linear-gradient(rgba(11,16,27,0.9), rgba(11,16,27,0.9)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
             background-size: cover; background-position: center; background-attachment: fixed;
-            overflow-x: hidden;
         }
 
-        /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        /* ИСПРАВЛЕНИЕ: ПРИНУДИТЕЛЬНЫЕ ЦВЕТА ДЛЯ ПОЛЕЙ */
+        input, select, textarea {
+            background-color: #0f1622 !important;
+            color: #ffffff !important;
+            border: 1px solid #2a3a55 !important;
+            -webkit-appearance: none; /* Убирает системные стили iOS */
+        }
+
+        /* Видимость подсказок (placeholder) */
+        ::placeholder { color: rgba(255, 255, 255, 0.5) !important; opacity: 1; }
+        :-ms-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+        ::-ms-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         nav {
@@ -34,75 +45,49 @@
 
         .container { max-width: 480px; margin: 0 auto; padding: 15px; }
         
-        header { text-align: center; margin-bottom: 30px; }
-        .logo-circle { 
-            width: 90px; height: 90px; border: 2px solid var(--accent-color); border-radius: 50%; 
-            margin: 0 auto 15px; overflow: hidden; box-shadow: 0 0 25px rgba(0,212,255,0.5);
-            animation: pulse-glow 3s infinite;
-        }
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 15px rgba(0,212,255,0.4); }
-            50% { box-shadow: 0 0 35px rgba(0,212,255,0.8); }
-            100% { box-shadow: 0 0 15px rgba(0,212,255,0.4); }
+        header { text-align: center; margin-bottom: 25px; }
+        .logo-circle { width: 80px; height: 80px; border: 2px solid var(--accent-color); border-radius: 50%; margin: 0 auto 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
+
+        /* БАННЕР АКЦИИ */
+        .promo-banner {
+            background: linear-gradient(45deg, #ff4444, #ff8800); color: white;
+            padding: 10px; border-radius: 12px; text-align: center; font-weight: bold;
+            font-size: 13px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255,68,68,0.3);
         }
 
-        .calculator, .map-section { 
-            background: var(--card-bg); border-radius: 20px; padding: 20px; 
-            margin-bottom: 25px; border: 1px solid rgba(0,212,255,0.15);
-            transition: transform 0.3s ease;
-        }
-        .calculator:active { transform: scale(0.99); }
-
-        .section-title { color: var(--accent-color); font-size: 17px; font-weight: bold; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .calculator, .map-section { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
+        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        .calc-row { margin-bottom: 18px; }
-        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .calc-row { margin-bottom: 15px; }
+        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; }
         
         .calc-row select, .calc-row input, .calc-row textarea { 
-            width: 100%; padding: 14px; border-radius: 12px; background: #0f1622; 
-            border: 1px solid #2a3a55; color: white; font-size: 14px; outline: none; transition: 0.3s;
+            width: 100%; padding: 12px; border-radius: 10px; font-size: 14px; outline: none; transition: 0.3s;
         }
-        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
+        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color) !important; box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
 
         .price-breakdown {
-            background: rgba(0,212,255,0.05); padding: 20px; border-radius: 15px;
-            text-align: center; border: 1px dashed var(--accent-color); margin-top: 20px;
+            background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px;
+            text-align: center; border: 1px dashed var(--accent-color); margin-top: 15px;
         }
-        .total-price { font-size: 32px; font-weight: 800; color: var(--accent-color); display: block; }
+        .total-price { font-size: 28px; font-weight: 800; color: var(--accent-color); display: block; }
+        .price-detail { font-size: 10px; color: #888; margin-top: 5px; }
         
         .btn-main { 
             display: block; width: 100%; background: var(--accent-color); color: #000; 
-            padding: 18px; border-radius: 35px; text-decoration: none; font-weight: 800; 
-            text-align: center; margin-top: 20px; font-size: 15px; text-transform: uppercase;
-            transition: 0.3s;
+            padding: 16px; border-radius: 30px; text-decoration: none; font-weight: bold; 
+            text-align: center; margin-top: 15px; font-size: 14px;
         }
-        .btn-main:hover { filter: brightness(1.1); }
-
-        .btn-sub-container { display: flex; gap: 12px; margin-top: 15px; }
+        .btn-sub-container { display: flex; gap: 10px; margin-top: 10px; }
         .btn-sub { 
-            flex: 1; padding: 12px; border-radius: 25px; text-decoration: none; 
+            flex: 1; padding: 10px; border-radius: 20px; text-decoration: none; 
             font-size: 11px; font-weight: bold; text-align: center; color: white;
-            border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
         }
 
-        .map-container { width: 100%; height: 280px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(0,212,255,0.2); }
-
-        /* КНОПКА ТЕЛЕФОНА С АНИМАЦИЕЙ */
-        .call-fixed { 
-            position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; 
-            background: var(--call-color); border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; color: white; font-size: 28px; 
-            z-index: 2000; box-shadow: 0 5px 20px rgba(40,167,69,0.4);
-            animation: phone-vibrate 2s infinite;
-        }
-        @keyframes phone-vibrate {
-            0%, 100% { transform: scale(1); }
-            10%, 20% { transform: scale(1.1) rotate(-5deg); }
-            30%, 40% { transform: scale(1.1) rotate(5deg); }
-            50% { transform: scale(1); }
-        }
-
-        footer { text-align: center; padding: 40px 20px; opacity: 0.6; font-size: 11px; }
+        .map-container { width: 100%; height: 250px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,212,255,0.3); }
+        .call-fixed { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 2000; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -115,13 +100,17 @@
 </nav>
 
 <div class="container">
-    <header class="animate__animated animate__fadeInDown">
+    <header class="animate__animated animate__fadeIn">
         <div class="logo-circle">
-            <img style="width:100%; height:100%; object-fit:cover;" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="Logo">
+            <img style="width:100%; height:100%; object-fit:cover;" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png">
         </div>
-        <h1 class="animate__animated animate__tracking-in-expand">НОЧНОЙ КУРЬЕР</h1>
-        <p style="color:var(--accent-color); font-weight:bold; letter-spacing: 2px;">ОРЕНБУРГ | 22:00 — 06:00</p>
+        <h1>НОЧНОЙ КУРЬЕР</h1>
+        <p style="color:var(--accent-color); font-weight:bold; font-size: 12px;">ОРЕНБУРГ | 22:00 — 06:00</p>
     </header>
+
+    <div class="promo-banner animate__animated animate__pulse animate__infinite">
+        🎁 Каждая 3-я доставка — скидка 25%!
+    </div>
 
     <section class="calculator reveal" id="delivery">
         <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
@@ -132,60 +121,39 @@
         <div class="calc-row">
             <select id="del-time" onchange="updateDelivery()">
                 <option value="0">22:00 - 00:00 (Без доплаты)</option>
-                <option value="150">00:00 - 04:00 (+150₽ Ночь)</option>
-                <option value="250">04:00 - 06:00 (+250₽ Раннее утро)</option>
+                <option value="100">00:00 - 02:00 (+100₽)</option>
+                <option value="200">02:00 - 04:00 (+200₽)</option>
+                <option value="250">04:00 - 06:00 (+250₽)</option>
             </select>
         </div>
-        <div style="display: flex; gap: 10px;" class="calc-row">
-            <input type="text" id="del-from" placeholder="Откуда" oninput="updateDelivery()">
-            <input type="text" id="del-to" placeholder="Куда" oninput="updateDelivery()">
+        <div style="display:flex; gap:10px;" class="calc-row">
+            <input type="text" id="del-from" placeholder="Откуда">
+            <input type="text" id="del-to" placeholder="Куда">
         </div>
-        <textarea class="calc-row" id="del-list" rows="2" placeholder="Что купить?" oninput="updateDelivery()"></textarea>
+        <textarea id="del-list" rows="2" placeholder="Что купить?" class="calc-row"></textarea>
         
         <div class="price-breakdown">
             💰 ИТОГО: <span id="del-total" class="total-price">300₽</span>
+            <div id="del-detail" class="price-detail">База: 300₽</div>
         </div>
         <a href="#" id="del-btn" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ</a>
-        
-        <div class="btn-sub-container">
-            <a href="tel:+79999099924" class="btn-sub"><i class="fas fa-phone"></i> Позвонить</a>
-            <a href="https://t.me/mankogame" class="btn-sub"><i class="fas fa-headset"></i> Помощь</a>
-        </div>
-    </section>
-
-    <section class="calculator reveal" id="driver" style="border-color: #28a74533;">
-        <div class="section-title" style="color: #28a745;"><i class="fas fa-user-check"></i> Трезвый водитель</div>
-        <div class="calc-row">
-            <select id="drv-tariff" onchange="updateDriver()">
-                <option value="1000">По городу (1000₽)</option>
-                <option value="1500">Пригород (1500₽)</option>
-            </select>
-        </div>
-        <div class="calc-row" style="display:flex; gap:10px;">
-            <input type="text" id="drv-from" placeholder="Откуда?" oninput="updateDriver()">
-            <input type="text" id="drv-to" placeholder="Куда?" oninput="updateDriver()">
-        </div>
-        <div class="price-breakdown" style="border-color:#28a745;">
-            💰 СУММА: <span id="drv-total" class="total-price" style="color:#28a745;">1000₽</span>
-        </div>
-        <a href="#" id="drv-btn" class="btn-main" style="background:#28a745;"><i class="fab fa-telegram"></i> ВЫЗВАТЬ</a>
     </section>
 
     <section class="map-section reveal" id="map-block">
-        <div class="section-title"><i class="fas fa-map-marked-alt"></i> Карта 24/7</div>
+        <div class="section-title"><i class="fas fa-map-marked-alt"></i> Карта Оренбурга</div>
         <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12&l=map" allowfullscreen="true"></iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12" width="100%" height="100%"></iframe>
         </div>
     </section>
 
-    <section class="calculator reveal" id="other" style="border-color: #9c27b033;">
+    <section class="calculator reveal" id="other" style="border-color: #9c27b0;">
         <div class="section-title" style="color: #9c27b0;"><i class="fas fa-tools"></i> Иная помощь</div>
-        <textarea id="other-task" rows="3" placeholder="Опишите ситуацию..." oninput="updateOther()" style="border-color:#9c27b0; height: 80px;"></textarea>
+        <textarea id="other-task" rows="3" placeholder="Опишите ситуацию..." oninput="updateOther()" style="border-color:#9c27b0 !important;"></textarea>
         <a href="#" id="other-btn" class="btn-main" style="background:#9c27b0; color:white;">ОТПРАВИТЬ</a>
     </section>
 
-    <footer>
-        <p style="color:#ff4444; font-weight:bold; margin-bottom:10px;">НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</p>
+    <footer style="text-align:center; padding: 20px; font-size: 10px; opacity: 0.5;">
+        <p>НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</p>
         <p>© 2026 Night Courier Orenburg.</p>
     </footer>
 </div>
@@ -193,35 +161,23 @@
 <a href="tel:+79999099924" class="call-fixed"><i class="fas fa-phone"></i></a>
 
 <script>
-    // 1. ЛОГИКА ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // 2. КАЛЬКУЛЯТОРЫ
     function sendToTG(text) { return "https://t.me/mankogame?text=" + encodeURIComponent(text); }
 
     function updateDelivery() {
         const d = parseInt(document.getElementById('dist').value);
         const t = parseInt(document.getElementById('del-time').value);
         document.getElementById('distVal').innerText = d;
-        const total = (d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 700) + t;
+        let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
+        const total = base + t;
         document.getElementById('del-total').innerText = total + '₽';
-        const msg = `📦 ДОСТАВКА\n📍 Из: ${document.getElementById('del-from').value}\n🏠 В: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Итого: ${total}₽`;
+        document.getElementById('del-detail').innerText = `База: ${base}₽ + доплата: ${t}₽`;
+        const msg = `📦 ЗАКАЗ\n📍 Откуда: ${document.getElementById('del-from').value}\n🏠 Куда: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Итого: ${total}₽`;
         document.getElementById('del-btn').href = sendToTG(msg);
-    }
-
-    function updateDriver() {
-        const total = document.getElementById('drv-tariff').value;
-        document.getElementById('drv-total').innerText = total + '₽';
-        const msg = `🚗 ВОДИТЕЛЬ\n📍 От: ${document.getElementById('drv-from').value}\n🏠 До: ${document.getElementById('drv-to').value}\n💰 Сумма: ${total}₽`;
-        document.getElementById('drv-btn').href = sendToTG(msg);
     }
 
     function updateOther() {
@@ -229,7 +185,7 @@
         document.getElementById('other-btn').href = sendToTG(msg);
     }
 
-    window.onload = () => { updateDelivery(); updateDriver(); updateOther(); };
+    window.onload = updateDelivery;
 </script>
 </body>
 </html>
