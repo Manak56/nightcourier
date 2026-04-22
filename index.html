@@ -8,164 +8,241 @@
     <style>
         :root {
             --bg-color: #0b101b; --accent-color: #00d4ff; --text-color: #ffffff;
-            --card-bg: rgba(18, 24, 34, 0.9); --tg-color: #0088cc; --call-color: #28a745;
+            --card-bg: rgba(18, 24, 34, 0.95); --tg-color: #0088cc; --call-color: #28a745;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
-            background-image: linear-gradient(rgba(11,16,27,0.8), rgba(11,16,27,0.8)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
-            background-size: cover; background-attachment: fixed;
+            background-image: linear-gradient(rgba(11,16,27,0.85), rgba(11,16,27,0.85)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
         nav {
-            position: sticky; top: 0; background: rgba(11, 16, 27, 0.95);
-            padding: 12px; display: flex; justify-content: center; gap: 15px;
+            position: sticky; top: 0; background: rgba(11, 16, 27, 0.98);
+            padding: 12px; display: flex; justify-content: center; gap: 20px;
             z-index: 1000; border-bottom: 1px solid var(--accent-color); backdrop-filter: blur(10px);
         }
-        nav a { color: white; text-decoration: none; font-size: 10px; text-transform: uppercase; font-weight: bold; }
-        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
-        .logo-circle { width: 80px; height: 80px; border: 2px solid var(--accent-color); border-radius: 50%; margin: 10px auto; overflow: hidden; box-shadow: 0 0 15px var(--accent-color); }
+        nav a { color: white; text-decoration: none; font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
+        .container { max-width: 480px; margin: 0 auto; padding: 15px; }
+        
+        .header { text-align: center; margin-bottom: 20px; }
+        .logo-circle { width: 85px; height: 85px; border: 2.5px solid var(--accent-color); border-radius: 50%; margin: 0 auto 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
         .logo-img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { text-align: center; font-size: 24px; margin-bottom: 5px; }
-        .work-time { text-align: center; color: var(--accent-color); font-weight: bold; margin-bottom: 20px; font-size: 14px; }
+        .work-time { color: var(--accent-color); font-weight: bold; font-size: 13px; text-transform: uppercase; }
+
+        .calculator { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 25px; border: 1px solid rgba(0,212,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-left: 3px solid var(--accent-color); padding-left: 10px; }
         
-        .calculator { background: var(--card-bg); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
-        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        
-        .calc-row { margin-bottom: 12px; }
-        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; }
+        .calc-row { margin-bottom: 15px; }
+        .calc-row label { display: block; font-size: 12px; color: #aaa; margin-bottom: 6px; font-weight: 600; }
         .calc-row select, .calc-row input, .calc-row textarea { 
-            width: 100%; padding: 10px; border-radius: 8px; background: #0f1622; 
-            border: 1px solid #2a3a55; color: white; font-size: 14px; 
+            width: 100%; padding: 12px; border-radius: 10px; background: #0f1622; 
+            border: 1px solid #2a3a55; color: white; font-size: 14px; outline: none;
         }
-        .price-tag { 
-            background: rgba(0,212,255,0.15); padding: 15px; border-radius: 10px; 
-            text-align: center; border: 1px dashed var(--accent-color); margin-top: 10px;
+        .calc-row input[type="range"] { padding: 0; accent-color: var(--accent-color); height: 6px; }
+
+        .price-breakdown {
+            background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px;
+            text-align: center; border: 1px dashed var(--accent-color); margin-top: 15px;
         }
-        .price-tag span { font-size: 26px; font-weight: 800; color: var(--accent-color); }
+        .total-price { font-size: 28px; font-weight: 800; color: var(--accent-color); display: block; }
+        .price-detail { font-size: 10px; color: #888; margin-top: 5px; line-height: 1.4; }
         
+        .prepay-alert { background: rgba(255, 100, 50, 0.2); border-left: 4px solid #ff6644; padding: 10px; border-radius: 8px; font-size: 11px; margin-top: 10px; display: none; }
+        .promo-badge { background: linear-gradient(135deg, #ffaa00, #ff6600); color: black; border-radius: 8px; padding: 8px; font-size: 11px; font-weight: bold; text-align: center; margin-top: 15px; }
+
         .btn-order { 
             display: block; width: 100%; background: var(--accent-color); color: #000; 
-            padding: 14px; border-radius: 30px; text-decoration: none; font-weight: bold; 
-            text-align: center; margin-top: 15px; transition: 0.3s;
+            padding: 16px; border-radius: 35px; text-decoration: none; font-weight: bold; 
+            text-align: center; margin-top: 20px; font-size: 15px; box-shadow: 0 4px 15px rgba(0,212,255,0.4);
         }
-        .call-now { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .btn-order:active { transform: scale(0.98); }
+
+        .call-block { 
+            margin-top: 15px; text-align: center; font-size: 13px; 
+            background: rgba(40,167,69,0.1); padding: 10px; border-radius: 30px; border: 1px solid rgba(40,167,69,0.3);
+        }
+        .call-block a { color: var(--call-color); text-decoration: none; font-weight: bold; }
+
+        .call-fixed { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#delivery-calc">Доставка</a>
-    <a href="#driver-calc">Трезвый водитель</a>
+    <a href="#delivery-section">Доставка</a>
+    <a href="#driver-section">Водитель</a>
     <a href="map.html">Карта 24/7</a>
 </nav>
 
 <div class="container">
-    <div class="logo-circle">
-        <img class="logo-img" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&from=bu&cs=620x0" alt="Logo">
+    <div class="header">
+        <div class="logo-circle">
+            <img class="logo-img" src="https://sun9-40.userapi.com/s/v1/ig2/GTSJgkgfU6luEbKHQUAJSfyU1jFT_u7UFNBzFC8XVMQWedKHbWExwIEVQNZq5nqcdSQaQBTtJXKMKeMLCtcPk8Ux.jpg?quality=95&from=bu&cs=620x0" alt="Logo">
+        </div>
+        <h1>НОЧНОЙ КУРЬЕР</h1>
+        <p class="work-time">ОРЕНБУРГ | 22:00 — 06:00</p>
     </div>
-    <h1>НОЧНОЙ КУРЬЕР</h1>
-    <p class="work-time">ОРЕНБУРГ | 22:00 — 06:00</p>
 
-    <div class="calculator" id="delivery-calc">
+    <div class="calculator" id="delivery-section">
         <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
         
         <div class="calc-row">
-            <label>РАЙОН ДОСТАВКИ:</label>
-            <select id="del-zone" onchange="calcDelivery()">
-                <option value="300">Степной / Центр (300₽)</option>
-                <option value="450">Южный / Маяк (450₽)</option>
-                <option value="600">Ростоши / Экодолье (600₽)</option>
-                <option value="800">Пригород (от 800₽)</option>
-            </select>
+            <label>РАССТОЯНИЕ: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
+            <input type="range" id="dist" min="1" max="20" value="3" step="1" oninput="updateDelivery()">
+            <div style="font-size: 9px; margin-top: 5px; opacity: 0.6; display: flex; justify-content: space-between;">
+                <span>1 км</span><span>10 км</span><span>20 км</span>
+            </div>
         </div>
 
         <div class="calc-row">
             <label>ВРЕМЯ ЗАКАЗА:</label>
-            <select id="del-time" onchange="calcDelivery()">
-                <option value="0">22:00 - 00:00 (0₽)</option>
-                <option value="150">00:00 - 03:00 (+150₽)</option>
-                <option value="250">03:00 - 06:00 (+250₽)</option>
+            <select id="del-time" onchange="updateDelivery()">
+                <option value="0">22:00 - 00:00 (Без доплаты)</option>
+                <option value="100">00:00 - 02:00 (+100₽)</option>
+                <option value="200">02:00 - 04:00 (+200₽)</option>
+                <option value="250">04:00 - 06:00 (+250₽)</option>
             </select>
         </div>
 
         <div style="display: flex; gap: 10px;">
             <div class="calc-row" style="flex: 1;">
-                <label>ОТКУДА:</label>
-                <input type="text" id="del-from" placeholder="Напр: Макдак">
+                <label>СЛОЖНЫЙ ЗАКАЗ:</label>
+                <select id="complex" onchange="updateDelivery()">
+                    <option value="0">Нет</option>
+                    <option value="150">Да, 2+ точки (+150₽)</option>
+                </select>
             </div>
             <div class="calc-row" style="flex: 1;">
-                <label>КУДА:</label>
-                <input type="text" id="del-to" placeholder="Напр: Мира 10">
+                <label>ТЯЖЕЛЫЙ ГРУЗ:</label>
+                <select id="heavy" onchange="updateDelivery()">
+                    <option value="0">До 10кг</option>
+                    <option value="100">10кг+ / Этаж (+100₽)</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <div class="calc-row" style="flex: 1;">
+                <label>ОТКУДА (Магазин/Адрес):</label>
+                <input type="text" id="del-from" placeholder="Напр: Лента" oninput="updateDelivery()">
+            </div>
+            <div class="calc-row" style="flex: 1;">
+                <label>КУДА (Ваш адрес):</label>
+                <input type="text" id="del-to" placeholder="Напр: Мира 5" oninput="updateDelivery()">
             </div>
         </div>
 
         <div class="calc-row">
-            <label>ЧТО ПРИВЕЗТИ + ПРИМЕРНАЯ ЦЕНА ТОВАРОВ:</label>
-            <textarea id="del-list" rows="2" placeholder="Напр: Бургер, сигареты. Сумма чека около 1200р"></textarea>
+            <label>СПИСОК ТОВАРОВ + ПРИМЕРНАЯ ЦЕНА:</label>
+            <textarea id="del-list" rows="2" placeholder="Напр: Кола, сигареты. Сумма покупок ~800р" oninput="updateDelivery()"></textarea>
         </div>
 
-        <div class="price-tag">Итого за доставку: <span id="del-total">300₽</span></div>
-        <a href="#" id="del-btn" class="btn-order">ЗАКАЗАТЬ ДОСТАВКУ</a>
+        <div class="price-breakdown">
+            💰 ИТОГО: <span id="del-total" class="total-price">300₽</span>
+            <div id="del-detail" class="price-detail">База: 300₽</div>
+            <div id="prepay-box" class="prepay-alert">
+                ⚠️ Сумма заказа ≥1000₽. Требуется предоплата 50%: <strong id="prepay-sum">500₽</strong>
+            </div>
+        </div>
+
+        <div class="promo-badge">🎁 АКЦИЯ: Каждая 3-я доставка — скидка 25%!</div>
+
+        <a href="#" id="del-btn" class="btn-order">🚀 ЗАКАЗАТЬ В TELEGRAM</a>
+        <div class="call-block">
+            Нет Telegram? <a href="tel:+79999099924">Позвонить оператору</a>
+        </div>
     </div>
 
-    <div class="calculator" id="driver-calc" style="border-color: #28a745;">
+    <div class="calculator" id="driver-section" style="border-color: #28a745;">
         <div class="section-title" style="color: #28a745;"><i class="fas fa-car"></i> Трезвый водитель</div>
         
         <div class="calc-row">
-            <label>МАРШРУТ:</label>
-            <select id="drv-zone" onchange="calcDriver()">
+            <label>ТАРИФ:</label>
+            <select id="drv-tariff" onchange="updateDriver()">
                 <option value="1000">По городу (1000₽)</option>
-                <option value="1500">Город -> Пригород (1500₽)</option>
+                <option value="1500">Город — Пригород (1500₽)</option>
                 <option value="2500">Межгород (от 2500₽)</option>
             </select>
         </div>
 
-        <div style="display: flex; gap: 10px;">
-            <div class="calc-row" style="flex: 1;">
-                <label>ОТКУДА (Где вы сейчас):</label>
-                <input type="text" id="drv-from" placeholder="Напр: Бар 'Доски'">
-            </div>
-            <div class="calc-row" style="flex: 1;">
-                <label>КУДА (Домой):</label>
-                <input type="text" id="drv-to" placeholder="Напр: Чкалова 2">
-            </div>
+        <div class="calc-row">
+            <label>ОТКУДА (Где вы сейчас):</label>
+            <input type="text" id="drv-from" placeholder="Напр: Ресторан 'Ностальгия'" oninput="updateDriver()">
+        </div>
+        <div class="calc-row">
+            <label>КУДА (Домой):</label>
+            <input type="text" id="drv-to" placeholder="Напр: ул. Терешковой 10" oninput="updateDriver()">
         </div>
 
-        <div class="price-tag" style="border-color: #28a745;">Цена услуги: <span id="drv-total" style="color: #28a745;">1000₽</span></div>
-        <a href="#" id="drv-btn" class="btn-order" style="background: #28a745;">ВЫЗВАТЬ ВОДИТЕЛЯ</a>
+        <div class="price-breakdown" style="border-color: #28a745; background: rgba(40,167,69,0.05);">
+            💰 СУММА: <span id="drv-total" class="total-price" style="color: #28a745;">1000₽</span>
+        </div>
+
+        <a href="#" id="drv-btn" class="btn-order" style="background: #28a745;">🚕 ВЫЗВАТЬ ВОДИТЕЛЯ</a>
     </div>
+
+    <p style="text-align: center; font-size: 10px; opacity: 0.5; padding-bottom: 30px;">
+        © 2026 Night Courier Orenburg. Не является офертой.
+    </p>
 </div>
 
-<a href="tel:+79999099924" class="call-now"><i class="fas fa-phone"></i></a>
+<a href="tel:+79999099924" class="call-fixed"><i class="fas fa-phone"></i></a>
 
 <script>
-    function calcDelivery() {
-        const zone = parseInt(document.getElementById('del-zone').value);
+    function getBasePrice(d) {
+        if (d <= 3) return 300;
+        if (d <= 7) return 450;
+        if (d <= 12) return 600;
+        return 650;
+    }
+
+    function updateDelivery() {
+        const dist = parseInt(document.getElementById('dist').value);
         const time = parseInt(document.getElementById('del-time').value);
-        const total = zone + time;
+        const comp = parseInt(document.getElementById('complex').value);
+        const heavy = parseInt(document.getElementById('heavy').value);
+        
+        document.getElementById('distVal').innerText = dist;
+        
+        const base = getBasePrice(dist);
+        const total = base + time + comp + heavy;
+        
         document.getElementById('del-total').innerText = total + '₽';
         
+        let detailText = `База (${dist} км): ${base}₽`;
+        if (time > 0) detailText += ` + время ${time}₽`;
+        if (comp > 0) detailText += ` + сложный заказ ${comp}₽`;
+        if (heavy > 0) detailText += ` + груз ${heavy}₽`;
+        document.getElementById('del-detail').innerText = detailText;
+
+        const prepayBox = document.getElementById('prepay-box');
+        if (total >= 1000) {
+            prepayBox.style.display = 'block';
+            document.getElementById('prepay-sum').innerText = Math.ceil(total / 2) + '₽';
+        } else {
+            prepayBox.style.display = 'none';
+        }
+
         const from = document.getElementById('del-from').value;
         const to = document.getElementById('del-to').value;
         const list = document.getElementById('del-list').value;
         
-        const msg = `📦 НОВАЯ ДОСТАВКА%0A📍 ОТКУДА: ${from}%0A🏠 КУДА: ${to}%0A📝 СПИСОК: ${list}%0A💰 ИТОГО СЕРВИС: ${total}₽`;
+        const msg = `🛵 ДОСТАВКА (Оренбург)%0A📏 Расстояние: ${dist} км%0A📍 Откуда: ${from}%0A🏠 Куда: ${to}%0A📋 Список: ${list}%0A💰 ИТОГО: ${total}₽`;
         document.getElementById('del-btn').href = `https://t.me/nightcourier56?text=${msg}`;
     }
 
-    function calcDriver() {
-        const price = document.getElementById('drv-zone').value;
-        document.getElementById('drv-total').innerText = price + '₽';
+    function updateDriver() {
+        const total = document.getElementById('drv-tariff').value;
+        document.getElementById('drv-total').innerText = total + '₽';
         
         const from = document.getElementById('drv-from').value;
         const to = document.getElementById('drv-to').value;
         
-        const msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ%0A📍 ОТКУДА: ${from}%0A🏠 КУДА: ${to}%0A💰 СУММА: ${price}₽`;
+        const msg = `🚕 ТРЕЗВЫЙ ВОДИТЕЛЬ%0A📍 Откуда: ${from}%0A🏠 Куда: ${to}%0A💰 СУММА: ${total}₽`;
         document.getElementById('drv-btn').href = `https://t.me/nightcourier56?text=${msg}`;
     }
 
-    // Инициализация при загрузке
-    window.onload = () => { calcDelivery(); calcDriver(); };
+    window.onload = () => { updateDelivery(); updateDriver(); };
 </script>
 </body>
 </html>
