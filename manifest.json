@@ -1,0 +1,12 @@
+{
+  "short_name": "Курьер 56",
+  "name": "Ночной Курьер Оренбург",
+  "icons": [
+    { "src": "icon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "index.html",
+  "background_color": "#0b101b",
+  "display": "standalone",
+  "theme_color": "#00d4ff"
+}
