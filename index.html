@@ -21,6 +21,7 @@
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
+            /* ЗДЕСЬ ВЫ МОЖЕТЕ ЗАМЕНИТЬ URL НА СВОЙ ФОН */
             background-image: linear-gradient(rgba(11, 16, 27, 0.85), rgba(11, 16, 27, 0.85)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: var(--text);
@@ -64,11 +65,16 @@
 
         .bottom-nav {
             position: absolute; bottom: 0; width: 100%; background: rgba(11, 16, 27, 0.98);
-            display: flex; justify-content: space-around; padding: 8px 0 18px;
-            border-top: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(20px); z-index: 100;
+            display: flex; justify-content: space-around; align-items: center;
+            padding: 6px 0 12px; border-top: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(20px); z-index: 100;
         }
-        .nav-item { color: #777; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 9px; font-weight: bold; transition: 0.2s; }
-        .nav-item i { font-size: 20px; margin-bottom: 3px; }
+        .nav-item {
+            color: #777; text-decoration: none; display: flex; flex-direction: column;
+            align-items: center; font-size: 9px; font-weight: bold; transition: 0.2s;
+            flex: 1; text-align: center;
+        }
+        .nav-item i { font-size: 18px; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
 
         .call-fab {
@@ -86,7 +92,6 @@
         .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; }
         .about-list i { width: 20px; color: var(--accent); }
 
-        /* FAQ стили */
         .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; cursor: pointer; font-weight: bold; font-size: 13px; }
         .faq-question i { transition: transform 0.2s; color: var(--accent); }
@@ -94,7 +99,7 @@
         .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* Схема тарифов (километраж) */
+        /* Схема тарифов */
         .tariff-scheme {
             background: #0f1622;
             border-radius: 20px;
@@ -126,7 +131,6 @@
             color: var(--accent);
         }
 
-        /* Преимущества на главной */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -139,51 +143,37 @@
             padding: 12px;
             text-align: center;
         }
-        .feature i {
-            font-size: 24px;
-            color: var(--accent);
-            margin-bottom: 6px;
-        }
-        .feature span {
-            font-size: 12px;
-            font-weight: bold;
-        }
+        .feature i { font-size: 24px; color: var(--accent); margin-bottom: 6px; }
+        .feature span { font-size: 12px; font-weight: bold; }
         .review {
             background: rgba(255,255,255,0.05);
             border-radius: 16px;
             padding: 12px;
             margin-bottom: 10px;
         }
-        .review .name {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--accent);
-        }
-        .review .text {
-            font-size: 11px;
-            margin-top: 4px;
-            color: var(--secondary);
-        }
+        .review .name { font-size: 12px; font-weight: bold; color: var(--accent); }
+        .review .text { font-size: 11px; margin-top: 4px; color: var(--secondary); }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <header>
+        <!-- ЗДЕСЬ ВСТАВЬТЕ СВОЙ ЛОГОТИП (маленький) -->
         <img class="header-logo" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="logo">
         <h1>Night Courier</h1>
     </header>
 
-    <!-- ГЛАВНАЯ (обновлена) -->
+    <!-- ГЛАВНАЯ -->
     <div id="home" class="page active">
         <div style="text-align: center; padding: 15px 0;">
+            <!-- ЗДЕСЬ БОЛЬШОЙ ЛОГО -->
             <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
             <h2 style="justify-content: center; font-size: 22px;">ОРЕНБУРГ</h2>
             <p style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">22:00 — 06:00</p>
         </div>
         <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
         
-        <!-- Блок "Почему выбирают нас" -->
         <div class="card">
             <h2><i class="fas fa-star"></i> Почему выбирают нас</h2>
             <div class="features-grid">
@@ -194,21 +184,11 @@
             </div>
         </div>
 
-        <!-- Блок "Отзывы" -->
         <div class="card">
             <h2><i class="fas fa-comment-dots"></i> Отзывы клиентов</h2>
-            <div class="review">
-                <div class="name">Алексей</div>
-                <div class="text">Заказывал в 2 часа ночи. Курьер приехал через 20 минут, все чётко. Спасибо!</div>
-            </div>
-            <div class="review">
-                <div class="name">Екатерина</div>
-                <div class="text">Отличная служба. Трезвый водитель — реально выручили. Рекомендую.</div>
-            </div>
-            <div class="review">
-                <div class="name">Дмитрий</div>
-                <div class="text">Пользовался доставкой уже 3 раза, скидку дали — приятно. Быстро и вежливо.</div>
-            </div>
+            <div class="review"><div class="name">Алексей</div><div class="text">Заказывал в 2 часа ночи. Курьер приехал через 20 минут, всё чётко. Спасибо!</div></div>
+            <div class="review"><div class="name">Екатерина</div><div class="text">Отличная служба. Трезвый водитель — реально выручили. Рекомендую.</div></div>
+            <div class="review"><div class="name">Дмитрий</div><div class="text">Пользовался доставкой уже 3 раза, скидку дали — приятно. Быстро и вежливо.</div></div>
         </div>
     </div>
 
@@ -221,33 +201,22 @@
             <input type="text" id="to" placeholder="Куда доставить?">
             <textarea id="list" rows="2" placeholder="Что передать? (товары, документы...)"></textarea>
             
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--accent);">📏 Расстояние: <span id="distVal">3</span> км</label>
-                <input type="range" id="dist" min="1" max="25" value="3" step="1">
-            </div>
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--accent);">⏰ Время заказа</label>
-                <select id="time">
-                    <option value="0">22:00 – 00:00 (без доплаты)</option>
-                    <option value="100">00:00 – 02:00 (+100₽)</option>
-                    <option value="200">02:00 – 04:00 (+200₽)</option>
-                    <option value="250">04:00 – 06:00 (+250₽)</option>
-                </select>
-            </div>
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--accent);">📍 Сложный маршрут (2+ точки)</label>
-                <select id="complex">
-                    <option value="0">Нет</option>
-                    <option value="150">Да, заезд в 2+ места (+150₽)</option>
-                </select>
-            </div>
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--accent);">🏋️ Тяжёлый груз (подъём >10 кг)</label>
-                <select id="heavy">
-                    <option value="0">Нет</option>
-                    <option value="100">Да (+100₽)</option>
-                </select>
-            </div>
+            <div><label style="font-size: 11px; color: var(--accent);">📏 Расстояние: <span id="distVal">3</span> км</label>
+            <input type="range" id="dist" min="1" max="25" value="3" step="1"></div>
+            
+            <div><label style="font-size: 11px; color: var(--accent);">⏰ Время заказа</label>
+            <select id="time">
+                <option value="0">22:00 – 00:00 (без доплаты)</option>
+                <option value="100">00:00 – 02:00 (+100₽)</option>
+                <option value="200">02:00 – 04:00 (+200₽)</option>
+                <option value="250">04:00 – 06:00 (+250₽)</option>
+            </select></div>
+            
+            <div><label style="font-size: 11px; color: var(--accent);">📍 Сложный маршрут (2+ точки)</label>
+            <select id="complex"><option value="0">Нет</option><option value="150">Да, заезд в 2+ места (+150₽)</option></select></div>
+            
+            <div><label style="font-size: 11px; color: var(--accent);">🏋️ Тяжёлый груз (подъём >10 кг)</label>
+            <select id="heavy"><option value="0">Нет</option><option value="100">Да (+100₽)</option></select></div>
 
             <div style="background: rgba(0,212,255,0.1); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
                 <span style="font-size: 10px;">ИТОГО:</span>
@@ -264,19 +233,15 @@
         <!-- Трезвый водитель -->
         <div class="card" style="border-color: var(--btn-green);">
             <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--btn-green);">📏 Расстояние: <span id="driverDistVal">3</span> км</label>
-                <input type="range" id="driverDist" min="1" max="30" value="3" step="1">
-            </div>
-            <div class="calc-row">
-                <label style="font-size: 11px; color: var(--btn-green);">⏰ Время заказа</label>
-                <select id="driverTime">
-                    <option value="0">22:00 – 00:00 (без доплаты)</option>
-                    <option value="100">00:00 – 02:00 (+100₽)</option>
-                    <option value="200">02:00 – 04:00 (+200₽)</option>
-                    <option value="250">04:00 – 06:00 (+250₽)</option>
-                </select>
-            </div>
+            <div><label style="font-size: 11px; color: var(--btn-green);">📏 Расстояние: <span id="driverDistVal">3</span> км</label>
+            <input type="range" id="driverDist" min="1" max="30" value="3" step="1"></div>
+            <div><label style="font-size: 11px; color: var(--btn-green);">⏰ Время заказа</label>
+            <select id="driverTime">
+                <option value="0">22:00 – 00:00 (без доплаты)</option>
+                <option value="100">00:00 – 02:00 (+100₽)</option>
+                <option value="200">02:00 – 04:00 (+200₽)</option>
+                <option value="250">04:00 – 06:00 (+250₽)</option>
+            </select></div>
             <div style="background: rgba(40,167,69,0.15); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
                 <span style="font-size: 10px;">СТОИМОСТЬ:</span>
                 <div id="driverTotal" style="font-size: 26px; font-weight: 800; color: var(--btn-green);">1200₽</div>
@@ -287,11 +252,10 @@
             </div>
         </div>
 
-        <!-- Помощь на дороге (перенесена сюда) -->
+        <!-- Помощь на дороге -->
         <div class="card">
             <h2 style="color: var(--btn-orange);"><i class="fas fa-tools"></i> Помощь на дороге</h2>
-            <p style="font-size: 13px; margin-bottom: 12px;">Опишите проблему: прикурить, открыть авто, трос, замена колеса и т.д.</p>
-            <textarea id="helpProblem" rows="2" placeholder="Например: не могу завестись, нужен прикуриватель..."></textarea>
+            <textarea id="helpProblem" rows="2" placeholder="Опишите проблему: прикурить, открыть авто, трос..."></textarea>
             <div class="flex-buttons">
                 <a href="#" id="helpSendBtn" class="btn-main" style="background: var(--btn-orange); color: white;"><i class="fab fa-telegram"></i> Отправить</a>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
@@ -299,7 +263,7 @@
         </div>
     </div>
 
-    <!-- КАРТА (заменена на схему тарифов и километража) -->
+    <!-- ТАРИФЫ (схема километража) -->
     <div id="map" class="page">
         <div class="card">
             <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
@@ -334,7 +298,6 @@
             <a href="tel:+79999099924" class="btn-main btn-call" style="margin-bottom: 10px;"><i class="fas fa-phone"></i> 8 (999) 909-99-24</a>
             <a href="https://t.me/mankogame" class="btn-main" style="background: #0088cc; color: white;"><i class="fab fa-telegram-plane"></i> @mankogame</a>
         </div>
-        <!-- Новый блок "Сотрудничество" -->
         <div class="card">
             <h2><i class="fas fa-handshake"></i> Сотрудничество</h2>
             <p style="font-size: 13px;">Приглашаем к сотрудничеству:</p>
@@ -361,25 +324,12 @@
                 <li><i class="fas fa-balance-scale"></i> Работаем строго по закону РФ</li>
             </ul>
         </div>
-        <!-- FAQ -->
         <div class="card">
             <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
-            <div class="faq-item">
-                <div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Среднее время подачи — 15–25 минут после подтверждения заказа. В ночное время часто быстрее.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Как оплатить доставку? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ требуется предоплата 50%.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатые вещества. Остальное согласовывается.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Каждая 3-я доставка у одного номера телефона автоматически получает скидку 25% (напоминайте оператору).</div>
-            </div>
+            <div class="faq-item"><div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Среднее время подачи — 15–25 минут после подтверждения заказа.</div></div>
+            <div class="faq-item"><div class="faq-question">Как оплатить доставку? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ предоплата 50%.</div></div>
+            <div class="faq-item"><div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатка.</div></div>
+            <div class="faq-item"><div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Каждая 3-я доставка у одного номера телефона – скидка 25% (напоминайте оператору).</div></div>
         </div>
         <div class="legal-note">
             ⚠️ Сайт не является публичной офертой. Цены носят информационный характер.<br>
@@ -406,85 +356,50 @@
         if (el) el.classList.add('active');
     }
 
-    // ---- Доставка ----
-    const fromInput = document.getElementById('from');
-    const toInput = document.getElementById('to');
-    const listInput = document.getElementById('list');
-    const distSlider = document.getElementById('dist');
-    const distVal = document.getElementById('distVal');
-    const timeSelect = document.getElementById('time');
-    const complexSelect = document.getElementById('complex');
-    const heavySelect = document.getElementById('heavy');
-    const totalSpan = document.getElementById('total');
-    const priceDetail = document.getElementById('priceDetail');
-    const sendBtn = document.getElementById('sendBtn');
-
+    // Доставка
+    const from = document.getElementById('from'), to = document.getElementById('to'), list = document.getElementById('list');
+    const distSlider = document.getElementById('dist'), distVal = document.getElementById('distVal');
+    const timeSelect = document.getElementById('time'), complexSelect = document.getElementById('complex'), heavySelect = document.getElementById('heavy');
+    const totalSpan = document.getElementById('total'), priceDetail = document.getElementById('priceDetail'), sendBtn = document.getElementById('sendBtn');
     function updateDelivery() {
-        const dist = parseInt(distSlider.value);
-        const timeExtra = parseInt(timeSelect.value);
-        const complexExtra = parseInt(complexSelect.value);
-        const heavyExtra = parseInt(heavySelect.value);
-        let base = dist <= 3 ? 300 : dist <= 7 ? 450 : dist <= 12 ? 600 : 650;
-        let total = base + timeExtra + complexExtra + heavyExtra;
-        distVal.innerText = dist;
-        totalSpan.innerText = total + '₽';
-        priceDetail.innerHTML = `База: ${base}₽ + ночь: ${timeExtra}₽ + сложный: ${complexExtra}₽ + тяжёлый: ${heavyExtra}₽`;
-        
-        const from = fromInput.value || "не указано";
-        const to = toInput.value || "не указано";
-        const list = listInput.value || "не указано";
-        const timeText = timeSelect.options[timeSelect.selectedIndex].text;
-        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n📍 Откуда: ${from}\n🏠 Куда: ${to}\n📦 Список: ${list}\n📏 Расстояние: ${dist} км\n⏰ ${timeText}\n📍 Сложный: ${complexExtra > 0 ? "Да (+150₽)" : "Нет"}\n🏋️ Тяжёлый: ${heavyExtra > 0 ? "Да (+100₽)" : "Нет"}\n💰 Итог: ${total}₽\n\nХочу заказать доставку!`;
+        let d = parseInt(distSlider.value), t = parseInt(timeSelect.value), c = parseInt(complexSelect.value), h = parseInt(heavySelect.value);
+        let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
+        let total = base + t + c + h;
+        distVal.innerText = d; totalSpan.innerText = total + '₽';
+        priceDetail.innerHTML = `База: ${base}₽ + ночь: ${t}₽ + сложный: ${c}₽ + тяжёлый: ${h}₽`;
+        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n📍 Откуда: ${from.value||'не указано'}\n🏠 Куда: ${to.value||'не указано'}\n📦 Список: ${list.value||'не указано'}\n📏 ${d} км\n⏰ ${timeSelect.options[timeSelect.selectedIndex].text}\n📍 Сложный: ${c>0?'Да':'Нет'}\n🏋️ Тяжёлый: ${h>0?'Да':'Нет'}\n💰 Итог: ${total}₽`;
         sendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
     }
-    fromInput.addEventListener('input', updateDelivery);
-    toInput.addEventListener('input', updateDelivery);
-    listInput.addEventListener('input', updateDelivery);
-    distSlider.addEventListener('input', updateDelivery);
-    timeSelect.addEventListener('change', updateDelivery);
-    complexSelect.addEventListener('change', updateDelivery);
-    heavySelect.addEventListener('change', updateDelivery);
+    from.addEventListener('input', updateDelivery); to.addEventListener('input', updateDelivery); list.addEventListener('input', updateDelivery);
+    distSlider.addEventListener('input', updateDelivery); timeSelect.addEventListener('change', updateDelivery);
+    complexSelect.addEventListener('change', updateDelivery); heavySelect.addEventListener('change', updateDelivery);
     updateDelivery();
 
-    // ---- Трезвый водитель ----
-    const driverDistSlider = document.getElementById('driverDist');
-    const driverDistVal = document.getElementById('driverDistVal');
-    const driverTimeSelect = document.getElementById('driverTime');
-    const driverTotalSpan = document.getElementById('driverTotal');
-    const driverSendBtn = document.getElementById('driverSendBtn');
-
+    // Трезвый водитель
+    const driverDist = document.getElementById('driverDist'), driverDistVal = document.getElementById('driverDistVal');
+    const driverTime = document.getElementById('driverTime'), driverTotal = document.getElementById('driverTotal'), driverSend = document.getElementById('driverSendBtn');
     function updateDriver() {
-        const dist = parseInt(driverDistSlider.value);
-        const timeExtra = parseInt(driverTimeSelect.value);
-        let base = 800 + dist * 15;
-        let total = base + timeExtra;
-        driverDistVal.innerText = dist;
-        driverTotalSpan.innerText = total + '₽';
-        const timeText = driverTimeSelect.options[driverTimeSelect.selectedIndex].text;
-        let msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n📏 Расстояние: ${dist} км\n⏰ ${timeText}\n💰 Стоимость: ${total}₽\n\nНужен водитель!`;
-        driverSendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+        let d = parseInt(driverDist.value), t = parseInt(driverTime.value);
+        let total = 800 + d * 15 + t;
+        driverDistVal.innerText = d; driverTotal.innerText = total + '₽';
+        let msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n📏 ${d} км\n⏰ ${driverTime.options[driverTime.selectedIndex].text}\n💰 ${total}₽`;
+        driverSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
     }
-    driverDistSlider.addEventListener('input', updateDriver);
-    driverTimeSelect.addEventListener('change', updateDriver);
+    driverDist.addEventListener('input', updateDriver); driverTime.addEventListener('change', updateDriver);
     updateDriver();
 
-    // ---- Помощь ----
-    const helpProblem = document.getElementById('helpProblem');
-    const helpSendBtn = document.getElementById('helpSendBtn');
+    // Помощь
+    const helpProblem = document.getElementById('helpProblem'), helpSend = document.getElementById('helpSendBtn');
     function updateHelp() {
-        let problem = helpProblem.value.trim() || "не описана";
-        let msg = `🛠 ПОМОЩЬ НА ДОРОГЕ\nПроблема: ${problem}\nНужна срочная помощь!`;
-        helpSendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+        let msg = `🛠 ПОМОЩЬ НА ДОРОГЕ\nПроблема: ${helpProblem.value.trim() || 'не описана'}`;
+        helpSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
     }
     helpProblem.addEventListener('input', updateHelp);
     updateHelp();
 
     // FAQ аккордеон
     document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const parent = q.parentElement;
-            parent.classList.toggle('active');
-        });
+        q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
     });
 </script>
 </body>
