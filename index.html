@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Ночной Курьер | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
         :root {
             --bg-color: #0b101b; --accent-color: #00d4ff; --text-color: #ffffff;
@@ -14,10 +16,14 @@
         
         body {
             font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
-            /* ФОН САЙТА (Строка 19) */
             background-image: linear-gradient(rgba(11,16,27,0.9), rgba(11,16,27,0.9)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
             background-size: cover; background-position: center; background-attachment: fixed;
+            overflow-x: hidden;
         }
+
+        /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         nav {
             position: sticky; top: 0; background: rgba(11, 16, 27, 0.98);
@@ -28,52 +34,75 @@
 
         .container { max-width: 480px; margin: 0 auto; padding: 15px; }
         
-        header { text-align: center; margin-bottom: 20px; }
-        .logo-circle { width: 85px; height: 85px; border: 2.5px solid var(--accent-color); border-radius: 50%; margin: 0 auto 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
-        /* ЛОГОТИП (Строка 37) */
-        .logo-img { width: 100%; height: 100%; object-fit: cover; }
+        header { text-align: center; margin-bottom: 30px; }
+        .logo-circle { 
+            width: 90px; height: 90px; border: 2px solid var(--accent-color); border-radius: 50%; 
+            margin: 0 auto 15px; overflow: hidden; box-shadow: 0 0 25px rgba(0,212,255,0.5);
+            animation: pulse-glow 3s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(0,212,255,0.4); }
+            50% { box-shadow: 0 0 35px rgba(0,212,255,0.8); }
+            100% { box-shadow: 0 0 15px rgba(0,212,255,0.4); }
+        }
 
-        .calculator { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
-        .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .calculator, .map-section { 
+            background: var(--card-bg); border-radius: 20px; padding: 20px; 
+            margin-bottom: 25px; border: 1px solid rgba(0,212,255,0.15);
+            transition: transform 0.3s ease;
+        }
+        .calculator:active { transform: scale(0.99); }
+
+        .section-title { color: var(--accent-color); font-size: 17px; font-weight: bold; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         
-        .calc-row { margin-bottom: 15px; }
-        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; cursor: pointer; }
+        .calc-row { margin-bottom: 18px; }
+        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
         
         .calc-row select, .calc-row input, .calc-row textarea { 
-            width: 100%; padding: 12px; border-radius: 10px; background: #0f1622; 
+            width: 100%; padding: 14px; border-radius: 12px; background: #0f1622; 
             border: 1px solid #2a3a55; color: white; font-size: 14px; outline: none; transition: 0.3s;
         }
-        /* АДАПТАЦИЯ 2: ПОДСВЕТКА ПОЛЕЙ */
-        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
 
         .price-breakdown {
-            background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px;
-            text-align: center; border: 1px dashed var(--accent-color); margin-top: 15px;
+            background: rgba(0,212,255,0.05); padding: 20px; border-radius: 15px;
+            text-align: center; border: 1px dashed var(--accent-color); margin-top: 20px;
         }
-        .total-price { font-size: 28px; font-weight: 800; color: var(--accent-color); display: block; }
-        .price-detail { font-size: 10px; color: #888; margin-top: 5px; }
+        .total-price { font-size: 32px; font-weight: 800; color: var(--accent-color); display: block; }
         
-        .prepay-alert { background: rgba(255, 100, 50, 0.2); border-left: 4px solid #ff6644; padding: 10px; border-radius: 8px; font-size: 11px; margin-top: 10px; display: none; }
-
-        /* КНОПКИ */
         .btn-main { 
             display: block; width: 100%; background: var(--accent-color); color: #000; 
-            padding: 16px; border-radius: 30px; text-decoration: none; font-weight: bold; 
-            text-align: center; margin-top: 15px; font-size: 14px;
+            padding: 18px; border-radius: 35px; text-decoration: none; font-weight: 800; 
+            text-align: center; margin-top: 20px; font-size: 15px; text-transform: uppercase;
+            transition: 0.3s;
         }
-        .btn-sub-container { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-main:hover { filter: brightness(1.1); }
+
+        .btn-sub-container { display: flex; gap: 12px; margin-top: 15px; }
         .btn-sub { 
-            flex: 1; padding: 10px; border-radius: 20px; text-decoration: none; 
+            flex: 1; padding: 12px; border-radius: 25px; text-decoration: none; 
             font-size: 11px; font-weight: bold; text-align: center; color: white;
-            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); transition: 0.3s;
         }
-        .btn-sub.call { color: #28a745; border-color: #28a745; }
-        .btn-sub.support { color: #0088cc; border-color: #0088cc; }
 
-        .legal-footer { margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.5); border-radius: 15px; font-size: 11px; color: #999; line-height: 1.6; }
-        .offer-tag { color: #ff4444; font-weight: bold; display: block; margin-bottom: 10px; }
+        .map-container { width: 100%; height: 280px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(0,212,255,0.2); }
 
-        .call-fixed { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        /* КНОПКА ТЕЛЕФОНА С АНИМАЦИЕЙ */
+        .call-fixed { 
+            position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; 
+            background: var(--call-color); border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; color: white; font-size: 28px; 
+            z-index: 2000; box-shadow: 0 5px 20px rgba(40,167,69,0.4);
+            animation: phone-vibrate 2s infinite;
+        }
+        @keyframes phone-vibrate {
+            0%, 100% { transform: scale(1); }
+            10%, 20% { transform: scale(1.1) rotate(-5deg); }
+            30%, 40% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1); }
+        }
+
+        footer { text-align: center; padding: 40px 20px; opacity: 0.6; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -81,172 +110,117 @@
 <nav>
     <a href="#delivery">Доставка</a>
     <a href="#driver">Водитель</a>
+    <a href="#map-block">Карта</a>
     <a href="#other">Помощь</a>
-    <a href="https://yandex.ru/maps/48/orenburg/search/круглосуточно/" target="_blank">Карта 24/7</a>
 </nav>
 
 <div class="container">
-    <header>
+    <header class="animate__animated animate__fadeInDown">
         <div class="logo-circle">
-            <img class="logo-img" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="Logo">
+            <img style="width:100%; height:100%; object-fit:cover;" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="Logo">
         </div>
-        <h1>НОЧНОЙ КУРЬЕР</h1>
-        <p style="color:var(--accent-color); font-weight:bold; font-size: 13px;">ОРЕНБУРГ | 22:00 — 06:00</p>
+        <h1 class="animate__animated animate__tracking-in-expand">НОЧНОЙ КУРЬЕР</h1>
+        <p style="color:var(--accent-color); font-weight:bold; letter-spacing: 2px;">ОРЕНБУРГ | 22:00 — 06:00</p>
     </header>
 
-    <section class="calculator" id="delivery">
+    <section class="calculator reveal" id="delivery">
         <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
-        
         <div class="calc-row">
-            <label for="dist">РАССТОЯНИЕ: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
+            <label>РАССТОЯНИЕ: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
             <input type="range" id="dist" min="1" max="25" value="3" oninput="updateDelivery()">
         </div>
-
         <div class="calc-row">
-            <label for="del-time">ВРЕМЯ ЗАКАЗА:</label>
             <select id="del-time" onchange="updateDelivery()">
                 <option value="0">22:00 - 00:00 (Без доплаты)</option>
                 <option value="150">00:00 - 04:00 (+150₽ Ночь)</option>
                 <option value="250">04:00 - 06:00 (+250₽ Раннее утро)</option>
             </select>
         </div>
-
-        <div style="display: flex; gap: 10px;">
-            <div class="calc-row" style="flex: 1;">
-                <label for="complex">СЛОЖНЫЙ ПУТЬ:</label>
-                <select id="complex" onchange="updateDelivery()">
-                    <option value="0">Нет</option>
-                    <option value="150">Да (+150₽)</option>
-                </select>
-            </div>
-            <div class="calc-row" style="flex: 1;">
-                <label for="heavy">ТЯЖЕЛЫЙ ГРУЗ:</label>
-                <select id="heavy" onchange="updateDelivery()">
-                    <option value="0">Нет</option>
-                    <option value="100">Да (+100₽)</option>
-                </select>
-            </div>
+        <div style="display: flex; gap: 10px;" class="calc-row">
+            <input type="text" id="del-from" placeholder="Откуда" oninput="updateDelivery()">
+            <input type="text" id="del-to" placeholder="Куда" oninput="updateDelivery()">
         </div>
-
-        <div class="calc-row">
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="del-from" placeholder="Откуда (магазин/адрес)" oninput="updateDelivery()">
-                <input type="text" id="del-to" placeholder="Куда (ваш адрес)" oninput="updateDelivery()">
-            </div>
-        </div>
-
-        <div class="calc-row">
-            <textarea id="del-list" rows="2" placeholder="Что купить и на какую сумму?" oninput="updateDelivery()"></textarea>
-        </div>
-
+        <textarea class="calc-row" id="del-list" rows="2" placeholder="Что купить?" oninput="updateDelivery()"></textarea>
+        
         <div class="price-breakdown">
             💰 ИТОГО: <span id="del-total" class="total-price">300₽</span>
-            <div id="del-detail" class="price-detail">База: 300₽</div>
-            <div id="prepay-box" class="prepay-alert">
-                ⚠️ Сумма услуг ≥1000₽. Предоплата: <strong id="prepay-sum">500₽</strong>
-            </div>
         </div>
-
-        <a href="#" id="del-btn" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ В TELEGRAM</a>
+        <a href="#" id="del-btn" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ</a>
         
         <div class="btn-sub-container">
-            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
-            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
+            <a href="tel:+79999099924" class="btn-sub"><i class="fas fa-phone"></i> Позвонить</a>
+            <a href="https://t.me/mankogame" class="btn-sub"><i class="fas fa-headset"></i> Помощь</a>
         </div>
     </section>
 
-    <section class="calculator" id="driver" style="border-color: #28a745;">
+    <section class="calculator reveal" id="driver" style="border-color: #28a74533;">
         <div class="section-title" style="color: #28a745;"><i class="fas fa-user-check"></i> Трезвый водитель</div>
-        
         <div class="calc-row">
-            <label for="drv-tariff">ВЫБЕРИТЕ ТАРИФ:</label>
             <select id="drv-tariff" onchange="updateDriver()">
                 <option value="1000">По городу (1000₽)</option>
                 <option value="1500">Пригород (1500₽)</option>
-                <option value="2500">Межгород (от 2500₽)</option>
             </select>
         </div>
-
-        <div class="calc-row">
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="drv-from" placeholder="Где вы сейчас?" oninput="updateDriver()">
-                <input type="text" id="drv-to" placeholder="Куда едем?" oninput="updateDriver()">
-            </div>
+        <div class="calc-row" style="display:flex; gap:10px;">
+            <input type="text" id="drv-from" placeholder="Откуда?" oninput="updateDriver()">
+            <input type="text" id="drv-to" placeholder="Куда?" oninput="updateDriver()">
         </div>
-
-        <div class="price-breakdown" style="border-color:#28a745; background: rgba(40,167,69,0.05);">
+        <div class="price-breakdown" style="border-color:#28a745;">
             💰 СУММА: <span id="drv-total" class="total-price" style="color:#28a745;">1000₽</span>
         </div>
-        <a href="#" id="drv-btn" class="btn-main" style="background:#28a745;"><i class="fab fa-telegram"></i> ВЫЗВАТЬ ВОДИТЕЛЯ</a>
-        
-        <div class="btn-sub-container">
-            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
-            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
+        <a href="#" id="drv-btn" class="btn-main" style="background:#28a745;"><i class="fab fa-telegram"></i> ВЫЗВАТЬ</a>
+    </section>
+
+    <section class="map-section reveal" id="map-block">
+        <div class="section-title"><i class="fas fa-map-marked-alt"></i> Карта 24/7</div>
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=55.1244%2C51.7681&z=12&l=map" allowfullscreen="true"></iframe>
         </div>
     </section>
 
-    <section class="calculator" id="other" style="border-color: #9c27b0;">
-        <div class="section-title" style="color: #9c27b0;"><i class="fas fa-tools"></i> Иная проблема</div>
-        <div class="calc-row">
-            <textarea id="other-task" rows="3" placeholder="Прикурить авто, привезти бензин или любая другая помощь..." oninput="updateOther()" style="border-color:#9c27b0;"></textarea>
-        </div>
-        <a href="#" id="other-btn" class="btn-main" style="background:#9c27b0; color:white;"><i class="fab fa-telegram"></i> ОПИСАТЬ ПРОБЛЕМУ</a>
-        
-        <div class="btn-sub-container">
-            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
-            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
-        </div>
+    <section class="calculator reveal" id="other" style="border-color: #9c27b033;">
+        <div class="section-title" style="color: #9c27b0;"><i class="fas fa-tools"></i> Иная помощь</div>
+        <textarea id="other-task" rows="3" placeholder="Опишите ситуацию..." oninput="updateOther()" style="border-color:#9c27b0; height: 80px;"></textarea>
+        <a href="#" id="other-btn" class="btn-main" style="background:#9c27b0; color:white;">ОТПРАВИТЬ</a>
     </section>
 
-    <footer class="legal-footer">
-        <span class="offer-tag">НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</span>
-        <p>Расчет стоимости является предварительным. Итоговую цену подтверждает оператор. Мы не доставляем запрещенные законом товары, алкоголь после 23:00 и табак несовершеннолетним. Клиент несет полную ответственность за содержимое заказа.</p>
-        <p style="margin-top:10px;">© 2026 Night Courier Orenburg.</p>
+    <footer>
+        <p style="color:#ff4444; font-weight:bold; margin-bottom:10px;">НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</p>
+        <p>© 2026 Night Courier Orenburg.</p>
     </footer>
 </div>
 
 <a href="tel:+79999099924" class="call-fixed"><i class="fas fa-phone"></i></a>
 
 <script>
-    // АДАПТАЦИЯ 1: ФУНКЦИЯ ДЛЯ БЕЗОПАСНЫХ ССЫЛОК
-    function sendToTG(text) {
-        return "https://t.me/mankogame?text=" + encodeURIComponent(text);
-    }
+    // 1. ЛОГИКА ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    function getBase(d) {
-        if (d <= 3) return 300;
-        if (d <= 7) return 450;
-        if (d <= 12) return 600;
-        return 700;
-    }
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 2. КАЛЬКУЛЯТОРЫ
+    function sendToTG(text) { return "https://t.me/mankogame?text=" + encodeURIComponent(text); }
 
     function updateDelivery() {
         const d = parseInt(document.getElementById('dist').value);
         const t = parseInt(document.getElementById('del-time').value);
-        const c = parseInt(document.getElementById('complex').value);
-        const h = parseInt(document.getElementById('heavy').value);
-        
         document.getElementById('distVal').innerText = d;
-        const base = getBase(d);
-        const total = base + t + c + h;
-        
+        const total = (d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 700) + t;
         document.getElementById('del-total').innerText = total + '₽';
-        document.getElementById('del-detail').innerText = `База: ${base}₽ + доплаты: ${t+c+h}₽`;
-
-        const prepay = document.getElementById('prepay-box');
-        if (total >= 1000) {
-            prepay.style.display = 'block';
-            document.getElementById('prepay-sum').innerText = Math.ceil(total/2) + '₽';
-        } else { prepay.style.display = 'none'; }
-
-        const msg = `📦 ДОСТАВКА\n📍 Из: ${document.getElementById('del-from').value}\n🏠 В: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Услуга: ${total}₽`;
+        const msg = `📦 ДОСТАВКА\n📍 Из: ${document.getElementById('del-from').value}\n🏠 В: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Итого: ${total}₽`;
         document.getElementById('del-btn').href = sendToTG(msg);
     }
 
     function updateDriver() {
         const total = document.getElementById('drv-tariff').value;
         document.getElementById('drv-total').innerText = total + '₽';
-        const msg = `🚗 ВОДИТЕЛЬ\n📍 От: ${document.getElementById('drv-from').value}\n🏠 До: ${document.getElementById('drv-to').value}\n💰 Тариф: ${total}₽`;
+        const msg = `🚗 ВОДИТЕЛЬ\n📍 От: ${document.getElementById('drv-from').value}\n🏠 До: ${document.getElementById('drv-to').value}\n💰 Сумма: ${total}₽`;
         document.getElementById('drv-btn').href = sendToTG(msg);
     }
 
