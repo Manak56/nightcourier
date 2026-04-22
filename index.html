@@ -14,7 +14,7 @@
         
         body {
             font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color);
-            /* ФОН САЙТА (Строка 17) */
+            /* ФОН САЙТА (Строка 19) */
             background-image: linear-gradient(rgba(11,16,27,0.9), rgba(11,16,27,0.9)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
             background-size: cover; background-position: center; background-attachment: fixed;
         }
@@ -28,37 +28,50 @@
 
         .container { max-width: 480px; margin: 0 auto; padding: 15px; }
         
-        .header { text-align: center; margin-bottom: 20px; }
+        header { text-align: center; margin-bottom: 20px; }
         .logo-circle { width: 85px; height: 85px; border: 2.5px solid var(--accent-color); border-radius: 50%; margin: 0 auto 10px; overflow: hidden; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
-        /* ЛОГОТИП (Строка 35) */
+        /* ЛОГОТИП (Строка 37) */
         .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
         .calculator { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 20px; border: 1px solid rgba(0,212,255,0.2); }
         .section-title { color: var(--accent-color); font-size: 16px; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
         .calc-row { margin-bottom: 15px; }
-        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; }
+        .calc-row label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; cursor: pointer; }
+        
         .calc-row select, .calc-row input, .calc-row textarea { 
             width: 100%; padding: 12px; border-radius: 10px; background: #0f1622; 
-            border: 1px solid #2a3a55; color: white; font-size: 14px; outline: none;
+            border: 1px solid #2a3a55; color: white; font-size: 14px; outline: none; transition: 0.3s;
         }
+        /* АДАПТАЦИЯ 2: ПОДСВЕТКА ПОЛЕЙ */
+        .calc-row select:focus, .calc-row input:focus, .calc-row textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
 
         .price-breakdown {
             background: rgba(0,212,255,0.1); padding: 15px; border-radius: 12px;
             text-align: center; border: 1px dashed var(--accent-color); margin-top: 15px;
         }
-        .total-price { font-size: 26px; font-weight: 800; color: var(--accent-color); }
+        .total-price { font-size: 28px; font-weight: 800; color: var(--accent-color); display: block; }
+        .price-detail { font-size: 10px; color: #888; margin-top: 5px; }
+        
+        .prepay-alert { background: rgba(255, 100, 50, 0.2); border-left: 4px solid #ff6644; padding: 10px; border-radius: 8px; font-size: 11px; margin-top: 10px; display: none; }
 
-        .btn-order { 
+        /* КНОПКИ */
+        .btn-main { 
             display: block; width: 100%; background: var(--accent-color); color: #000; 
-            padding: 15px; border-radius: 30px; text-decoration: none; font-weight: bold; 
-            text-align: center; margin-top: 15px; transition: 0.2s;
+            padding: 16px; border-radius: 30px; text-decoration: none; font-weight: bold; 
+            text-align: center; margin-top: 15px; font-size: 14px;
         }
+        .btn-sub-container { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-sub { 
+            flex: 1; padding: 10px; border-radius: 20px; text-decoration: none; 
+            font-size: 11px; font-weight: bold; text-align: center; color: white;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
+        }
+        .btn-sub.call { color: #28a745; border-color: #28a745; }
+        .btn-sub.support { color: #0088cc; border-color: #0088cc; }
 
-        /* ЮРИДИЧЕСКИЙ БЛОК */
         .legal-footer { margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.5); border-radius: 15px; font-size: 11px; color: #999; line-height: 1.6; }
-        .legal-footer h4 { color: #ccc; margin-bottom: 10px; font-size: 12px; }
-        .offer-tag { color: #ff4444; font-weight: bold; }
+        .offer-tag { color: #ff4444; font-weight: bold; display: block; margin-bottom: 10px; }
 
         .call-fixed { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--call-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
     </style>
@@ -73,106 +86,176 @@
 </nav>
 
 <div class="container">
-    <div class="header">
+    <header>
         <div class="logo-circle">
             <img class="logo-img" src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" alt="Logo">
         </div>
         <h1>НОЧНОЙ КУРЬЕР</h1>
-        <p style="color:var(--accent-color); font-weight:bold;">ОРЕНБУРГ | 22:00 — 06:00</p>
-    </div>
+        <p style="color:var(--accent-color); font-weight:bold; font-size: 13px;">ОРЕНБУРГ | 22:00 — 06:00</p>
+    </header>
 
-    <div class="calculator" id="delivery">
-        <div class="section-title"><i class="fas fa-shipping-fast"></i> Доставка от 300₽</div>
+    <section class="calculator" id="delivery">
+        <div class="section-title"><i class="fas fa-box"></i> Калькулятор Доставки</div>
+        
         <div class="calc-row">
-            <label>Расстояние: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
-            <input type="range" id="dist" min="1" max="25" value="3" oninput="update()">
+            <label for="dist">РАССТОЯНИЕ: <span id="distVal" style="color:var(--accent-color)">3</span> км</label>
+            <input type="range" id="dist" min="1" max="25" value="3" oninput="updateDelivery()">
         </div>
+
         <div class="calc-row">
-            <label>Время заказа:</label>
-            <select id="del-time" onchange="update()">
-                <option value="0">22:00 - 00:00 (Обычный)</option>
+            <label for="del-time">ВРЕМЯ ЗАКАЗА:</label>
+            <select id="del-time" onchange="updateDelivery()">
+                <option value="0">22:00 - 00:00 (Без доплаты)</option>
                 <option value="150">00:00 - 04:00 (+150₽ Ночь)</option>
                 <option value="250">04:00 - 06:00 (+250₽ Раннее утро)</option>
             </select>
         </div>
-        <div class="calc-row">
-            <div style="display:flex; gap:8px;">
-                <input type="text" id="del-from" placeholder="Откуда забрать" oninput="update()">
-                <input type="text" id="del-to" placeholder="Куда привезти" oninput="update()">
+
+        <div style="display: flex; gap: 10px;">
+            <div class="calc-row" style="flex: 1;">
+                <label for="complex">СЛОЖНЫЙ ПУТЬ:</label>
+                <select id="complex" onchange="updateDelivery()">
+                    <option value="0">Нет</option>
+                    <option value="150">Да (+150₽)</option>
+                </select>
+            </div>
+            <div class="calc-row" style="flex: 1;">
+                <label for="heavy">ТЯЖЕЛЫЙ ГРУЗ:</label>
+                <select id="heavy" onchange="updateDelivery()">
+                    <option value="0">Нет</option>
+                    <option value="100">Да (+100₽)</option>
+                </select>
             </div>
         </div>
-        <div class="calc-row">
-            <textarea id="del-list" rows="2" placeholder="Список товаров (напр: сок, сигареты) и их примерная стоимость" oninput="update()"></textarea>
-        </div>
-        <div class="price-breakdown">ИТОГО УСЛУГА: <span id="del-total" class="total-price">300₽</span></div>
-        <a href="#" id="del-btn" class="btn-order"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ В ТЕЛЕГРАМ</a>
-    </div>
 
-    <div class="calculator" id="driver" style="border-color: #28a745;">
-        <div class="section-title" style="color: #28a745;"><i class="fas fa-user-check"></i> Трезвый водитель</div>
         <div class="calc-row">
-            <select id="drv-tariff" onchange="update()">
-                <option value="1000">По городу (от 1000₽)</option>
-                <option value="1500">Пригород / Дачи (от 1500₽)</option>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="del-from" placeholder="Откуда (магазин/адрес)" oninput="updateDelivery()">
+                <input type="text" id="del-to" placeholder="Куда (ваш адрес)" oninput="updateDelivery()">
+            </div>
+        </div>
+
+        <div class="calc-row">
+            <textarea id="del-list" rows="2" placeholder="Что купить и на какую сумму?" oninput="updateDelivery()"></textarea>
+        </div>
+
+        <div class="price-breakdown">
+            💰 ИТОГО: <span id="del-total" class="total-price">300₽</span>
+            <div id="del-detail" class="price-detail">База: 300₽</div>
+            <div id="prepay-box" class="prepay-alert">
+                ⚠️ Сумма услуг ≥1000₽. Предоплата: <strong id="prepay-sum">500₽</strong>
+            </div>
+        </div>
+
+        <a href="#" id="del-btn" class="btn-main"><i class="fab fa-telegram"></i> ЗАКАЗАТЬ В TELEGRAM</a>
+        
+        <div class="btn-sub-container">
+            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
+            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
+        </div>
+    </section>
+
+    <section class="calculator" id="driver" style="border-color: #28a745;">
+        <div class="section-title" style="color: #28a745;"><i class="fas fa-user-check"></i> Трезвый водитель</div>
+        
+        <div class="calc-row">
+            <label for="drv-tariff">ВЫБЕРИТЕ ТАРИФ:</label>
+            <select id="drv-tariff" onchange="updateDriver()">
+                <option value="1000">По городу (1000₽)</option>
+                <option value="1500">Пригород (1500₽)</option>
+                <option value="2500">Межгород (от 2500₽)</option>
             </select>
         </div>
+
         <div class="calc-row">
-            <div style="display:flex; gap:8px;">
-                <input type="text" id="drv-from" placeholder="Где вы сейчас" oninput="update()">
-                <input type="text" id="drv-to" placeholder="Ваш адрес" oninput="update()">
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="drv-from" placeholder="Где вы сейчас?" oninput="updateDriver()">
+                <input type="text" id="drv-to" placeholder="Куда едем?" oninput="updateDriver()">
             </div>
         </div>
-        <div class="price-breakdown" style="border-color:#28a745;">СУММА: <span id="drv-total" class="total-price" style="color:#28a745;">1000₽</span></div>
-        <a href="#" id="drv-btn" class="btn-order" style="background:#28a745;"><i class="fab fa-telegram"></i> НАПИСАТЬ ВОДИТЕЛЮ</a>
-    </div>
 
-    <div class="calculator" id="other" style="border-color: #9c27b0;">
-        <div class="section-title" style="color: #9c27b0;"><i class="fas fa-question-circle"></i> Иная проблема</div>
-        <textarea id="other-task" rows="3" placeholder="Опишите, что нужно сделать..." oninput="update()" style="border-color:#9c27b0;"></textarea>
-        <a href="#" id="other-btn" class="btn-order" style="background:#9c27b0; color:white;">ОПИСАТЬ В ТЕЛЕГРАМ</a>
-    </div>
+        <div class="price-breakdown" style="border-color:#28a745; background: rgba(40,167,69,0.05);">
+            💰 СУММА: <span id="drv-total" class="total-price" style="color:#28a745;">1000₽</span>
+        </div>
+        <a href="#" id="drv-btn" class="btn-main" style="background:#28a745;"><i class="fab fa-telegram"></i> ВЫЗВАТЬ ВОДИТЕЛЯ</a>
+        
+        <div class="btn-sub-container">
+            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
+            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
+        </div>
+    </section>
 
-    <div class="legal-footer">
-        <p class="offer-tag">ВНИМАНИЕ: Данный сайт НЕ является публичной офертой.</p>
-        <br>
-        <h4>Правила и ограничения:</h4>
-        <ul>
-            <li>• Мы не доставляем алкоголь после 23:00 и табак лицам до 18 лет.</li>
-            <li>• Мы не перевозим оружие, наркотики и иные запрещенные законом РФ предметы.</li>
-            <li>• Стоимость услуг, рассчитанная в калькуляторе, является предварительной. Итоговую цену подтверждает оператор.</li>
-            <li>• Курьер имеет право отказать в обслуживании без объяснения причин в случае неадекватного поведения клиента.</li>
-            <li>• Все расчеты за товары производятся по чекам. При заказе свыше 1000₽ берется предоплата.</li>
-        </ul>
-        <br>
-        <p>© 2026 Night Courier Orenburg. Все права защищены.</p>
-    </div>
+    <section class="calculator" id="other" style="border-color: #9c27b0;">
+        <div class="section-title" style="color: #9c27b0;"><i class="fas fa-tools"></i> Иная проблема</div>
+        <div class="calc-row">
+            <textarea id="other-task" rows="3" placeholder="Прикурить авто, привезти бензин или любая другая помощь..." oninput="updateOther()" style="border-color:#9c27b0;"></textarea>
+        </div>
+        <a href="#" id="other-btn" class="btn-main" style="background:#9c27b0; color:white;"><i class="fab fa-telegram"></i> ОПИСАТЬ ПРОБЛЕМУ</a>
+        
+        <div class="btn-sub-container">
+            <a href="tel:+79999099924" class="btn-sub call"><i class="fas fa-phone"></i> Позвонить</a>
+            <a href="https://t.me/mankogame" class="btn-sub support"><i class="fas fa-headset"></i> Поддержка</a>
+        </div>
+    </section>
+
+    <footer class="legal-footer">
+        <span class="offer-tag">НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</span>
+        <p>Расчет стоимости является предварительным. Итоговую цену подтверждает оператор. Мы не доставляем запрещенные законом товары, алкоголь после 23:00 и табак несовершеннолетним. Клиент несет полную ответственность за содержимое заказа.</p>
+        <p style="margin-top:10px;">© 2026 Night Courier Orenburg.</p>
+    </footer>
 </div>
 
 <a href="tel:+79999099924" class="call-fixed"><i class="fas fa-phone"></i></a>
 
 <script>
-    function update() {
-        // Доставка
-        const d = document.getElementById('dist').value;
-        document.getElementById('distVal').innerText = d;
-        let base = d <= 3 ? 300 : (d <= 7 ? 450 : (d <= 12 ? 600 : 700));
-        let totalDel = base + parseInt(document.getElementById('del-time').value);
-        document.getElementById('del-total').innerText = totalDel + '₽';
-        
-        let msgDel = `🛵 ЗАКАЗ ДОСТАВКИ%0A📍 Откуда: ${document.getElementById('del-from').value}%0A🏠 Куда: ${document.getElementById('del-to').value}%0A📋 Что везем: ${document.getElementById('del-list').value}%0A💰 Услуга: ${totalDel}₽`;
-        document.getElementById('del-btn').href = `https://t.me/mankogame?text=${msgDel}`;
-
-        // Водитель
-        let totalDrv = document.getElementById('drv-tariff').value;
-        document.getElementById('drv-total').innerText = totalDrv + '₽';
-        let msgDrv = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ%0A📍 Откуда: ${document.getElementById('drv-from').value}%0A🏠 Куда: ${document.getElementById('drv-to').value}%0A💰 Тариф: ${totalDrv}₽`;
-        document.getElementById('drv-btn').href = `https://t.me/mankogame?text=${msgDrv}`;
-
-        // Иное
-        let msgOther = `🛠 ИНАЯ ПОМОЩЬ%0A📋 Суть проблемы: ${document.getElementById('other-task').value}`;
-        document.getElementById('other-btn').href = `https://t.me/mankogame?text=${msgOther}`;
+    // АДАПТАЦИЯ 1: ФУНКЦИЯ ДЛЯ БЕЗОПАСНЫХ ССЫЛОК
+    function sendToTG(text) {
+        return "https://t.me/mankogame?text=" + encodeURIComponent(text);
     }
-    window.onload = update;
+
+    function getBase(d) {
+        if (d <= 3) return 300;
+        if (d <= 7) return 450;
+        if (d <= 12) return 600;
+        return 700;
+    }
+
+    function updateDelivery() {
+        const d = parseInt(document.getElementById('dist').value);
+        const t = parseInt(document.getElementById('del-time').value);
+        const c = parseInt(document.getElementById('complex').value);
+        const h = parseInt(document.getElementById('heavy').value);
+        
+        document.getElementById('distVal').innerText = d;
+        const base = getBase(d);
+        const total = base + t + c + h;
+        
+        document.getElementById('del-total').innerText = total + '₽';
+        document.getElementById('del-detail').innerText = `База: ${base}₽ + доплаты: ${t+c+h}₽`;
+
+        const prepay = document.getElementById('prepay-box');
+        if (total >= 1000) {
+            prepay.style.display = 'block';
+            document.getElementById('prepay-sum').innerText = Math.ceil(total/2) + '₽';
+        } else { prepay.style.display = 'none'; }
+
+        const msg = `📦 ДОСТАВКА\n📍 Из: ${document.getElementById('del-from').value}\n🏠 В: ${document.getElementById('del-to').value}\n📋 Список: ${document.getElementById('del-list').value}\n💰 Услуга: ${total}₽`;
+        document.getElementById('del-btn').href = sendToTG(msg);
+    }
+
+    function updateDriver() {
+        const total = document.getElementById('drv-tariff').value;
+        document.getElementById('drv-total').innerText = total + '₽';
+        const msg = `🚗 ВОДИТЕЛЬ\n📍 От: ${document.getElementById('drv-from').value}\n🏠 До: ${document.getElementById('drv-to').value}\n💰 Тариф: ${total}₽`;
+        document.getElementById('drv-btn').href = sendToTG(msg);
+    }
+
+    function updateOther() {
+        const msg = `🛠 ПОМОЩЬ\n📝 Суть: ${document.getElementById('other-task').value}`;
+        document.getElementById('other-btn').href = sendToTG(msg);
+    }
+
+    window.onload = () => { updateDelivery(); updateDriver(); updateOther(); };
 </script>
 </body>
 </html>
