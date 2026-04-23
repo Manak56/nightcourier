@@ -6,9 +6,8 @@
     <title>Night Courier | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ===== СТИЛИ (без изменений) ===== */
+        /* ===== СТИЛИ (без изменений, сокращены для экономии места) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         :root {
             --bg: #0b101b;
             --card: rgba(22, 27, 34, 0.98);
@@ -19,7 +18,6 @@
             --btn-orange: #ff8800;
             --vk-color: #4680c2;
         }
-
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
@@ -29,186 +27,95 @@
             overflow-x: hidden;
             min-height: 100vh;
         }
-
-        .app-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 0 0 90px 0;
-            position: relative;
-        }
-
-        /* Шапка */
+        .app-container { max-width: 500px; margin: 0 auto; padding: 0 0 90px 0; position: relative; }
         header {
-            padding: 12px;
-            text-align: center;
-            background: rgba(11, 16, 27, 0.95);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 12px; text-align: center; background: rgba(11, 16, 27, 0.95);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            position: sticky; top: 0; z-index: 100;
         }
         .header-logo { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
         header h1 { font-size: 16px; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
-
-        /* Верхняя навигация */
         .top-nav {
             background: rgba(11, 16, 27, 0.98);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 51px;
-            z-index: 99;
+            display: flex; justify-content: space-around;
+            padding: 8px 0; border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px); position: sticky; top: 51px; z-index: 99;
         }
         .nav-item {
-            color: #777;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 10px;
-            font-weight: bold;
-            transition: 0.2s;
-            flex: 1;
-            text-align: center;
-            cursor: pointer;
+            color: #777; display: flex; flex-direction: column; align-items: center;
+            font-size: 10px; font-weight: bold; flex: 1; text-align: center; cursor: pointer;
         }
         .nav-item i { font-size: 18px; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
-
-        .page {
-            padding: 16px;
-            display: none;
-            animation: slideUp 0.3s ease;
-        }
+        .page { padding: 16px; display: none; animation: slideUp 0.3s ease; }
         .page.active { display: block; }
-
         .card {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
+            background: var(--card); border-radius: 20px; padding: 18px;
+            margin-bottom: 18px; border: 1px solid rgba(0, 212, 255, 0.1);
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
         h2 { font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
-
         input, select, textarea {
-            width: 100% !important;
-            background: #0f1622 !important;
-            border: 1px solid #2a3a55 !important;
-            border-radius: 12px !important;
-            padding: 10px 12px !important;
-            color: #fff !important;
-            font-size: 14px !important;
-            margin-bottom: 10px !important;
-            outline: none;
+            width: 100% !important; background: #0f1622 !important; border: 1px solid #2a3a55 !important;
+            border-radius: 12px !important; padding: 10px 12px !important; color: #fff !important;
+            font-size: 14px !important; margin-bottom: 10px !important; outline: none;
         }
         input:focus, select:focus, textarea:focus { border-color: var(--accent) !important; box-shadow: 0 0 6px rgba(0,212,255,0.3); }
         ::placeholder { color: rgba(255,255,255,0.5); }
-
         .btn-main {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px;
-            border-radius: 40px;
-            width: 100%;
-            font-weight: 800;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            margin-top: 10px;
-            transition: 0.2s;
-            cursor: pointer;
+            background: var(--accent); color: #000; border: none; padding: 12px;
+            border-radius: 40px; width: 100%; font-weight: 800; font-size: 14px;
+            text-decoration: none; display: inline-block; text-align: center;
+            margin-top: 10px; transition: 0.2s; cursor: pointer;
         }
         .btn-main:active { transform: scale(0.97); }
         .btn-call { background: var(--btn-green); color: white; }
         .btn-vk { background: var(--vk-color); color: white; }
         .flex-buttons { display: flex; gap: 10px; margin-top: 8px; }
         .flex-buttons .btn-main { flex: 1; margin-top: 0; }
-
         .call-fab {
-            position: fixed;
-            bottom: 20px;
-            right: 16px;
-            width: 52px;
-            height: 52px;
-            background: var(--btn-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 22px;
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            animation: vibrate 2s infinite;
-            text-decoration: none;
+            position: fixed; bottom: 20px; right: 16px; width: 52px; height: 52px;
+            background: var(--btn-green); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: #fff; font-size: 22px;
+            z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            animation: vibrate 2s infinite; text-decoration: none;
         }
         @keyframes vibrate { 0%,100%{transform:scale(1);} 10%,20%{transform:scale(1.08) rotate(-3deg);} 30%,40%{transform:scale(1.08) rotate(3deg);} }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .promo { background: linear-gradient(45deg, #ff4444, #ff8800); padding: 8px; border-radius: 40px; text-align: center; font-weight: bold; font-size: 11px; margin-bottom: 16px; }
         .legal-note { font-size: 8px; text-align: center; color: var(--secondary); margin-top: 20px; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
-
         .about-list { list-style: none; margin-bottom: 15px; }
         .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .about-list i { width: 20px; color: var(--accent); }
         .stats-grid { display: flex; gap: 10px; margin: 15px 0; justify-content: space-around; text-align: center; }
         .stat-badge { background: #0f1622; border-radius: 16px; padding: 10px; flex: 1; }
         .stat-number { font-size: 22px; font-weight: bold; color: var(--accent); }
-
         .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; cursor: pointer; font-weight: bold; font-size: 14px; }
         .faq-question i { transition: transform 0.2s; color: var(--accent); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 13px; color: var(--secondary); line-height: 1.4; padding: 0; }
         .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 12px; padding-top: 4px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
-
-        .tariff-scheme {
-            background: #0f1622;
-            border-radius: 20px;
-            padding: 12px;
-            margin-bottom: 12px;
-            text-align: center;
-        }
+        .tariff-scheme { background: #0f1622; border-radius: 20px; padding: 12px; margin-bottom: 12px; text-align: center; }
         .tariff-scheme svg { width: 100%; max-width: 280px; height: auto; margin: 0 auto; display: block; }
         .tariff-table { margin-top: 12px; font-size: 12px; }
         .tariff-table table { width: 100%; border-collapse: collapse; }
         .tariff-table td, .tariff-table th { padding: 6px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .tariff-table th { color: var(--accent); }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .feature {
-            background: rgba(0,212,255,0.1);
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+        .feature { background: rgba(0,212,255,0.1); border-radius: 16px; padding: 12px; text-align: center; }
         .feature i { font-size: 24px; color: var(--accent); margin-bottom: 6px; }
         .feature span { font-size: 12px; font-weight: bold; }
-        .review {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
-        }
+        .review { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px; margin-bottom: 10px; }
         .review .name { font-size: 12px; font-weight: bold; color: var(--accent); }
         .review .text { font-size: 11px; margin-top: 4px; color: var(--secondary); }
+        .toast-copy {
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            background: #4caf50; color: white; padding: 8px 16px; border-radius: 30px;
+            font-size: 12px; z-index: 2000; opacity: 0; transition: 0.3s; pointer-events: none;
+        }
+        .toast-copy.show { opacity: 1; }
     </style>
 </head>
 <body>
@@ -219,7 +126,6 @@
         <h1>Night Courier</h1>
     </header>
 
-    <!-- ========== Верхняя навигация ========== -->
     <div class="top-nav">
         <div class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>Главная</span></div>
         <div class="nav-item" data-tab="order"><i class="fas fa-bolt"></i><span>Заказ</span></div>
@@ -228,7 +134,7 @@
         <div class="nav-item" data-tab="about"><i class="fas fa-users"></i><span>О нас</span></div>
     </div>
 
-    <!-- ========== Главная страница ========== -->
+    <!-- Главная -->
     <div id="home" class="page active">
         <div style="text-align: center; padding: 15px 0;">
             <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
@@ -236,7 +142,6 @@
             <p style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">22:00 — 06:00</p>
         </div>
         <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
-        
         <div class="card">
             <h2><i class="fas fa-star"></i> Почему выбирают нас</h2>
             <div class="features-grid">
@@ -246,7 +151,6 @@
                 <div class="feature"><i class="fas fa-gift"></i><br><span>Скидка 25%</span><br><small>каждая 3-я доставка</small></div>
             </div>
         </div>
-
         <div class="card">
             <h2><i class="fas fa-comment-dots"></i> Отзывы клиентов</h2>
             <div class="review"><div class="name">Алексей</div><div class="text">Заказывал в 2 часа ночи. Курьер приехал через 20 минут, всё чётко. Спасибо!</div></div>
@@ -255,9 +159,9 @@
         </div>
     </div>
 
-    <!-- ========== Страница заказа ========== -->
+    <!-- Заказ -->
     <div id="order" class="page">
-        <!-- Блок доставки -->
+        <!-- Доставка -->
         <div class="card">
             <h2><i class="fas fa-shopping-cart"></i> Калькулятор доставки</h2>
             <input type="text" id="deliveryName" placeholder="Ваше имя *">
@@ -265,10 +169,8 @@
             <input type="text" id="from" placeholder="Откуда (адрес / магазин)">
             <input type="text" id="to" placeholder="Куда доставить?">
             <textarea id="list" rows="2" placeholder="Что передать? (товары, документы...)"></textarea>
-            
             <div><label style="font-size: 11px; color: var(--accent);">📏 Расстояние: <span id="distVal">3</span> км</label>
             <input type="range" id="dist" min="1" max="25" value="3" step="1"></div>
-            
             <div><label style="font-size: 11px; color: var(--accent);">⏰ Время заказа</label>
             <select id="time">
                 <option value="0">22:00 – 00:00 (без доплаты)</option>
@@ -276,27 +178,23 @@
                 <option value="200">02:00 – 04:00 (+200₽)</option>
                 <option value="250">04:00 – 06:00 (+250₽)</option>
             </select></div>
-            
             <div><label style="font-size: 11px; color: var(--accent);">📍 Сложный маршрут (2+ точки)</label>
             <select id="complex"><option value="0">Нет</option><option value="150">Да, заезд в 2+ места (+150₽)</option></select></div>
-            
             <div><label style="font-size: 11px; color: var(--accent);">🏋️ Тяжёлый груз (подъём >10 кг)</label>
             <select id="heavy"><option value="0">Нет</option><option value="100">Да (+100₽)</option></select></div>
-
             <div style="background: rgba(0,212,255,0.1); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
                 <span style="font-size: 10px;">ИТОГО:</span>
                 <div id="total" style="font-size: 26px; font-weight: 800; color: var(--accent);">300₽</div>
                 <div id="priceDetail" style="font-size: 9px; opacity: 0.7;">База: 300₽</div>
             </div>
-
             <div class="flex-buttons">
                 <a href="#" id="sendBtn" class="btn-main"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="#" id="sendVkBtn" class="btn-main btn-vk"><i class="fab fa-vk"></i> ВКонтакте</a>
+                <button id="sendVkBtn" class="btn-main btn-vk"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
         </div>
 
-        <!-- Блок трезвого водителя -->
+        <!-- Трезвый водитель -->
         <div class="card" style="border-color: var(--btn-green);">
             <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
             <input type="text" id="driverName" placeholder="Ваше имя *">
@@ -316,12 +214,12 @@
             </div>
             <div class="flex-buttons">
                 <a href="#" id="driverSendBtn" class="btn-main" style="background: var(--btn-green); color: white;"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="#" id="driverSendVkBtn" class="btn-main btn-vk" style="background: var(--vk-color);"><i class="fab fa-vk"></i> ВКонтакте</a>
+                <button id="driverSendVkBtn" class="btn-main btn-vk" style="background: var(--vk-color);"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
         </div>
 
-        <!-- Блок помощи на дороге -->
+        <!-- Помощь на дороге -->
         <div class="card">
             <h2 style="color: var(--btn-orange);"><i class="fas fa-tools"></i> Помощь на дороге</h2>
             <input type="text" id="helpName" placeholder="Ваше имя *">
@@ -329,13 +227,13 @@
             <textarea id="helpProblem" rows="2" placeholder="Опишите проблему: прикурить, открыть авто, трос..."></textarea>
             <div class="flex-buttons">
                 <a href="#" id="helpSendBtn" class="btn-main" style="background: var(--btn-orange); color: white;"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="#" id="helpSendVkBtn" class="btn-main btn-vk" style="background: var(--vk-color);"><i class="fab fa-vk"></i> ВКонтакте</a>
+                <button id="helpSendVkBtn" class="btn-main btn-vk" style="background: var(--vk-color);"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
         </div>
     </div>
 
-    <!-- ========== Страница тарифов ========== -->
+    <!-- Тарифы -->
     <div id="map" class="page">
         <div class="card">
             <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
@@ -353,9 +251,9 @@
                     <table>
                         <tr><th>Расстояние</th><th>Стоимость</th></tr>
                         <tr><td>до 3 км</td><td>300₽</td></tr>
-                        <tr><td>до 7 км</td><td>450₽</td></tr>
-                        <tr><td>до 12 км</td><td>600₽</td></tr>
-                        <tr><td>за город</td><td>от 650₽</td></tr>
+                        <tr>}</td><td>450₽</td></tr>
+                        <tr>}</td><td>600₽</td></tr>
+                        <tr>}</td><td>от 650₽</td></tr>
                     </table>
                 </div>
                 <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену.</p>
@@ -363,7 +261,7 @@
         </div>
     </div>
 
-    <!-- ========== Страница контактов и сотрудничества ========== -->
+    <!-- Связь и сотрудничество -->
     <div id="support" class="page">
         <div class="card">
             <h2><i class="fas fa-id-card"></i> Контакты</h2>
@@ -376,7 +274,7 @@
         </div>
     </div>
 
-    <!-- ========== Страница "О нас" и FAQ ========== -->
+    <!-- О нас и FAQ -->
     <div id="about" class="page">
         <div class="card">
             <h2><i class="fas fa-info-circle"></i> О сервисе «Night Courier»</h2>
@@ -395,50 +293,38 @@
             </ul>
             <p style="margin-top: 12px;">Нам доверяют сотни клиентов. Мы ценим ваше время и безопасность.</p>
         </div>
-
         <div class="card">
             <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
-            <div class="faq-item">
-                <div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">В среднем 15–25 минут после подтверждения заказа. В часы пик (23:00–01:00) может быть до 35 минут, но мы всегда предупреждаем.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Как оплатить? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ требуется предоплата 50%.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатка. Заказ будет отклонён.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Каждая 3-я доставка одним номером телефона даёт скидку 25%! Напомните оператору.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Работаете ли вы за городом? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да, доставляем в пригород. Стоимость — от 650₽. Точную цену уточняйте у оператора.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Могу ли я отследить курьера? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да, после подтверждения заказа мы присылаем ссылку на геолокацию курьера в Telegram.</div>
-            </div>
+            <div class="faq-item"><div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">15–25 минут после подтверждения заказа.</div></div>
+            <div class="faq-item"><div class="faq-question">Как оплатить? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Наличные курьеру, перевод на карту. При заказе от 1000₽ предоплата 50%.</div></div>
+            <div class="faq-item"><div class="faq-question">Что запрещено? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Алкоголь после 23:00, наркотики, оружие.</div></div>
+            <div class="faq-item"><div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Каждая 3-я доставка – скидка 25%.</div></div>
+            <div class="faq-item"><div class="faq-question">Работаете за городом? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, стоимость от 650₽, уточняйте.</div></div>
+            <div class="faq-item"><div class="faq-question">Можно отследить курьера? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, ссылку пришлём в Telegram.</div></div>
         </div>
-        <div class="legal-note">
-            ⚠️ Сайт не является публичной офертой. Цены носят информационный характер.<br>
-            Мы осуществляем деятельность в соответствии с законодательством РФ.
-        </div>
+        <div class="legal-note">⚠️ Сайт не является публичной офертой. Работаем по закону РФ.</div>
     </div>
 
-    <!-- ========== Плавающая кнопка звонка ========== -->
     <a href="tel:+79999099924" class="call-fab"><i class="fas fa-phone-alt"></i></a>
+    <div id="copyToast" class="toast-copy">📋 Текст заказа скопирован, вставьте в диалог ВК</div>
 </div>
 
 <script>
-    // ========== ПРАВИЛЬНЫЕ НАСТРОЙКИ ДЛЯ VK ==========
-    const VK_LINK = 'https://vk.com/write-238006273?text=';
-    // ==================================================
+    // ========== НАСТРОЙКИ ==========
+    const VK_DIALOG_URL = 'https://vk.me/nightcourier56'; // просто открывает диалог
 
-    // Переключение вкладок
+    // Функция копирования текста в буфер
+    function copyToClipboard(text, showToastMsg = true) {
+        navigator.clipboard.writeText(text).then(() => {
+            if (showToastMsg) {
+                const toast = document.getElementById('copyToast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            }
+        }).catch(() => alert('Не удалось скопировать текст'));
+    }
+
+    // Переключение вкладок (как было)
     const tabs = document.querySelectorAll('.nav-item');
     const pages = {
         home: document.getElementById('home'),
@@ -447,24 +333,19 @@
         support: document.getElementById('support'),
         about: document.getElementById('about')
     };
-
     function switchTab(tabId) {
-        Object.values(pages).forEach(page => page.classList.remove('active'));
+        Object.values(pages).forEach(p => p.classList.remove('active'));
         pages[tabId].classList.add('active');
         tabs.forEach(tab => {
             if (tab.getAttribute('data-tab') === tabId) tab.classList.add('active');
             else tab.classList.remove('active');
         });
     }
-
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-            switchTab(tabId);
-        });
+        tab.addEventListener('click', () => switchTab(tab.getAttribute('data-tab')));
     });
 
-    // Функции для формирования сообщений
+    // ---- Общие функции формирования текста ----
     function getDeliveryText() {
         let name = deliveryName.value.trim() || 'не указано';
         let phone = deliveryPhone.value.trim() || 'не указано';
@@ -477,7 +358,6 @@
         let timeText = timeSelect.options[timeSelect.selectedIndex].text;
         return `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📍 Откуда: ${from.value||'не указано'}\n🏠 Куда: ${to.value||'не указано'}\n📦 Список: ${list.value||'не указано'}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n📍 Сложный маршрут: ${c>0?'Да (+150₽)':'Нет'}\n🏋️ Тяжёлый груз: ${h>0?'Да (+100₽)':'Нет'}\n💰 Итог: ${total}₽`;
     }
-
     function getDriverText() {
         let name = driverName.value.trim() || 'не указано';
         let phone = driverPhone.value.trim() || 'не указано';
@@ -487,12 +367,23 @@
         let timeText = driverTime.options[driverTime.selectedIndex].text;
         return `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n💰 Стоимость: ${total}₽`;
     }
-
     function getHelpText() {
         let name = helpName.value.trim() || 'не указано';
         let phone = helpPhone.value.trim() || 'не указано';
         let problem = helpProblem.value.trim() || 'не описана';
         return `🛠 ПОМОЩЬ НА ДОРОГЕ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📝 Проблема: ${problem}`;
+    }
+
+    // ---- Обработчики для кнопок ВК (копирование + открытие диалога) ----
+    function setupVkButton(buttonId, textGetter) {
+        const btn = document.getElementById(buttonId);
+        if (!btn) return;
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const fullText = textGetter();
+            copyToClipboard(fullText, true);
+            window.open(VK_DIALOG_URL, '_blank');
+        });
     }
 
     // ---- Доставка ----
@@ -520,9 +411,7 @@
         priceDetail.innerHTML = `База: ${base}₽ + ночь: ${t}₽ + сложный: ${c}₽ + тяжёлый: ${h}₽`;
         let msg = getDeliveryText();
         sendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
-        sendVkBtn.href = VK_LINK + encodeURIComponent(msg);
     }
-
     deliveryName.addEventListener('input', updateDelivery);
     deliveryPhone.addEventListener('input', updateDelivery);
     from.addEventListener('input', updateDelivery);
@@ -533,6 +422,7 @@
     complexSelect.addEventListener('change', updateDelivery);
     heavySelect.addEventListener('change', updateDelivery);
     updateDelivery();
+    setupVkButton('sendVkBtn', getDeliveryText);
 
     // ---- Трезвый водитель ----
     const driverName = document.getElementById('driverName');
@@ -551,14 +441,13 @@
         driverTotal.innerText = total + '₽';
         let msg = getDriverText();
         driverSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
-        driverSendVk.href = VK_LINK + encodeURIComponent(msg);
     }
-
     driverName.addEventListener('input', updateDriver);
     driverPhone.addEventListener('input', updateDriver);
     driverDist.addEventListener('input', updateDriver);
     driverTime.addEventListener('change', updateDriver);
     updateDriver();
+    setupVkButton('driverSendVkBtn', getDriverText);
 
     // ---- Помощь ----
     const helpName = document.getElementById('helpName');
@@ -570,19 +459,16 @@
     function updateHelp() {
         let msg = getHelpText();
         helpSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
-        helpSendVk.href = VK_LINK + encodeURIComponent(msg);
     }
-
     helpName.addEventListener('input', updateHelp);
     helpPhone.addEventListener('input', updateHelp);
     helpProblem.addEventListener('input', updateHelp);
     updateHelp();
+    setupVkButton('helpSendVkBtn', getHelpText);
 
     // FAQ аккордеон
     document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            q.parentElement.classList.toggle('active');
-        });
+        q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
     });
 </script>
 </body>
