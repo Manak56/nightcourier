@@ -22,7 +22,6 @@
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
-            /* ЗАМЕНИТЕ ССЫЛКУ НА ВАШ ФОН (если нужно) */
             background-image: linear-gradient(rgba(11, 16, 27, 0.85), rgba(11, 16, 27, 0.85)), url('https://s3.fotokto.ru/photo/full/774/7746023.jpg');
             background-size: cover;
             background-position: center;
@@ -32,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* Анимации */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -47,6 +45,7 @@
             10%,20%{transform:scale(1.08) rotate(-3deg);}
             30%,40%{transform:scale(1.08) rotate(3deg);}
         }
+
         .app-container {
             max-width: 500px;
             margin: 0 auto;
@@ -54,7 +53,6 @@
             position: relative;
             animation: fadeInUp 0.6s ease-out;
         }
-        /* Карточки появляются с задержкой */
         .card {
             background: var(--card);
             border-radius: 24px;
@@ -74,7 +72,6 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             border-color: rgba(0,212,255,0.5);
         }
-        /* Кнопки */
         .btn-main {
             background: var(--accent);
             color: #000;
@@ -96,7 +93,13 @@
         .btn-call { background: var(--btn-green); color: white; }
         .btn-vk { background: var(--vk-color); color: white; }
 
-        /* Плавающая кнопка телефона */
+        .button-hint {
+            font-size: 9px;
+            text-align: center;
+            margin-top: 6px;
+            color: #aaa;
+        }
+
         .call-fab {
             position: fixed;
             bottom: 20px;
@@ -118,7 +121,6 @@
         }
         .call-fab:hover { transform: scale(1.05); }
 
-        /* Уведомление (теперь дольше) */
         .toast-copy {
             position: fixed;
             bottom: 100px;
@@ -142,7 +144,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Шапка и навигация */
         header {
             padding: 12px;
             text-align: center;
@@ -215,14 +216,12 @@
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
-        /* Тарифы */
         .tariff-scheme { background: #0f1622; border-radius: 20px; padding: 12px; text-align: center; margin-bottom: 12px; }
         .tariff-scheme svg { width: 100%; max-width: 280px; height: auto; margin: 0 auto; display: block; }
         .tariff-table { margin-top: 12px; font-size: 12px; }
         .tariff-table table { width: 100%; border-collapse: collapse; }
         .tariff-table td, .tariff-table th { padding: 8px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .tariff-table th { color: var(--accent); }
-        /* Преимущества и отзывы */
         .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
         .feature { background: rgba(0,212,255,0.1); border-radius: 16px; padding: 12px; text-align: center; transition: transform 0.2s; }
         .feature:hover { transform: scale(1.02); background: rgba(0,212,255,0.2); }
@@ -230,14 +229,12 @@
         .review { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px; margin-bottom: 10px; transition: background 0.2s; }
         .review:hover { background: rgba(255,255,255,0.1); }
         .review .name { font-size: 12px; font-weight: bold; color: var(--accent); }
-        /* FAQ */
         .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; cursor: pointer; font-weight: bold; font-size: 14px; }
         .faq-question i { transition: transform 0.2s; color: var(--accent); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 13px; color: var(--secondary); padding: 0; }
         .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 12px; padding-top: 4px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
-        /* О нас */
         .about-list { list-style: none; margin: 15px 0; }
         .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .stats-grid { display: flex; gap: 10px; margin: 15px 0; justify-content: space-around; }
@@ -250,7 +247,6 @@
 
 <div class="app-container">
     <header>
-        <!-- ЗАМЕНИТЕ НА СВОЙ ЛОГОТИП (маленький) -->
         <img class="header-logo" src="https://sun9-1.userapi.com/s/v1/ig2/OzS0EBjOpCp5iM3zsHmld7GmjlaJxHPXmtF0y9RngSJ77wQcPXa24i0aPhYJSIhVok5_9MUmp_RXnpiMDt15WfKE.jpg?quality=95&as=32x36,48x54,72x81,108x121,160x180,240x269,360x404,480x539,540x606,640x719,684x768&from=bu&u=Oy_v1hCJoc9NWqvTuKhC6vcteYGQGhifNAchiLMkzsA&cs=684x0" alt="logo">
         <h1>Night Courier</h1>
     </header>
@@ -321,6 +317,8 @@
                 <button id="sendVkBtn" class="btn-main btn-vk"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
+            <div class="button-hint">✈️ Telegram откроется с готовым заказом</div>
+            <div class="button-hint">📋 ВК: текст скопируется — вставьте в диалог (Ctrl+V)</div>
         </div>
 
         <!-- Трезвый водитель -->
@@ -346,6 +344,8 @@
                 <button id="driverSendVkBtn" class="btn-main btn-vk"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
+            <div class="button-hint">✈️ Telegram откроется с готовым заказом</div>
+            <div class="button-hint">📋 ВК: текст скопируется — вставьте в диалог</div>
         </div>
 
         <!-- Помощь на дороге -->
@@ -359,6 +359,8 @@
                 <button id="helpSendVkBtn" class="btn-main btn-vk"><i class="fab fa-vk"></i> ВКонтакте</button>
                 <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
             </div>
+            <div class="button-hint">✈️ Telegram откроется с готовым заказом</div>
+            <div class="button-hint">📋 ВК: текст скопируется — вставьте в диалог</div>
         </div>
     </div>
 
@@ -379,9 +381,9 @@
                 <div class="tariff-table">
                     <table>
                         <tr><th>Расстояние</th><th>Стоимость</th></tr>
-                        <tr><td>до 3 км</td><td>300₽</td></tr>
+                        <tr>}<td>до 3 км</td><td>300₽</td></tr>
                         <tr>}<td>до 7 км</td><td>450₽</td></tr>
-                        <tr>)<td>до 12 км</td><td>600₽</td></tr>
+                        <tr>}<td>до 12 км</td><td>600₽</td></tr>
                         <tr>}<td>за город</td><td>от 650₽</td></tr>
                     </table>
                 </div>
@@ -440,16 +442,13 @@
 
 <script>
     // ========== НАСТРОЙКИ ==========
-    const VK_DIALOG_URL = 'https://vk.me/nightcourier56'; // просто открывает диалог
+    const VK_DIALOG_URL = 'https://vk.me/nightcourier56';
 
-    // Функция копирования с долгим уведомлением (3 секунды)
     function copyToClipboardAndOpenVK(text) {
         navigator.clipboard.writeText(text).then(() => {
             const toast = document.getElementById('toastCopy');
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            setTimeout(() => toast.classList.remove('show'), 3000);
             window.open(VK_DIALOG_URL, '_blank');
         }).catch(() => alert('Не удалось скопировать текст'));
     }
@@ -475,7 +474,7 @@
         tab.addEventListener('click', () => switchTab(tab.getAttribute('data-tab')));
     });
 
-    // ---- Общие функции формирования текста ----
+    // ---- Общие функции текста ----
     function getDeliveryText() {
         let name = deliveryName.value.trim() || 'не указано';
         let phone = deliveryPhone.value.trim() || 'не указано';
