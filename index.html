@@ -6,6 +6,7 @@
     <title>Night Courier | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* ===== СТИЛИ (без изменений) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         :root {
@@ -218,7 +219,7 @@
         <h1>Night Courier</h1>
     </header>
 
-    <!-- Верхняя навигация -->
+    <!-- ========== Верхняя навигация ========== -->
     <div class="top-nav">
         <div class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>Главная</span></div>
         <div class="nav-item" data-tab="order"><i class="fas fa-bolt"></i><span>Заказ</span></div>
@@ -227,7 +228,7 @@
         <div class="nav-item" data-tab="about"><i class="fas fa-users"></i><span>О нас</span></div>
     </div>
 
-    <!-- ГЛАВНАЯ -->
+    <!-- ========== Главная страница ========== -->
     <div id="home" class="page active">
         <div style="text-align: center; padding: 15px 0;">
             <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
@@ -254,9 +255,9 @@
         </div>
     </div>
 
-    <!-- ЗАКАЗ -->
+    <!-- ========== Страница заказа ========== -->
     <div id="order" class="page">
-        <!-- Доставка -->
+        <!-- Блок доставки -->
         <div class="card">
             <h2><i class="fas fa-shopping-cart"></i> Калькулятор доставки</h2>
             <input type="text" id="deliveryName" placeholder="Ваше имя *">
@@ -295,7 +296,7 @@
             </div>
         </div>
 
-        <!-- Трезвый водитель -->
+        <!-- Блок трезвого водителя -->
         <div class="card" style="border-color: var(--btn-green);">
             <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
             <input type="text" id="driverName" placeholder="Ваше имя *">
@@ -320,7 +321,7 @@
             </div>
         </div>
 
-        <!-- Помощь на дороге -->
+        <!-- Блок помощи на дороге -->
         <div class="card">
             <h2 style="color: var(--btn-orange);"><i class="fas fa-tools"></i> Помощь на дороге</h2>
             <input type="text" id="helpName" placeholder="Ваше имя *">
@@ -334,7 +335,7 @@
         </div>
     </div>
 
-    <!-- ТАРИФЫ -->
+    <!-- ========== Страница тарифов ========== -->
     <div id="map" class="page">
         <div class="card">
             <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
@@ -352,7 +353,7 @@
                     <table>
                         <tr><th>Расстояние</th><th>Стоимость</th></tr>
                         <tr><td>до 3 км</td><td>300₽</td></tr>
-                        <tr>}<td>до 7 км</td><td>450₽</td></tr>
+                        <tr><td>до 7 км</td><td>450₽</td></tr>
                         <tr><td>до 12 км</td><td>600₽</td></tr>
                         <tr><td>за город</td><td>от 650₽</td></tr>
                     </table>
@@ -362,7 +363,7 @@
         </div>
     </div>
 
-    <!-- СВЯЗЬ + СОТРУДНИЧЕСТВО -->
+    <!-- ========== Страница контактов и сотрудничества ========== -->
     <div id="support" class="page">
         <div class="card">
             <h2><i class="fas fa-id-card"></i> Контакты</h2>
@@ -375,7 +376,7 @@
         </div>
     </div>
 
-    <!-- О НАС + FAQ -->
+    <!-- ========== Страница "О нас" и FAQ ========== -->
     <div id="about" class="page">
         <div class="card">
             <h2><i class="fas fa-info-circle"></i> О сервисе «Night Courier»</h2>
@@ -428,15 +429,14 @@
         </div>
     </div>
 
-    <!-- Плавающая кнопка звонка -->
+    <!-- ========== Плавающая кнопка звонка ========== -->
     <a href="tel:+79999099924" class="call-fab"><i class="fas fa-phone-alt"></i></a>
 </div>
 
 <script>
-    // ========== НАСТРОЙКИ ==========
-    // ПРОВЕРЕННАЯ ССЫЛКА ДЛЯ ВК (сообщение заполняется автоматически)
-    const VK_LINK = 'https://vk.com/write-238006273?text=';
-    // ================================
+    // ========== ПРАВИЛЬНЫЕ НАСТРОЙКИ ДЛЯ VK ==========
+    const VK_LINK = 'https://vk.com/write?to=nightcourier56&text=';
+    // ==================================================
 
     // Переключение вкладок
     const tabs = document.querySelectorAll('.nav-item');
@@ -464,7 +464,38 @@
         });
     });
 
-    // ---- ДОСТАВКА ----
+    // Функции для формирования сообщений
+    function getDeliveryText() {
+        let name = deliveryName.value.trim() || 'не указано';
+        let phone = deliveryPhone.value.trim() || 'не указано';
+        let d = parseInt(distSlider.value);
+        let t = parseInt(timeSelect.value);
+        let c = parseInt(complexSelect.value);
+        let h = parseInt(heavySelect.value);
+        let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
+        let total = base + t + c + h;
+        let timeText = timeSelect.options[timeSelect.selectedIndex].text;
+        return `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📍 Откуда: ${from.value||'не указано'}\n🏠 Куда: ${to.value||'не указано'}\n📦 Список: ${list.value||'не указано'}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n📍 Сложный маршрут: ${c>0?'Да (+150₽)':'Нет'}\n🏋️ Тяжёлый груз: ${h>0?'Да (+100₽)':'Нет'}\n💰 Итог: ${total}₽`;
+    }
+
+    function getDriverText() {
+        let name = driverName.value.trim() || 'не указано';
+        let phone = driverPhone.value.trim() || 'не указано';
+        let d = parseInt(driverDist.value);
+        let t = parseInt(driverTime.value);
+        let total = 800 + d * 15 + t;
+        let timeText = driverTime.options[driverTime.selectedIndex].text;
+        return `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n💰 Стоимость: ${total}₽`;
+    }
+
+    function getHelpText() {
+        let name = helpName.value.trim() || 'не указано';
+        let phone = helpPhone.value.trim() || 'не указано';
+        let problem = helpProblem.value.trim() || 'не описана';
+        return `🛠 ПОМОЩЬ НА ДОРОГЕ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📝 Проблема: ${problem}`;
+    }
+
+    // ---- Доставка ----
     const deliveryName = document.getElementById('deliveryName');
     const deliveryPhone = document.getElementById('deliveryPhone');
     const from = document.getElementById('from');
@@ -479,19 +510,6 @@
     const priceDetail = document.getElementById('priceDetail');
     const sendBtn = document.getElementById('sendBtn');
     const sendVkBtn = document.getElementById('sendVkBtn');
-
-    function getDeliveryText() {
-        let name = deliveryName.value.trim() || 'не указано';
-        let phone = deliveryPhone.value.trim() || 'не указано';
-        let d = parseInt(distSlider.value);
-        let t = parseInt(timeSelect.value);
-        let c = parseInt(complexSelect.value);
-        let h = parseInt(heavySelect.value);
-        let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
-        let total = base + t + c + h;
-        let timeText = timeSelect.options[timeSelect.selectedIndex].text;
-        return `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📍 Откуда: ${from.value||'не указано'}\n🏠 Куда: ${to.value||'не указано'}\n📦 Список: ${list.value||'не указано'}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n📍 Сложный маршрут: ${c>0?'Да (+150₽)':'Нет'}\n🏋️ Тяжёлый груз: ${h>0?'Да (+100₽)':'Нет'}\n💰 Итог: ${total}₽`;
-    }
 
     function updateDelivery() {
         let d = parseInt(distSlider.value), t = parseInt(timeSelect.value), c = parseInt(complexSelect.value), h = parseInt(heavySelect.value);
@@ -516,7 +534,7 @@
     heavySelect.addEventListener('change', updateDelivery);
     updateDelivery();
 
-    // ---- ТРЕЗВЫЙ ВОДИТЕЛЬ ----
+    // ---- Трезвый водитель ----
     const driverName = document.getElementById('driverName');
     const driverPhone = document.getElementById('driverPhone');
     const driverDist = document.getElementById('driverDist');
@@ -525,16 +543,6 @@
     const driverTotal = document.getElementById('driverTotal');
     const driverSend = document.getElementById('driverSendBtn');
     const driverSendVk = document.getElementById('driverSendVkBtn');
-
-    function getDriverText() {
-        let name = driverName.value.trim() || 'не указано';
-        let phone = driverPhone.value.trim() || 'не указано';
-        let d = parseInt(driverDist.value);
-        let t = parseInt(driverTime.value);
-        let total = 800 + d * 15 + t;
-        let timeText = driverTime.options[driverTime.selectedIndex].text;
-        return `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📏 Расстояние: ${d} км\n⏰ ${timeText}\n💰 Стоимость: ${total}₽`;
-    }
 
     function updateDriver() {
         let d = parseInt(driverDist.value), t = parseInt(driverTime.value);
@@ -552,19 +560,12 @@
     driverTime.addEventListener('change', updateDriver);
     updateDriver();
 
-    // ---- ПОМОЩЬ ----
+    // ---- Помощь ----
     const helpName = document.getElementById('helpName');
     const helpPhone = document.getElementById('helpPhone');
     const helpProblem = document.getElementById('helpProblem');
     const helpSend = document.getElementById('helpSendBtn');
     const helpSendVk = document.getElementById('helpSendVkBtn');
-
-    function getHelpText() {
-        let name = helpName.value.trim() || 'не указано';
-        let phone = helpPhone.value.trim() || 'не указано';
-        let problem = helpProblem.value.trim() || 'не описана';
-        return `🛠 ПОМОЩЬ НА ДОРОГЕ\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📝 Проблема: ${problem}`;
-    }
 
     function updateHelp() {
         let msg = getHelpText();
