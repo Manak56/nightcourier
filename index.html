@@ -2,404 +2,196 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Night Courier | Оренбург</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-        :root {
-            --bg: #0b101b;
-            --card: rgba(22, 27, 34, 0.98);
-            --accent: #00d4ff;
-            --text: #ffffff;
-            --secondary: #8b949e;
-            --btn-green: #28a745;
-            --btn-orange: #ff8800;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            /* ЗДЕСЬ ВЫ МОЖЕТЕ ЗАМЕНИТЬ URL НА СВОЙ ФОН */
-            background-image: linear-gradient(rgba(11, 16, 27, 0.85), rgba(11, 16, 27, 0.85)), url('https://gostinica-otel.ru/spaw2/uploads/files/36f8f7c2ba5c4a8f86060c9172743dda.max-1200x800.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: var(--text);
-            overflow: hidden; height: 100vh;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0b101b;
+            background-image: linear-gradient(rgba(11,16,27,0.85), rgba(11,16,27,0.85)), url('https://raw.githubusercontent.com/Manak56/night-courier/main/image.png');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 80px;
         }
-
-        .app-container { display: flex; flex-direction: column; height: 100vh; max-width: 500px; margin: 0 auto; position: relative; }
-
-        header {
-            padding: 12px; text-align: center; background: rgba(11, 16, 27, 0.95);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+        .container { max-width: 500px; margin: 0 auto; padding: 16px; }
+        .card {
+            background: rgba(22,27,34,0.96);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,212,255,0.2);
         }
-        .header-logo { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
-        header h1 { font-size: 16px; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
-
-        .page { flex: 1; overflow-y: auto; padding: 16px; display: none; padding-bottom: 100px; }
-        .page.active { display: block; animation: slideUp 0.3s ease; }
-
-        .card { background: var(--card); border-radius: 20px; padding: 18px; margin-bottom: 18px; border: 1px solid rgba(0, 212, 255, 0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        h2 { font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
-
+        h1, h2 { color: #00d4ff; }
+        .promo {
+            background: linear-gradient(45deg, #ff4444, #ff8800);
+            padding: 10px;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
         input, select, textarea {
-            width: 100% !important; background: #0f1622 !important; border: 1px solid #2a3a55 !important;
-            border-radius: 12px !important; padding: 10px 12px !important; color: #fff !important;
-            font-size: 14px !important; margin-bottom: 10px !important; outline: none;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent) !important; box-shadow: 0 0 6px rgba(0,212,255,0.3); }
-        ::placeholder { color: rgba(255,255,255,0.5); }
-
-        .btn-main {
-            background: var(--accent); color: #000; border: none; padding: 12px;
-            border-radius: 40px; width: 100%; font-weight: 800; font-size: 14px;
-            text-decoration: none; display: block; text-align: center; margin-top: 10px;
-            transition: 0.2s;
-        }
-        .btn-main:active { transform: scale(0.97); }
-        .btn-call { background: var(--btn-green); color: white; }
-        .flex-buttons { display: flex; gap: 10px; margin-top: 8px; }
-        .flex-buttons .btn-main { flex: 1; margin-top: 0; }
-
-        .bottom-nav {
-            position: absolute; bottom: 0; width: 100%; background: rgba(11, 16, 27, 0.98);
-            display: flex; justify-content: space-around; align-items: center;
-            padding: 6px 0 12px; border-top: 1px solid rgba(0, 212, 255, 0.2);
-            backdrop-filter: blur(20px); z-index: 100;
-        }
-        .nav-item {
-            color: #777; text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; font-size: 9px; font-weight: bold; transition: 0.2s;
-            flex: 1; text-align: center;
-        }
-        .nav-item i { font-size: 18px; margin-bottom: 2px; }
-        .nav-item.active { color: var(--accent); }
-
-        .call-fab {
-            position: fixed; bottom: 90px; right: 16px; width: 52px; height: 52px;
-            background: var(--btn-green); border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; color: #fff; font-size: 22px; z-index: 999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4); animation: vibrate 2s infinite;
-        }
-        @keyframes vibrate { 0%,100%{transform:scale(1);} 10%,20%{transform:scale(1.08) rotate(-3deg);} 30%,40%{transform:scale(1.08) rotate(3deg);} }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .promo { background: linear-gradient(45deg, #ff4444, #ff8800); padding: 8px; border-radius: 40px; text-align: center; font-weight: bold; font-size: 11px; margin-bottom: 16px; }
-        .legal-note { font-size: 8px; text-align: center; color: var(--secondary); margin-top: 20px; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .about-list { list-style: none; }
-        .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; }
-        .about-list i { width: 20px; color: var(--accent); }
-
-        .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; cursor: pointer; font-weight: bold; font-size: 13px; }
-        .faq-question i { transition: transform 0.2s; color: var(--accent); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 12px; color: var(--secondary); padding: 0; }
-        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); }
-
-        /* Схема тарифов */
-        .tariff-scheme {
+            width: 100%;
             background: #0f1622;
-            border-radius: 20px;
+            border: 1px solid #2a3a55;
+            border-radius: 12px;
             padding: 12px;
+            color: #fff;
             margin-bottom: 12px;
-            text-align: center;
         }
-        .tariff-scheme svg {
+        button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
             width: 100%;
-            max-width: 280px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
+            cursor: pointer;
         }
-        .tariff-table {
-            margin-top: 12px;
-            font-size: 12px;
+        .flex-buttons { display: flex; gap: 10px; }
+        .flex-buttons button { flex: 1; }
+        .btn-call { background: #28a745; color: #fff; }
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            padding: 10px 20px;
+            border-radius: 30px;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 2000;
         }
-        .tariff-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .tariff-table td, .tariff-table th {
-            padding: 6px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .tariff-table th {
-            color: var(--accent);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .feature {
-            background: rgba(0,212,255,0.1);
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-        }
-        .feature i { font-size: 24px; color: var(--accent); margin-bottom: 6px; }
-        .feature span { font-size: 12px; font-weight: bold; }
-        .review {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
-        }
-        .review .name { font-size: 12px; font-weight: bold; color: var(--accent); }
-        .review .text { font-size: 11px; margin-top: 4px; color: var(--secondary); }
+        .toast.show { opacity: 1; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <header>
-        <!-- ЗДЕСЬ ВСТАВЬТЕ СВОЙ ЛОГОТИП (маленький) -->
-       <img class="header-logo" src="icon.png" alt="logo">
-        <h1>Night Courier</h1>
-    </header>
-
-    <!-- ГЛАВНАЯ -->
-    <div id="home" class="page active">
-        <div style="text-align: center; padding: 15px 0;">
-            <!-- ЗДЕСЬ БОЛЬШОЙ ЛОГО -->
-            <img src="icon.png" style="width: 90px; filter: drop-shadow(0 0 12px var(--accent));">
-            <h2 style="justify-content: center; font-size: 22px;">ОРЕНБУРГ</h2>
-            <p style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">22:00 — 06:00</p>
-        </div>
-        <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
-        
-        <div class="card">
-            <h2><i class="fas fa-star"></i> Почему выбирают нас</h2>
-            <div class="features-grid">
-                <div class="feature"><i class="fas fa-clock"></i><br><span>15-25 мин</span><br><small>подача курьера</small></div>
-                <div class="feature"><i class="fas fa-ruble-sign"></i><br><span>Прозрачные цены</span><br><small>без скрытых комиссий</small></div>
-                <div class="feature"><i class="fas fa-shield-alt"></i><br><span>Анонимно</span><br><small>ваши данные в безопасности</small></div>
-                <div class="feature"><i class="fas fa-gift"></i><br><span>Скидка 25%</span><br><small>каждая 3-я доставка</small></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-comment-dots"></i> Отзывы клиентов</h2>
-            <div class="review"><div class="name">Алексей</div><div class="text">Заказывал в 2 часа ночи. Курьер приехал через 20 минут, всё чётко. Спасибо!</div></div>
-            <div class="review"><div class="name">Екатерина</div><div class="text">Отличная служба. Трезвый водитель — реально выручили. Рекомендую.</div></div>
-            <div class="review"><div class="name">Дмитрий</div><div class="text">Пользовался доставкой уже 3 раза, скидку дали — приятно. Быстро и вежливо.</div></div>
-        </div>
+<div class="container">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://raw.githubusercontent.com/Manak56/night-courier/main/icon.png" style="width: 80px; border-radius: 50%;">
+        <h1>НОЧНОЙ КУРЬЕР</h1>
+        <p style="color:#00d4ff;">ОРЕНБУРГ | 22:00 — 06:00</p>
     </div>
 
-    <!-- ЗАКАЗ (доставка + трезвый водитель + помощь) -->
-    <div id="order" class="page">
-        <!-- Доставка -->
-        <div class="card">
-            <h2><i class="fas fa-shopping-cart"></i> Калькулятор доставки</h2>
-            <input type="text" id="from" placeholder="Откуда (адрес / магазин)">
-            <input type="text" id="to" placeholder="Куда доставить?">
-            <textarea id="list" rows="2" placeholder="Что передать? (товары, документы...)"></textarea>
-            
-            <div><label style="font-size: 11px; color: var(--accent);">📏 Расстояние: <span id="distVal">3</span> км</label>
-            <input type="range" id="dist" min="1" max="25" value="3" step="1"></div>
-            
-            <div><label style="font-size: 11px; color: var(--accent);">⏰ Время заказа</label>
-            <select id="time">
-                <option value="0">22:00 – 00:00 (без доплаты)</option>
-                <option value="100">00:00 – 02:00 (+100₽)</option>
-                <option value="200">02:00 – 04:00 (+200₽)</option>
-                <option value="250">04:00 – 06:00 (+250₽)</option>
-            </select></div>
-            
-            <div><label style="font-size: 11px; color: var(--accent);">📍 Сложный маршрут (2+ точки)</label>
-            <select id="complex"><option value="0">Нет</option><option value="150">Да, заезд в 2+ места (+150₽)</option></select></div>
-            
-            <div><label style="font-size: 11px; color: var(--accent);">🏋️ Тяжёлый груз (подъём >10 кг)</label>
-            <select id="heavy"><option value="0">Нет</option><option value="100">Да (+100₽)</option></select></div>
+    <div class="promo">🎁 КАЖДАЯ 3-Я ДОСТАВКА — СКИДКА 25%!</div>
 
-            <div style="background: rgba(0,212,255,0.1); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
-                <span style="font-size: 10px;">ИТОГО:</span>
-                <div id="total" style="font-size: 26px; font-weight: 800; color: var(--accent);">300₽</div>
-                <div id="priceDetail" style="font-size: 9px; opacity: 0.7;">База: 300₽</div>
-            </div>
-
-            <div class="flex-buttons">
-                <a href="#" id="sendBtn" class="btn-main"><i class="fab fa-telegram"></i> Заказать</a>
-                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
-            </div>
+    <div class="card">
+        <h2>📦 Калькулятор доставки</h2>
+        <input type="text" id="clientName" placeholder="Ваше имя *">
+        <input type="tel" id="clientPhone" placeholder="Номер телефона *">
+        <input type="text" id="from" placeholder="Откуда">
+        <input type="text" id="to" placeholder="Куда">
+        <textarea id="list" rows="2" placeholder="Что передать?"></textarea>
+        <div>📏 Расстояние: <span id="distVal">3</span> км</div>
+        <input type="range" id="dist" min="1" max="25" value="3">
+        <select id="time">
+            <option value="0">22:00–00:00 (без доплаты)</option>
+            <option value="100">00:00–02:00 (+100₽)</option>
+            <option value="200">02:00–04:00 (+200₽)</option>
+            <option value="250">04:00–06:00 (+250₽)</option>
+        </select>
+        <select id="complex">
+            <option value="0">Сложный маршрут: Нет</option>
+            <option value="150">Да (+150₽)</option>
+        </select>
+        <select id="heavy">
+            <option value="0">Тяжёлый груз: Нет</option>
+            <option value="100">Да (+100₽)</option>
+        </select>
+        <div style="background: rgba(0,212,255,0.1); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
+            💰 ИТОГО: <span id="total" style="font-size: 24px; color:#00d4ff;">300₽</span>
         </div>
-
-        <!-- Трезвый водитель -->
-        <div class="card" style="border-color: var(--btn-green);">
-            <h2 style="color: var(--btn-green);"><i class="fas fa-user-check"></i> Трезвый водитель</h2>
-            <div><label style="font-size: 11px; color: var(--btn-green);">📏 Расстояние: <span id="driverDistVal">3</span> км</label>
-            <input type="range" id="driverDist" min="1" max="30" value="3" step="1"></div>
-            <div><label style="font-size: 11px; color: var(--btn-green);">⏰ Время заказа</label>
-            <select id="driverTime">
-                <option value="0">22:00 – 00:00 (без доплаты)</option>
-                <option value="100">00:00 – 02:00 (+100₽)</option>
-                <option value="200">02:00 – 04:00 (+200₽)</option>
-                <option value="250">04:00 – 06:00 (+250₽)</option>
-            </select></div>
-            <div style="background: rgba(40,167,69,0.15); padding: 12px; border-radius: 16px; text-align: center; margin: 10px 0;">
-                <span style="font-size: 10px;">СТОИМОСТЬ:</span>
-                <div id="driverTotal" style="font-size: 26px; font-weight: 800; color: var(--btn-green);">1200₽</div>
-            </div>
-            <div class="flex-buttons">
-                <a href="#" id="driverSendBtn" class="btn-main" style="background: var(--btn-green); color: white;"><i class="fab fa-telegram"></i> Заказать</a>
-                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
-            </div>
-        </div>
-
-        <!-- Помощь на дороге -->
-        <div class="card">
-            <h2 style="color: var(--btn-orange);"><i class="fas fa-tools"></i> Помощь на дороге</h2>
-            <textarea id="helpProblem" rows="2" placeholder="Опишите проблему: прикурить, открыть авто, трос..."></textarea>
-            <div class="flex-buttons">
-                <a href="#" id="helpSendBtn" class="btn-main" style="background: var(--btn-orange); color: white;"><i class="fab fa-telegram"></i> Отправить</a>
-                <a href="tel:+79999099924" class="btn-main btn-call"><i class="fas fa-phone"></i> Позвонить</a>
-            </div>
+        <div class="flex-buttons">
+            <button id="sendOrderBtn"><i class="fab fa-telegram"></i> Заказать</button>
+            <button class="btn-call" onclick="window.location.href='tel:+79999099924'"><i class="fas fa-phone"></i> Позвонить</button>
         </div>
     </div>
-
-    <!-- ТАРИФЫ (схема километража) -->
-    <div id="map" class="page">
-        <div class="card">
-            <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
-            <div class="tariff-scheme">
-                <svg viewBox="0 0 200 150">
-                    <circle cx="100" cy="75" r="20" fill="none" stroke="#00d4ff" stroke-width="2" stroke-dasharray="4"/>
-                    <circle cx="100" cy="75" r="40" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3"/>
-                    <circle cx="100" cy="75" r="60" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="2"/>
-                    <text x="100" y="70" text-anchor="middle" fill="#00d4ff" font-size="6">3 км</text>
-                    <text x="100" y="50" text-anchor="middle" fill="#aaa" font-size="5">7 км</text>
-                    <text x="100" y="30" text-anchor="middle" fill="#aaa" font-size="5">12 км</text>
-                    <circle cx="100" cy="75" r="3" fill="#00d4ff"/>
-                </svg>
-                <div class="tariff-table">
-                    <table>
-                        <tr><th>Расстояние</th><th>Стоимость</th></tr>
-                        <tr><td>до 3 км</td><td>300₽</td></tr>
-                        <tr><td>до 7 км</td><td>450₽</td></tr>
-                        <tr><td>до 12 км</td><td>600₽</td></tr>
-                        <tr><td>за город</td><td>от 650₽</td></tr>
-                    </table>
-                </div>
-                <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену. Итог всегда виден в калькуляторе.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- СВЯЗЬ + СОТРУДНИЧЕСТВО -->
-    <div id="support" class="page">
-        <div class="card">
-            <h2><i class="fas fa-id-card"></i> Контакты</h2>
-            <a href="tel:+79999099924" class="btn-main btn-call" style="margin-bottom: 10px;"><i class="fas fa-phone"></i> 8 (999) 909-99-24</a>
-            <a href="https://t.me/mankogame" class="btn-main" style="background: #0088cc; color: white;"><i class="fab fa-telegram-plane"></i> @mankogame</a>
-        </div>
-        <div class="card">
-            <h2><i class="fas fa-handshake"></i> Сотрудничество</h2>
-            <p style="font-size: 13px;">Приглашаем к сотрудничеству:</p>
-            <ul style="margin: 10px 0 0 20px; font-size: 12px;">
-                <li>• Таксопарки и водителей (ночные смены)</li>
-                <li>• Магазины и кафе (доставка готовых заказов)</li>
-                <li>• Рекламные агентства (размещение информации)</li>
-            </ul>
-            <p style="margin-top: 12px;">По вопросам партнёрства пишите в Telegram: <strong>@mankogame</strong></p>
-        </div>
-    </div>
-
-    <!-- О НАС + FAQ -->
-    <div id="about" class="page">
-        <div class="card">
-            <h2><i class="fas fa-info-circle"></i> О нас</h2>
-            <p style="margin-bottom: 12px;">«Night Courier» — ночная служба доставки и помощи в Оренбурге с 22:00 до 06:00.</p>
-            <ul class="about-list">
-                <li><i class="fas fa-check-circle"></i> Работаем по всему городу и пригороду</li>
-                <li><i class="fas fa-clock"></i> Среднее время подачи — 15–25 минут</li>
-                <li><i class="fas fa-ruble-sign"></i> Честный калькулятор без скрытых комиссий</li>
-                <li><i class="fas fa-gift"></i> Акция: каждый 3-й заказ – скидка 25%</li>
-                <li><i class="fas fa-shield-alt"></i> Водители проходят проверку</li>
-                <li><i class="fas fa-balance-scale"></i> Работаем строго по закону РФ</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
-            <div class="faq-item"><div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Среднее время подачи — 15–25 минут после подтверждения заказа.</div></div>
-            <div class="faq-item"><div class="faq-question">Как оплатить доставку? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ предоплата 50%.</div></div>
-            <div class="faq-item"><div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатка.</div></div>
-            <div class="faq-item"><div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Каждая 3-я доставка у одного номера телефона – скидка 25% (напоминайте оператору).</div></div>
-        </div>
-        <div class="legal-note">
-            ⚠️ Сайт не является публичной офертой. Цены носят информационный характер.<br>
-            Мы осуществляем деятельность в соответствии с законодательством РФ.
-        </div>
-    </div>
-
-    <a href="tel:+79999099924" class="call-fab"><i class="fas fa-phone-alt"></i></a>
-
-    <nav class="bottom-nav">
-        <a href="javascript:void(0)" class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i><span>Главная</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('order', this)"><i class="fas fa-bolt"></i><span>Заказ</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('map', this)"><i class="fas fa-chart-simple"></i><span>Тарифы</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('support', this)"><i class="fas fa-headset"></i><span>Связь</span></a>
-        <a href="javascript:void(0)" class="nav-item" onclick="switchTab('about', this)"><i class="fas fa-users"></i><span>О нас</span></a>
-    </nav>
 </div>
 
+<div id="toast" class="toast">✅ Заказ отправлен!</div>
+
 <script>
-    function switchTab(tabId, el) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        if (el) el.classList.add('active');
+    const APP_SCRIPT_URL = 'https://vk.com/away.php?to=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbywXfSTT9bOGsnqQHWzwshy_RWWm0cMxylNtFVzphW_xfn3vmgb7rE5X8F0kNfQItA4%2Fexec&utf=1';
+
+    function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    // Доставка
-    const from = document.getElementById('from'), to = document.getElementById('to'), list = document.getElementById('list');
-    const distSlider = document.getElementById('dist'), distVal = document.getElementById('distVal');
-    const timeSelect = document.getElementById('time'), complexSelect = document.getElementById('complex'), heavySelect = document.getElementById('heavy');
-    const totalSpan = document.getElementById('total'), priceDetail = document.getElementById('priceDetail'), sendBtn = document.getElementById('sendBtn');
+    async function sendToSheet(data) {
+        try {
+            await fetch(APP_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            return true;
+        } catch(e) { return false; }
+    }
+
+    // Калькулятор
+    const distSlider = document.getElementById('dist');
+    const distVal = document.getElementById('distVal');
+    const timeSelect = document.getElementById('time');
+    const complexSelect = document.getElementById('complex');
+    const heavySelect = document.getElementById('heavy');
+    const totalSpan = document.getElementById('total');
+
     function updateDelivery() {
-        let d = parseInt(distSlider.value), t = parseInt(timeSelect.value), c = parseInt(complexSelect.value), h = parseInt(heavySelect.value);
+        let d = parseInt(distSlider.value);
+        let t = parseInt(timeSelect.value);
+        let c = parseInt(complexSelect.value);
+        let h = parseInt(heavySelect.value);
         let base = d <= 3 ? 300 : d <= 7 ? 450 : d <= 12 ? 600 : 650;
         let total = base + t + c + h;
-        distVal.innerText = d; totalSpan.innerText = total + '₽';
-        priceDetail.innerHTML = `База: ${base}₽ + ночь: ${t}₽ + сложный: ${c}₽ + тяжёлый: ${h}₽`;
-        let msg = `🛵 НОЧНОЙ КУРЬЕР (ДОСТАВКА)\n📍 Откуда: ${from.value||'не указано'}\n🏠 Куда: ${to.value||'не указано'}\n📦 Список: ${list.value||'не указано'}\n📏 ${d} км\n⏰ ${timeSelect.options[timeSelect.selectedIndex].text}\n📍 Сложный: ${c>0?'Да':'Нет'}\n🏋️ Тяжёлый: ${h>0?'Да':'Нет'}\n💰 Итог: ${total}₽`;
-        sendBtn.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
+        distVal.innerText = d;
+        totalSpan.innerText = total + '₽';
     }
-    from.addEventListener('input', updateDelivery); to.addEventListener('input', updateDelivery); list.addEventListener('input', updateDelivery);
-    distSlider.addEventListener('input', updateDelivery); timeSelect.addEventListener('change', updateDelivery);
-    complexSelect.addEventListener('change', updateDelivery); heavySelect.addEventListener('change', updateDelivery);
+    distSlider.addEventListener('input', updateDelivery);
+    timeSelect.addEventListener('change', updateDelivery);
+    complexSelect.addEventListener('change', updateDelivery);
+    heavySelect.addEventListener('change', updateDelivery);
     updateDelivery();
 
-    // Трезвый водитель
-    const driverDist = document.getElementById('driverDist'), driverDistVal = document.getElementById('driverDistVal');
-    const driverTime = document.getElementById('driverTime'), driverTotal = document.getElementById('driverTotal'), driverSend = document.getElementById('driverSendBtn');
-    function updateDriver() {
-        let d = parseInt(driverDist.value), t = parseInt(driverTime.value);
-        let total = 800 + d * 15 + t;
-        driverDistVal.innerText = d; driverTotal.innerText = total + '₽';
-        let msg = `🚗 ТРЕЗВЫЙ ВОДИТЕЛЬ\n📏 ${d} км\n⏰ ${driverTime.options[driverTime.selectedIndex].text}\n💰 ${total}₽`;
-        driverSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
-    }
-    driverDist.addEventListener('input', updateDriver); driverTime.addEventListener('change', updateDriver);
-    updateDriver();
-
-    // Помощь
-    const helpProblem = document.getElementById('helpProblem'), helpSend = document.getElementById('helpSendBtn');
-    function updateHelp() {
-        let msg = `🛠 ПОМОЩЬ НА ДОРОГЕ\nПроблема: ${helpProblem.value.trim() || 'не описана'}`;
-        helpSend.href = "https://t.me/mankogame?text=" + encodeURIComponent(msg);
-    }
-    helpProblem.addEventListener('input', updateHelp);
-    updateHelp();
-
-    // FAQ аккордеон
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
+    // Отправка заказа
+    document.getElementById('sendOrderBtn').addEventListener('click', async () => {
+        const name = document.getElementById('clientName').value.trim();
+        const phone = document.getElementById('clientPhone').value.trim();
+        if (!name || !phone) { alert('Введите имя и телефон'); return; }
+        
+        const order = {
+            type: 'delivery',
+            name: name,
+            phone: phone,
+            from: document.getElementById('from').value,
+            to: document.getElementById('to').value,
+            list: document.getElementById('list').value,
+            distance: parseInt(distSlider.value),
+            time: timeSelect.options[timeSelect.selectedIndex].text,
+            total: totalSpan.innerText
+        };
+        await sendToSheet(order);
+        showToast();
+        // Очистка полей
+        document.getElementById('clientName').value = '';
+        document.getElementById('clientPhone').value = '';
+        document.getElementById('from').value = '';
+        document.getElementById('to').value = '';
+        document.getElementById('list').value = '';
+        distSlider.value = '3';
+        timeSelect.value = '0';
+        complexSelect.value = '0';
+        heavySelect.value = '0';
+        updateDelivery();
     });
 </script>
 </body>
