@@ -10,7 +10,7 @@
 
         :root {
             --bg: #0b101b;
-            --card: rgba(22, 27, 34, 0.96);
+            --card: rgba(22, 27, 34, 0.8);   /* полупрозрачный фон карточек */
             --accent: #00d4ff;
             --text: #ffffff;
             --secondary: #8b949e;
@@ -22,7 +22,7 @@
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
-            background-image: linear-gradient(rgba(11, 16, 27, 0.85), rgba(11, 16, 27, 0.85)), url('https://s3.fotokto.ru/photo/full/774/7746023.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://i.ytimg.com/vi/Jqdra9GPWHI/maxresdefault.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -31,6 +31,7 @@
             min-height: 100vh;
         }
 
+        /* Анимации */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -53,6 +54,7 @@
             position: relative;
             animation: fadeInUp 0.6s ease-out;
         }
+
         .card {
             background: var(--card);
             border-radius: 24px;
@@ -63,6 +65,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             animation: fadeInUp 0.5s ease-out;
             animation-fill-mode: backwards;
+            backdrop-filter: blur(6px);  /* эффект стекла */
         }
         .card:nth-child(1) { animation-delay: 0.05s; }
         .card:nth-child(2) { animation-delay: 0.1s; }
@@ -72,6 +75,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             border-color: rgba(0,212,255,0.5);
         }
+
         .btn-main {
             background: var(--accent);
             color: #000;
@@ -97,7 +101,7 @@
             font-size: 9px;
             text-align: center;
             margin-top: 6px;
-            color: #aaa;
+            color: #ddd;
         }
 
         .call-fab {
@@ -147,7 +151,7 @@
         header {
             padding: 12px;
             text-align: center;
-            background: rgba(11, 16, 27, 0.95);
+            background: rgba(11, 16, 27, 0.9);
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
             backdrop-filter: blur(10px);
             display: flex;
@@ -160,8 +164,9 @@
         }
         .header-logo { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
         header h1 { font-size: 18px; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
+
         .top-nav {
-            background: rgba(11, 16, 27, 0.98);
+            background: rgba(11, 16, 27, 0.96);
             display: flex;
             justify-content: space-around;
             padding: 8px 0;
@@ -172,7 +177,7 @@
             z-index: 99;
         }
         .nav-item {
-            color: #777;
+            color: #ccc;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -185,12 +190,15 @@
         }
         .nav-item i { font-size: 18px; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
+
         .page { padding: 16px; display: none; animation: fadeInUp 0.4s ease; }
         .page.active { display: block; }
+
         h2 { font-size: 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
+
         input, select, textarea {
             width: 100% !important;
-            background: #0f1622 !important;
+            background: rgba(15, 22, 34, 0.9) !important;
             border: 1px solid #2a3a55 !important;
             border-radius: 12px !important;
             padding: 12px !important;
@@ -204,8 +212,10 @@
             border-color: var(--accent) !important;
             box-shadow: 0 0 0 2px rgba(0,212,255,0.2);
         }
+
         .flex-buttons { display: flex; gap: 10px; margin-top: 10px; }
         .flex-buttons .btn-main { flex: 1; margin-top: 0; }
+
         .promo {
             background: linear-gradient(45deg, #ff4444, #ff8800);
             padding: 10px;
@@ -216,31 +226,38 @@
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
-        .tariff-scheme { background: #0f1622; border-radius: 20px; padding: 12px; text-align: center; margin-bottom: 12px; }
+
+        .tariff-scheme { background: rgba(15, 22, 34, 0.8); border-radius: 20px; padding: 12px; text-align: center; margin-bottom: 12px; backdrop-filter: blur(4px); }
         .tariff-scheme svg { width: 100%; max-width: 280px; height: auto; margin: 0 auto; display: block; }
         .tariff-table { margin-top: 12px; font-size: 12px; }
         .tariff-table table { width: 100%; border-collapse: collapse; }
         .tariff-table td, .tariff-table th { padding: 8px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .tariff-table th { color: var(--accent); }
+
         .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
-        .feature { background: rgba(0,212,255,0.1); border-radius: 16px; padding: 12px; text-align: center; transition: transform 0.2s; }
-        .feature:hover { transform: scale(1.02); background: rgba(0,212,255,0.2); }
+        .feature { background: rgba(0,212,255,0.15); border-radius: 16px; padding: 12px; text-align: center; transition: transform 0.2s; backdrop-filter: blur(4px); }
+        .feature:hover { transform: scale(1.02); background: rgba(0,212,255,0.25); }
         .feature i { font-size: 26px; color: var(--accent); margin-bottom: 6px; }
-        .review { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px; margin-bottom: 10px; transition: background 0.2s; }
-        .review:hover { background: rgba(255,255,255,0.1); }
+
+        .review { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 12px; margin-bottom: 10px; transition: background 0.2s; backdrop-filter: blur(4px); }
+        .review:hover { background: rgba(255,255,255,0.15); }
         .review .name { font-size: 12px; font-weight: bold; color: var(--accent); }
+
         .faq-item { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; cursor: pointer; font-weight: bold; font-size: 14px; }
         .faq-question i { transition: transform 0.2s; color: var(--accent); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 13px; color: var(--secondary); padding: 0; }
         .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 12px; padding-top: 4px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
+
         .about-list { list-style: none; margin: 15px 0; }
         .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+
         .stats-grid { display: flex; gap: 10px; margin: 15px 0; justify-content: space-around; }
-        .stat-badge { background: #0f1622; border-radius: 16px; padding: 10px; flex: 1; text-align: center; }
+        .stat-badge { background: rgba(15,22,34,0.7); border-radius: 16px; padding: 10px; flex: 1; text-align: center; backdrop-filter: blur(4px); }
         .stat-number { font-size: 22px; font-weight: bold; color: var(--accent); }
-        .legal-note { font-size: 9px; text-align: center; opacity: 0.6; margin-top: 20px; }
+
+        .legal-note { font-size: 9px; text-align: center; opacity: 0.8; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -382,9 +399,9 @@
                     <table>
                         <tr><th>Расстояние</th><th>Стоимость</th></tr>
                         <tr>}<td>до 3 км</td><td>300₽</td></tr>
-                        <tr>}<td>до 7 км</td><td>450₽</td></tr>
-                        <tr>}<td>до 12 км</td><td>600₽</td></tr>
-                        <tr>}<td>за город</td><td>от 650₽</td></tr>
+                        <tr>}                                             <td>до 7 км</td><td>450₽</td></tr>
+                        <tr>}                                             <td>до 12 км</td><td>600₽</td></tr>
+                        <tr>}                                             <td>за город</td><td>от 650₽</td></tr>
                     </table>
                 </div>
                 <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену.</p>
