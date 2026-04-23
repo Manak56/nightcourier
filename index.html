@@ -159,7 +159,6 @@
         .promo { background: linear-gradient(45deg, #ff4444, #ff8800); padding: 8px; border-radius: 40px; text-align: center; font-weight: bold; font-size: 11px; margin-bottom: 16px; }
         .legal-note { font-size: 8px; text-align: center; color: var(--secondary); margin-top: 20px; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        /* ABOUT PAGE (дополнительные стили) */
         .about-list { list-style: none; margin-bottom: 15px; }
         .about-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .about-list i { width: 20px; color: var(--accent); }
@@ -219,7 +218,7 @@
         <h1>Night Courier</h1>
     </header>
 
-    <!-- Верхняя навигация (исправлена: иконка для Тарифов) -->
+    <!-- Верхняя навигация -->
     <div class="top-nav">
         <div class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>Главная</span></div>
         <div class="nav-item" data-tab="order"><i class="fas fa-bolt"></i><span>Заказ</span></div>
@@ -255,7 +254,7 @@
         </div>
     </div>
 
-    <!-- ЗАКАЗ (доставка + трезвый водитель + помощь) -->
+    <!-- ЗАКАЗ -->
     <div id="order" class="page">
         <!-- Доставка -->
         <div class="card">
@@ -335,7 +334,7 @@
         </div>
     </div>
 
-    <!-- ТАРИФЫ (схема километража) -->
+    <!-- ТАРИФЫ -->
     <div id="map" class="page">
         <div class="card">
             <h2><i class="fas fa-chart-line"></i> Как рассчитывается цена?</h2>
@@ -353,12 +352,12 @@
                     <table>
                         <tr><th>Расстояние</th><th>Стоимость</th></tr>
                         <tr><td>до 3 км</td><td>300₽</td></tr>
-                        <tr><td>до 7 км</td><td>450₽</td></tr>
+                        <tr>}<td>до 7 км</td><td>450₽</td></tr>
                         <tr><td>до 12 км</td><td>600₽</td></tr>
                         <tr><td>за город</td><td>от 650₽</td></tr>
                     </table>
                 </div>
-                <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену. Итог всегда виден в калькуляторе.</p>
+                <p style="font-size: 10px; margin-top: 8px;">* Ночные доплаты, сложный маршрут и тяжёлый груз увеличивают цену.</p>
             </div>
         </div>
     </div>
@@ -376,7 +375,7 @@
         </div>
     </div>
 
-    <!-- О НАС + FAQ (расширенные блоки) -->
+    <!-- О НАС + FAQ -->
     <div id="about" class="page">
         <div class="card">
             <h2><i class="fas fa-info-circle"></i> О сервисе «Night Courier»</h2>
@@ -400,27 +399,27 @@
             <h2><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</h2>
             <div class="faq-item">
                 <div class="faq-question">Как быстро приедет курьер? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">В среднем 15–25 минут после подтверждения заказа. В часы пик (23:00–01:00) может быть до 35 минут, но мы всегда предупреждаем и держим в курсе.</div>
+                <div class="faq-answer">В среднем 15–25 минут после подтверждения заказа. В часы пик (23:00–01:00) может быть до 35 минут, но мы всегда предупреждаем.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Как оплатить? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ требуется предоплата 50% (чтобы избежать ложных вызовов).</div>
+                <div class="faq-answer">Наличные курьеру, перевод на карту или СБП. При заказе от 1000₽ требуется предоплата 50%.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Что запрещено перевозить? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Алкоголь после 23:00, наркотические средства, оружие, взрывчатые вещества, легковоспламеняющиеся жидкости. Заказ будет отклонён.</div>
+                <div class="faq-answer">Алкоголь после 23:00, наркотики, оружие, взрывчатка. Заказ будет отклонён.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Как получить скидку 25%? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Каждая 3-я доставка, совершённая одним номером телефона, автоматически даёт скидку 25% на всю сумму! Просто напомните оператору при оформлении.</div>
+                <div class="faq-answer">Каждая 3-я доставка одним номером телефона даёт скидку 25%! Напомните оператору.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Работаете ли вы за городом? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да, мы доставляем в пригород и ближайшие районы. Стоимость — от 650₽. Точную цену уточняйте у оператора.</div>
+                <div class="faq-answer">Да, доставляем в пригород. Стоимость — от 650₽. Точную цену уточняйте у оператора.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Могу ли я отследить курьера? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да, после подтверждения заказа мы присылаем ссылку на геолокацию курьера в Telegram. Вы видите, где он находится.</div>
+                <div class="faq-answer">Да, после подтверждения заказа мы присылаем ссылку на геолокацию курьера в Telegram.</div>
             </div>
         </div>
         <div class="legal-note">
@@ -435,8 +434,8 @@
 
 <script>
     // ========== НАСТРОЙКИ ==========
-    // Правильная ссылка для отправки сообщений в сообщество ВК (с заполнением текста)
-    const VK_LINK = 'https://vk.com/im?sel=-238006273&text=';
+    // ПРОВЕРЕННАЯ ССЫЛКА ДЛЯ ВК (сообщение заполняется автоматически)
+    const VK_LINK = 'https://vk.com/write-238006273?text=';
     // ================================
 
     // Переключение вкладок
