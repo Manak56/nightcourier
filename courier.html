@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кабинет курьера | Night Courier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0b101b;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card {
+            background: rgba(22,27,34,0.96);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,212,255,0.2);
+        }
+        h2 { color: #00d4ff; margin-bottom: 15px; }
+        .order {
+            background: #0f1622;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 3px solid #00d4ff;
+        }
+        .order.available { border-left-color: #ff8800; }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .order-id { color: #00d4ff; }
+        .order-sum { color: #28a745; }
+        .order-details { font-size: 13px; color: #aaa; margin-bottom: 10px; line-height: 1.4; }
+        button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-top: 5px;
+        }
+        .btn-take { background: #ff8800; color: #fff; }
+        .btn-done { background: #28a745; color: #fff; }
+        .reply-area {
+            margin-top: 10px;
+            display: none;
+        }
+        .reply-area input {
+            width: 70%;
+            background: #0f1622;
+            border: 1px solid #2a3a55;
+            border-radius: 20px;
+            padding: 8px 12px;
+            color: #fff;
+        }
+        .login-form {
+            max-width: 350px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #0f1622;
+            border: 1px solid #2a3a55;
+            border-radius: 12px;
+            color: #fff;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .stat-card {
+            background: #0f1622;
+            padding: 15px;
+            border-radius: 16px;
+            flex: 1;
+            text-align: center;
+        }
+        .stat-number { font-size: 24px; font-weight: bold; color: #00d4ff; }
+        .badge { background: #ff8800; font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="loginForm" class="login-form card">
+    <h2>🚚 Вход для курьера</h2>
+    <input type="text" id="loginUsername" placeholder="Логин">
+    <input type="password" id="loginPassword" placeholder="Пароль">
+    <button onclick="doLogin()">ВОЙТИ</button>
+    <p style="font-size: 11px; margin-top: 15px;">Логины: ivan, petr | Пароль: 1234</p>
+</div>
+
+<div id="cabinet" style="display:none;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1>🚚 Кабинет курьера: <span id="courierName"></span></h1>
+            <button onclick="logout()" style="background:#555;">Выйти</button>
+        </div>
+        <div class="stats" id="statsBlock"></div>
+        <div class="card">
+            <h2>📋 Доступные заказы</h2>
+            <div id="availableOrders"></div>
+        </div>
+        <div class="card">
+            <h2>✅ Мои заказы</h2>
+            <div id="myOrders"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const APP_SCRIPT_URL = 'https://vk.com/away.php?to=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbzKl6nZP3zNvzfFWfutRsarMopz7kMzHiKf9dL9NbJ6YxJgwmvF9qOfq6PZzZiDz_fD%2Fexec&utf=1';
+    // логины
+    const COURIERS = {
+        'ivan': '1234',
+        'petr': '1234'
+    };
+    let currentCourier = null;
+    let allOrders = [];
+
+    async function fetchOrders() {
+        const res = await fetch(APP_SCRIPT_URL);
+        const orders = await res.json();
+        allOrders = orders;
+        renderAvailable();
+        renderMy();
+        renderStats();
+    }
+
+    function renderAvailable() {
+        const available = allOrders.filter(o => (o.Курьер === 'available' || !o.Курьер) && o.Статус !== 'done');
+        const container = document.getElementById('availableOrders');
+        if (available.length === 0) {
+            container.innerHTML = '<div>Нет доступных заказов</div>';
+            return;
+        }
+        container.innerHTML = available.map(order => `
+            <div class="order available">
+                <div class="order-header">
+                    <span class="order-id">🆔 ${order.ID}</span>
+                    <span class="order-sum">💰 ${order.Сумма || '—'}</span>
+                    <span class="badge">НОВЫЙ</span>
+                </div>
+                <div class="order-details">
+                    👤 ${order.Имя} | 📞 ${order.Телефон}<br>
+                    📍 ${order.Откуда || ''} → ${order.Куда || ''}<br>
+                    📦 ${order.Список || ''}
+                </div>
+                <button class="btn-take" onclick="takeOrder(${order.ID})">✅ ВЗЯТЬ ЗАКАЗ</button>
+            </div>
+        `).join('');
+    }
+
+    function renderMy() {
+        const myOrders = allOrders.filter(o => o.Курьер === currentCourier && o.Статус !== 'done');
+        const container = document.getElementById('myOrders');
+        if (myOrders.length === 0) {
+            container.innerHTML = '<div>Нет активных заказов</div>';
+            return;
+        }
+        container.innerHTML = myOrders.map(order => `
+            <div class="order">
+                <div class="order-header">
+                    <span class="order-id">🆔 ${order.ID}</span>
+                    <span class="order-sum">💰 ${order.Сумма || '—'}</span>
+                </div>
+                <div class="order-details">
+                    👤 ${order.Имя} | 📞 ${order.Телефон}<br>
+                    📍 ${order.Откуда || ''} → ${order.Куда || ''}
+                </div>
+                ${order.Сообщение_клиента ? `<div style="background:#1a2538; padding:8px; border-radius:12px; margin:8px 0;">💬 Клиент: "${order.Сообщение_клиента}"</div>` : ''}
+                ${order.Ответ_курьера ? `<div style="background:#1a2538; padding:8px; border-radius:12px; margin:8px 0;">✅ Ваш ответ: "${order.Ответ_курьера}"</div>` : ''}
+                <button onclick="showReply(${order.ID})">✏️ Ответить</button>
+                <button class="btn-done" onclick="doneOrder(${order.ID})">✅ Выполнен</button>
+                <div id="reply-${order.ID}" class="reply-area">
+                    <input type="text" id="replyInput-${order.ID}" placeholder="Ваш ответ...">
+                    <button onclick="sendReply(${order.ID})">Отправить</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    async function takeOrder(id) {
+        const order = allOrders.find(o => o.ID == id);
+        if (!order || (order.Курьер && order.Курьер !== 'available')) return;
+        // Обновляем в таблице (через POST с action)
+        await fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'take', orderId: id, courier: currentCourier })
+        });
+        fetchOrders();
+    }
+
+    async function sendReply(orderId) {
+        const reply = document.getElementById(`replyInput-${orderId}`).value.trim();
+        if (!reply) return;
+        await fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'reply', orderId: orderId, reply: reply, courier: currentCourier })
+        });
+        document.getElementById(`replyInput-${orderId}`).value = '';
+        document.getElementById(`reply-${orderId}`).style.display = 'none';
+        fetchOrders();
+    }
+
+    async function doneOrder(orderId) {
+        if (!confirm('Отметить заказ как выполненный?')) return;
+        await fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'done', orderId: orderId, courier: currentCourier })
+        });
+        fetchOrders();
+    }
+
+    function showReply(id) {
+        const el = document.getElementById(`reply-${id}`);
+        if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function renderStats() {
+        const myOrders = allOrders.filter(o => o.Курьер === currentCourier);
+        const done = myOrders.filter(o => o.Статус === 'done');
+        const active = myOrders.filter(o => o.Статус !== 'done');
+        const totalSum = done.reduce((s, o) => s + (parseInt(o.Сумма) || 0), 0);
+        document.getElementById('statsBlock').innerHTML = `
+            <div class="stat-card"><div class="stat-number">${active.length}</div><div>В работе</div></div>
+            <div class="stat-card"><div class="stat-number">${done.length}</div><div>Выполнено</div></div>
+            <div class="stat-card"><div class="stat-number">${totalSum}₽</div><div>Заработано</div></div>
+        `;
+    }
+
+    function doLogin() {
+        const login = document.getElementById('loginUsername').value.trim();
+        const pass = document.getElementById('loginPassword').value.trim();
+        if (COURIERS[login] && COURIERS[login] === pass) {
+            currentCourier = login;
+            document.getElementById('courierName').innerText = login;
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('cabinet').style.display = 'block';
+            fetchOrders();
+            setInterval(fetchOrders, 10000);
+        } else {
+            alert('Неверный логин или пароль');
+        }
+    }
+
+    function logout() {
+        currentCourier = null;
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('cabinet').style.display = 'none';
+    }
+</script>
+</body>
+</html>
